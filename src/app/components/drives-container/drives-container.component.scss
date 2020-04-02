@@ -1,0 +1,38 @@
+.container {
+    background: #F9F9F9;
+    height: 100vh;
+    border-radius: 20px 20px 0px 0px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.13);
+    text-align: center;
+    font-weight: 400;
+    padding: 5px 13px;
+    position: absolute;
+    transform: translateY(25%);
+    left: 0;
+    right: 0;
+    z-index: 5;
+
+
+    .line {
+        width: 100%;
+        text-align: center;
+        position: relative;
+        color: rgba(0, 0, 0, 0.685);
+
+        span {
+            background: #f9f9f9; 
+            padding: 0 10px;
+        }
+
+        &:before {
+            content: "";
+            width: 100%;
+            left: 0;
+            top: 50%;
+            position: absolute;
+            z-index: -1;
+            border-top: 2px solid rgba(0, 0, 0, 0.116);
+            border-radius: 100px;
+        }
+    }
+}

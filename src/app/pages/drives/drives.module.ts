@@ -8,6 +8,9 @@ import { DrivesPageRoutingModule } from './drives-routing.module';
 
 import { DrivesPage } from './drives.page';
 
+import { DrivesContainerComponent } from '../../components/drives-container/drives-container.component';
+import { DrivesCardsComponent } from '../../components/drives-cards/drives-cards.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +18,7 @@ import { DrivesPage } from './drives.page';
     IonicModule,
     DrivesPageRoutingModule
   ],
-  declarations: [DrivesPage]
+  declarations: [DrivesPage, DrivesContainerComponent, DrivesCardsComponent],
+  exports: [DrivesCardsComponent]
 })
-export class DrivesPageModule {}
+export class DrivesPageModule { }
