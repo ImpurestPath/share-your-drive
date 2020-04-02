@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { DrivesCardsComponent } from './drives-cards.component';
+import { DrivesCardComponent } from './drives-card.component';
 
 describe('DrivesCardsComponent', () => {
-  let component: DrivesCardsComponent;
-  let fixture: ComponentFixture<DrivesCardsComponent>;
+  let component: DrivesCardComponent;
+  let fixture: ComponentFixture<DrivesCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DrivesCardsComponent ],
+      declarations: [DrivesCardComponent],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DrivesCardsComponent);
+    fixture = TestBed.createComponent(DrivesCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
