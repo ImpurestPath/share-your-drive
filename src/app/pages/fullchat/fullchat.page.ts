@@ -12,7 +12,8 @@ import { ChatService } from 'src/app/service/chat.service';
 export class FullchatPage implements OnInit {
   id: string;
   uid: string;
-  messages: Message[]
+  messages: Message[];
+  currentMessage: string;
   constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UserService) { }
 
   ngOnInit() {
@@ -23,4 +24,16 @@ export class FullchatPage implements OnInit {
       this.messages = messages.reverse();})
   }
 
+  sendMessage(){
+    console.log('Sending...')
+    const message: Message = {
+      fromId: this.uid,
+      messageText: this.currentMessage,
+      sentAt: new Date(),
+      toId: null,
+      chatId: this.id
+    }
+    this.chatService.sendMessage(message)
+    this.currentMessage = '';
+  }
 }
