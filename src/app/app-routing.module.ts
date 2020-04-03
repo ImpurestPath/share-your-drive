@@ -9,7 +9,11 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },  {
+    path: 'fullchat',
+    loadChildren: () => import('./pages/fullchat/fullchat.module').then( m => m.FullchatPageModule)
   }
+
 
 ];
 

@@ -22,6 +22,7 @@ export class ChatPage implements OnInit {
         const lastMessage = (await this.chatService.getMessagesFromChat(basicChat.id,1).pipe(take(1)).toPromise())[0]
 
         this.chats.push({
+          id: basicChat.id,
           name: name,
           lastMessage: lastMessage,
         })

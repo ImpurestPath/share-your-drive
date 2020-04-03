@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'chat',
         loadChildren: () => import('../chat/chat.module').then(m => m.ChatPageModule)
+      },
+      {
+        path: 'chat/:id',
+        loadChildren: () => import('../fullchat/fullchat.module').then(m => m.FullchatPageModule)
       }
     ]
   },

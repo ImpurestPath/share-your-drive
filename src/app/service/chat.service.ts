@@ -31,7 +31,7 @@ export class ChatService {
   }
 
   getMessagesFromChat(id:string, amount: number){
-    return this.store.collection(this.collectionName).doc(id).collection<Message>('chat', ref => ref.orderBy('sentAt').limit(amount)).valueChanges();
+    return this.store.collection(this.collectionName).doc(id).collection<Message>('chat', ref => ref.orderBy('sentAt','desc').limit(amount)).valueChanges();
   }
 
   getUserChats(){
