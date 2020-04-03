@@ -86,12 +86,14 @@ export class UserService {
   // Auth providers
   // TODO finish
   authLogin(provider) {
-    return this.ngFireAuth.auth.signInWithPopup(provider)
+    return new Promise( (resolve, reject) => this.ngFireAuth.auth.signInWithPopup(provider)
       .then((result) => {
+        
         this.setUserData(result.user);
+        resolve(result);
       }).catch((error) => {
-        window.alert(error)
-      })
+        reject(error);
+      }))
   }
 
   // Store user in localStorage
