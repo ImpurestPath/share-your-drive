@@ -1,8 +1,52 @@
-.card {
-    width: 100%;
-    height: 150px;
+
+ion-card {
+    margin: 10px 0px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.247);
+    display: flex;
     background: var(--ion-color-primary);
-    border-radius: 10px;
-    margin: 15px 0px;
-    padding: 10px;
+    flex-direction: row;
+    cursor: pointer;
+
+    ion-item-divider {
+        padding: 0;
+        background: inherit;
+    }
+    
+    .left-panel {
+        width: 10px;
+        background: var(--ion-color-primary-shade);
+    }
+
+    .right-panel {
+        width: 100%;
+        color: white;
+
+
+        ion-card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+            background: inherit;
+        }
+
+        ion-card-content {
+            
+            padding: 0;
+            color: white;
+            background: inherit;
+        }
+
+        ion-icon {
+            color: white;
+            background: inherit;
+        }
+
+        ion-item {
+            font-size: 15px;
+            color: white;
+            --background: var(--ion-color-primary);
+        }
+    }
+
 }

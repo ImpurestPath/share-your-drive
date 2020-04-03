@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class DrivesContainerComponent implements OnInit {
   public currentFilter: any = 'Kyydit lähellä sinua';
   public cards: Array<any> = [
-    { route: 'Oulu - Tampere', time: 'now' },
-    { route: 'Helsinki - Lappeenranta', time: 'tomorrow' }
+    { route: 'Oulu - Tampere', time: 'Sunnuntai, 21. Tammikuuta', seats: '2/4' },
+    { route: 'Helsinki - Lappeenranta', time: 'Tiistai, 15. Joulukuuta', seats: '3/4' },
+    { route: 'Helsinki - Lappeenranta', time: 'Tiistai, 15. Joulukuuta', seats: '3/4' }
   ];
 
   constructor() { }
