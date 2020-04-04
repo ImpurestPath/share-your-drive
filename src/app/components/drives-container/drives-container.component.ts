@@ -1,5 +1,6 @@
+import { DriveService } from './../../service/drive.service';
 import { Component, OnInit } from '@angular/core';
-import { Drive } from '../../entity/drive';
+// import { Drive } from '../../entity/drive';
 
 @Component({
   selector: 'app-drives-container',
@@ -8,37 +9,12 @@ import { Drive } from '../../entity/drive';
 })
 export class DrivesContainerComponent implements OnInit {
   public currentFilter: any = 'Kyydit lähellä sinua';
-  // public drives: Array<Drive>;
-  public drives: Array<any> = [
-    {
-      startPlace: 'Oulu',
-      finishPlace: 'Tampere',
-      startDate: '21. Tammikuuta 2020'
-    },
-    {
-      startPlace: 'Oulu',
-      finishPlace: 'Tampere',
-      startDate: '21. Tammikuuta 2020'
-    },
-    {
-      startPlace: 'Oulu',
-      finishPlace: 'Tampere',
-      startDate: '21. Tammikuuta 2020'
-    },
-    {
-      startPlace: 'Oulu',
-      finishPlace: 'Tampere',
-      startDate: '21. Tammikuuta 2020'
-    },
-    {
-      startPlace: 'Oulu',
-      finishPlace: 'Tampere',
-      startDate: '21. Tammikuuta 2020'
-    }
-  ];
+  public drives: Array<any>;
 
-  constructor() { }
+  constructor(private driveService: DriveService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.driveService.getRecent(10).subscribe(drives => this.drives = drives);
+  }
 
 }

@@ -29,7 +29,7 @@ export class DrivesActionComponent {
           }
         },
         {
-          text: 'Cancel',
+          text: 'Peruuta',
           icon: 'close',
           role: 'cancel',
           handler: () => {

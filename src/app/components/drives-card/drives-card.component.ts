@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Drive } from '../../entity/drive';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-drives-card',
@@ -7,11 +7,20 @@ import { Drive } from '../../entity/drive';
   styleUrls: ['./drives-card.component.scss'],
 })
 export class DrivesCardComponent implements OnInit {
-  @Input() drive: any;
+  public card: any;
+  public formattedTime: any;
+
+  @Input() set drive(value: any) {
+    this.card = value;
+    this.card.startDate = moment(this.card.startDate.toDate());
+    this.formattedTime = this.card.startDate.fromNow();
+  }
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
 
   openDetails() {
     // CODE TO OPEN DETAIL PAGES

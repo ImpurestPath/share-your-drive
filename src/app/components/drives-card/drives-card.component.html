@@ -5,14 +5,14 @@
   <div class="right-panel">
     <ion-item-divider>
       <ion-card-header>
-        <ion-card-title>{{ drive.startPlace }} - {{ drive.finishPlace }}</ion-card-title>
+        <ion-card-title>{{ card.startPlace }} - {{ card.finishPlace }}</ion-card-title>
       </ion-card-header>
     </ion-item-divider>
 
     <ion-card-content>
       <ion-item lines="full">
         <ion-icon name="time" slot="start" size="medium"></ion-icon>
-        <ion-label>{{ drive.startDate }}</ion-label>
+        <ion-label>{{ formattedTime }}</ion-label>
       </ion-item>
 
       <ion-item lines="none">
