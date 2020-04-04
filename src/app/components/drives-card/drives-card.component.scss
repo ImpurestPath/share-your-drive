@@ -1,7 +1,7 @@
 
 ion-card {
-    margin: 10px 0px;
-    border-radius: 15px;
+    margin: 0px 0px 10px 0px;
+    border-radius: 10px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.247);
     display: flex;
     background: var(--ion-color-primary);
@@ -14,7 +14,7 @@ ion-card {
     }
     
     .left-panel {
-        width: 10px;
+        width: 8px;
         background: var(--ion-color-primary-shade);
     }
 
@@ -22,29 +22,27 @@ ion-card {
         width: 100%;
         color: white;
 
-
-        ion-card-title {
-            font-size: 20px;
-            font-weight: 600;
+        ion-card-title,
+        ion-card-content,
+        ion-icon,
+        ion-item {
             color: white;
             background: inherit;
+        }
+
+
+        ion-card-title {
+            font-size: 17px;
+            font-weight: 600;
         }
 
         ion-card-content {
-            
             padding: 0;
-            color: white;
-            background: inherit;
-        }
 
-        ion-icon {
-            color: white;
-            background: inherit;
         }
 
         ion-item {
-            font-size: 15px;
-            color: white;
+            font-size: 13px;
             --background: var(--ion-color-primary);
         }
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Drive } from '../../entity/drive';
 
 @Component({
   selector: 'app-drives-container',
@@ -7,10 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DrivesContainerComponent implements OnInit {
   public currentFilter: any = 'Kyydit lähellä sinua';
-  public cards: Array<any> = [
-    { route: 'Oulu - Tampere', time: 'Sunnuntai, 21. Tammikuuta', seats: '2/4' },
-    { route: 'Helsinki - Lappeenranta', time: 'Tiistai, 15. Joulukuuta', seats: '3/4' },
-    { route: 'Helsinki - Lappeenranta', time: 'Tiistai, 15. Joulukuuta', seats: '3/4' }
+  // public drives: Array<Drive>;
+  public drives: Array<any> = [
+    {
+      startPlace: 'Oulu',
+      finishPlace: 'Tampere',
+      startDate: '21. Tammikuuta 2020'
+    },
+    {
+      startPlace: 'Oulu',
+      finishPlace: 'Tampere',
+      startDate: '21. Tammikuuta 2020'
+    },
+    {
+      startPlace: 'Oulu',
+      finishPlace: 'Tampere',
+      startDate: '21. Tammikuuta 2020'
+    },
+    {
+      startPlace: 'Oulu',
+      finishPlace: 'Tampere',
+      startDate: '21. Tammikuuta 2020'
+    },
+    {
+      startPlace: 'Oulu',
+      finishPlace: 'Tampere',
+      startDate: '21. Tammikuuta 2020'
+    }
   ];
 
   constructor() { }
