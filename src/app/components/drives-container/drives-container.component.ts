@@ -1,6 +1,5 @@
 import { DriveService } from './../../service/drive.service';
 import { Component, OnInit } from '@angular/core';
-// import { Drive } from '../../entity/drive';
 
 @Component({
   selector: 'app-drives-container',
@@ -9,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DrivesContainerComponent implements OnInit {
   public currentFilter: any = 'Kyydit lähellä sinua';
+  // public drives: Array<any>;
   public drives: Array<any>;
 
   constructor(private driveService: DriveService) { }

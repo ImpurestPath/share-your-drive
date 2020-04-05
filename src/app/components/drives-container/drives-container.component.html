@@ -5,21 +5,12 @@
     </span>
   </div>
 
-  <div *ngIf="drives; else elseBlock" class="cards" scrollY="true" no-bounce>
-    <app-drives-card *ngFor="let drive of drives" [drive]="drive">
+  <div *ngIf="drives; else loading" class="cards" scrollY="true" no-bounce>
+    <app-drives-card *ngFor="let drive of drives" [data]="drive">
     </app-drives-card>
   </div>
 
-  <ng-template #elseBlock>
-
-    <ion-card class="else">
-      <ion-card-content>
-        <ion-item lines="none">
-          <ion-icon name="alert-circle-outline" slot="start" size="medium"></ion-icon>
-          <ion-label>Kyytejä ei löytynyt</ion-label>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-
+  <ng-template #loading>
+    <ion-spinner color="primary" name="crescent"></ion-spinner>
   </ng-template>
 </div>

@@ -50,7 +50,7 @@
     }
 
     .cards {
-        height: 85%;
+        height: calc(100% - 70px);
 
         overflow-x: scroll;
         -webkit-overflow-scrolling: touch;
@@ -62,4 +62,10 @@
         display: none; // Safari and Chrome
         }
     }
+}
+
+ion-spinner {
+    width: 15%;
+    height: 15%;
+    margin-top: 10%;
 }

@@ -7,13 +7,13 @@ import * as moment from 'moment';
   styleUrls: ['./drives-card.component.scss'],
 })
 export class DrivesCardComponent implements OnInit {
-  public card: any;
+  public drive: any;
   public formattedTime: any;
 
-  @Input() set drive(value: any) {
-    this.card = value;
-    this.card.startDate = moment(this.card.startDate.toDate());
-    this.formattedTime = this.card.startDate.fromNow();
+  @Input() set data(value: any) {
+    this.drive = value;
+    this.drive.startDate = moment(this.drive.startDate.toDate());
+    this.formattedTime = this.drive.startDate.fromNow();
   }
 
   constructor() { }
