@@ -1,0 +1,82 @@
+.back-btn {
+    cursor: pointer;
+}
+
+ion-card {
+    margin: 10px 10px;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.103);
+    // border: 2px solid var(--ion-color-primary);
+    height: calc(100% - 25px);
+
+    .map {
+        border-radius: 10px;
+        height: 35vh;
+        width: 100%;
+        background: url('../../../assets/images/cartodb_placeholder.png');
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-evenly;
+        position: absolute;
+
+        ion-button {
+            align-items: center;
+            text-align: center;
+            color: white;
+            text-transform: none;
+            --box-shadow: none;
+            
+            ion-icon {
+                justify-content: center;
+                vertical-align: middle;
+            }
+
+            p {
+                color: white;
+            }
+        }
+
+        .chat-btn {
+            p {
+                color: var(--ion-color-primary);
+            }
+        }
+    }
+
+    ion-chip {
+        margin: 0;
+        margin-bottom: 5px;
+    }
+
+    ion-card-title {
+        font-weight: 600;
+        color: #3F3F3F
+    }
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    
+
+    .list-icon {
+        justify-content: center;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+
+    .list-text {
+        background: rgb(243, 243, 243);
+        padding: 5px;
+        padding-left: 15px;
+        border-radius: 0px 5px 5px 0px;
+        width: 100%;
+        border-left: 2px solid var(--ion-color-primary);
+        color: #3F3F3F;
+    }
+}

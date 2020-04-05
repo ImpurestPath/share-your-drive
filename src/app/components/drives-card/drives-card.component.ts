@@ -1,5 +1,7 @@
+import { DrivesDetailsPage } from './../../pages/drives-details/drives-details.page';
 import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-drives-card',
@@ -7,23 +9,30 @@ import * as moment from 'moment';
   styleUrls: ['./drives-card.component.scss'],
 })
 export class DrivesCardComponent implements OnInit {
-  public drive: any;
+  // public drive: any;
   public formattedTime: any;
+  @Input() drive: any;
 
-  @Input() set data(value: any) {
-    this.drive = value;
-    this.drive.startDate = moment(this.drive.startDate.toDate());
-    this.formattedTime = this.drive.startDate.fromNow();
-  }
+  // @Input() set data(value: any) {
+  //   this.drive = value;
+  //   this.drive.startDate = moment(this.drive.startDate.toDate());
+  //   this.formattedTime = this.drive.startDate.fromNow();
+  // }
 
-  constructor() { }
+  constructor(public modalController: ModalController) { }
 
   ngOnInit() {
 
   }
 
-  openDetails() {
-    // CODE TO OPEN DETAIL PAGES
+  async openDetails() {
+    const modal = await this.modalController.create({
+      component: DrivesDetailsPage,
+      componentProps: {
+        drive: this.drive
+      }
+    });
+    return await modal.present();
   }
 
 }

@@ -8,13 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DrivesContainerComponent implements OnInit {
   public currentFilter: any = 'Kyydit lähellä sinua';
-  // public drives: Array<any>;
-  public drives: Array<any>;
+  public drives: Array<any> = [
+    { startPlace: 'Oulu', finishPlace: 'Helsinki' },
+    { startPlace: 'Oulu', finishPlace: 'Helsinki' },
+    { startPlace: 'Oulu', finishPlace: 'Helsinki' },
+    { startPlace: 'Oulu', finishPlace: 'Helsinki' },
+    { startPlace: 'Oulu', finishPlace: 'Helsinki' }
+  ]
 
   constructor(private driveService: DriveService) { }
 
   ngOnInit() {
-    this.driveService.getRecent(10).subscribe(drives => this.drives = drives);
+    // this.driveService.getRecent(10).subscribe(drives => this.drives = drives);
   }
 
 }

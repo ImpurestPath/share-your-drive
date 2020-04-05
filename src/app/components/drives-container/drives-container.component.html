@@ -6,7 +6,7 @@
   </div>
 
   <div *ngIf="drives; else loading" class="cards" scrollY="true" no-bounce>
-    <app-drives-card *ngFor="let drive of drives" [data]="drive">
+    <app-drives-card *ngFor="let drive of drives" [drive]="drive">
     </app-drives-card>
   </div>
 

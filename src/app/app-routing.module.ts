@@ -9,7 +9,11 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },  {
+    path: 'drives-details',
+    loadChildren: () => import('./pages/drives-details/drives-details.module').then( m => m.DrivesDetailsPageModule)
   }
+
 
 ];
 
