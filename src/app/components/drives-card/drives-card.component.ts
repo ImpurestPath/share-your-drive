@@ -9,15 +9,14 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./drives-card.component.scss'],
 })
 export class DrivesCardComponent implements OnInit {
-  // public drive: any;
+  public drive: any;
   public formattedTime: any;
-  @Input() drive: any;
 
-  // @Input() set data(value: any) {
-  //   this.drive = value;
-  //   this.drive.startDate = moment(this.drive.startDate.toDate());
-  //   this.formattedTime = this.drive.startDate.fromNow();
-  // }
+  @Input() set data(value: any) {
+    this.drive = value;
+    this.drive.startDate = moment(this.drive.startDate.toDate());
+    this.formattedTime = this.drive.startDate.fromNow();
+  }
 
   constructor(public modalController: ModalController) { }
 
@@ -29,7 +28,7 @@ export class DrivesCardComponent implements OnInit {
     const modal = await this.modalController.create({
       component: DrivesDetailsPage,
       componentProps: {
-        drive: this.drive
+        data: this.drive
       }
     });
     return await modal.present();

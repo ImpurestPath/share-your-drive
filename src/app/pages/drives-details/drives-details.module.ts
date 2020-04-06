@@ -17,4 +17,4 @@ import { DrivesDetailsPage } from './drives-details.page';
   ],
   declarations: [DrivesDetailsPage]
 })
-export class DrivesDetailsPageModule {}
+export class DrivesDetailsPageModule { }

@@ -6,68 +6,77 @@
 </ion-toolbar>
 
 <ion-content>
+
   <ion-card>
     <div class="map">
     </div>
-    <ion-card-header>
+    <div class="content-wrapper">
+      <ion-card-header>
 
-      <ion-chip outline color="primary">
-        <ion-avatar>
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-        </ion-avatar>
-        <ion-label>John Doe</ion-label>
-      </ion-chip>
+        <ion-chip outline color="primary">
+          <ion-avatar>
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          </ion-avatar>
+          <ion-label>
+            (Driver profile)
+          </ion-label>
+        </ion-chip>
 
-      <ion-card-title>
-        {{ drive.startPlace }} - {{ drive.finishPlace }}
-      </ion-card-title>
-    </ion-card-header>
+        <ion-card-title>
+          {{ drive.startPlace }} - {{ drive.finishPlace }}
+        </ion-card-title>
+      </ion-card-header>
 
-    <ion-card-content>
+      <ion-card-content>
 
-      <div class="list-item">
-        <div class="list-icon">
-          <ion-icon name="time-outline" size="large" color="primary"></ion-icon>
+        <div class="list-item">
+          <div class="list-icon">
+            <ion-icon name="time-outline" size="large" color="primary"></ion-icon>
+          </div>
+
+          <div class="list-text">
+            <p>{{ formattedTime }}</p>
+          </div>
         </div>
 
-        <div class="list-text">
-          <p>Sunnuntaina 24. Joulukuuta</p>
-        </div>
-      </div>
+        <div class="list-item">
+          <div class="list-icon">
+            <ion-icon size="large" name="people-circle-outline" color="primary"></ion-icon>
+          </div>
 
-      <div class="list-item">
-        <div class="list-icon">
-          <ion-icon size="large" name="people-circle-outline" color="primary"></ion-icon>
-        </div>
-
-        <div class="list-text">
-          <p>people here</p>
-        </div>
-      </div>
-
-      <div class="list-item">
-        <div class="list-icon">
-          <ion-icon size="large" name="information-circle-outline" color="primary"></ion-icon>
+          <div class="list-text">
+            <p>
+              (passengers)
+            </p>
+          </div>
         </div>
 
-        <div class="list-text">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id turpis sem.</p>
+        <div class="list-item">
+          <div class="list-icon">
+            <ion-icon size="large" name="information-circle-outline" color="primary"></ion-icon>
+          </div>
+
+          <div class="list-text">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id turpis sem.</p>
+          </div>
         </div>
-      </div>
+
+      </ion-card-content>
 
       <div class="buttons">
-        <ion-button color="primary">
+        <ion-button color="primary" (click)="bookSeat()">
           <ion-icon size="medium" color="light" slot="start" name="checkbox"></ion-icon>
           <p>Varaa paikka</p>
         </ion-button>
 
-        <ion-button class="chat-btn" fill="outline" color="primary">
+        <ion-button class="chat-btn" fill="outline" color="primary" (click)="messageDriver()">
           <ion-icon size="medium" color="primary" slot="start" name="paper-plane"></ion-icon>
           <p>Lähetä viesti</p>
         </ion-button>
       </div>
 
-    </ion-card-content>
+    </div>
+
   </ion-card>
 
 </ion-content>
