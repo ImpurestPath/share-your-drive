@@ -23,7 +23,7 @@
         </ion-chip>
 
         <ion-card-title>
-          {{ drive.startPlace }} - {{ drive.finishPlace }}
+          {{ drive.origin }} - {{ drive.destination }}
         </ion-card-title>
       </ion-card-header>
 
@@ -45,9 +45,7 @@
           </div>
 
           <div class="list-text">
-            <p>
-              (passengers)
-            </p>
+            <ion-label>{{ drive.seatsLeft }} paikkaa vapaana</ion-label>
           </div>
         </div>
 
@@ -57,7 +55,7 @@
           </div>
 
           <div class="list-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id turpis sem.</p>
+            <p>{{ drive.info }}</p>
           </div>
         </div>
 

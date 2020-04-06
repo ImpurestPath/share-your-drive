@@ -5,7 +5,7 @@
   <div class="right-panel">
     <ion-item-divider>
       <ion-card-header>
-        <ion-card-title>{{ drive.startPlace }} - {{ drive.finishPlace }}</ion-card-title>
+        <ion-card-title>{{ drive.origin }} - {{ drive.destination }}</ion-card-title>
       </ion-card-header>
     </ion-item-divider>
 
@@ -17,7 +17,7 @@
 
       <ion-item lines="none">
         <ion-icon name="people-circle" slot="start" size="medium"></ion-icon>
-        <ion-label> seats here </ion-label>
+        <ion-label>{{ drive.seatsLeft }} vapaata paikkaa</ion-label>
       </ion-item>
 
     </ion-card-content>
