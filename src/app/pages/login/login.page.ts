@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
   signUp(email, password){
     this.userService.signUpEmail(email.value,password.value).then(
       res => {
-        this.signIn(email.value,password.value)
+        this.signIn(email,password)
       },
       err => {
         //TODO make normal error message

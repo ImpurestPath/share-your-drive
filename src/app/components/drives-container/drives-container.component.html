@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="line">
+    <span>
+      {{ currentFilter }}
+    </span>
+  </div>
+
+  <div *ngIf="drives; else loading" class="cards" scrollY="true" no-bounce>
+    <app-drives-card *ngFor="let drive of drives" [data]="drive">
+    </app-drives-card>
+  </div>
+
+  <ng-template #loading>
+    <ion-spinner color="primary" name="crescent"></ion-spinner>
+  </ng-template>
+</div>
