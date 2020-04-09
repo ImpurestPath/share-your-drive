@@ -1,0 +1,22 @@
+.back-btn {
+    cursor: pointer;
+}
+
+.buttons {
+        display: flex;
+        justify-content: space-evenly;
+        margin: 10px;
+
+        ion-button {
+            align-items: center;
+            text-align: center;
+            color: white;
+            text-transform: none;
+            --box-shadow: none;
+            
+            ion-icon {
+                justify-content: center;
+                vertical-align: middle;
+            }
+        }
+    }

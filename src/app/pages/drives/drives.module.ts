@@ -1,3 +1,4 @@
+import { AddDrivePageModule } from './../add-drive/add-drive.module';
 import { DrivesDetailsPageModule } from './../drives-details/drives-details.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,7 +20,8 @@ import { DrivesActionComponent } from '../../components/drives-action/drives-act
     FormsModule,
     IonicModule,
     DrivesPageRoutingModule,
-    DrivesDetailsPageModule
+    DrivesDetailsPageModule,
+    AddDrivePageModule
   ],
   declarations: [
     DrivesPage,

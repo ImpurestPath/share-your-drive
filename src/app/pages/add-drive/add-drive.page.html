@@ -1,0 +1,79 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-icon name="chevron-back" size="large" (click)="dismiss()" class="back-btn"></ion-icon>
+  </ion-buttons>
+  <ion-title>Luo uusi kyyti</ion-title>
+</ion-toolbar>
+
+
+<ion-content>
+  <form>
+    <ion-item>
+      <ion-label position="stacked">Lähtöpaikka</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Määränpää</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Lähtöpäivä</ion-label>
+      <ion-datetime
+        monthNames="Tammikuu, Helmikuu, Maaliskuu, Huhtikuu, Toukokuu, Kesäkuu, Heinäkuu, Elokuu, Syyskuu, Lokakuu, Marraskuu, Joulukuu"
+        displayFormat="DD MMMM YY" placeholder="Valitse päivä">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Lähtöaika</ion-label>
+      <ion-datetime displayFormat="HH:mm" placeholder="Valitse kellonaika"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Arvioitu saapumisaika</ion-label>
+      <ion-datetime displayFormat="HH:mm" placeholder="Valitse kellonaika"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Maksimitilavuus</ion-label>
+      <ion-select placeholder="Valitse yksi">
+        <ion-select-option value="2">2 paikkaa</ion-select-option>
+        <ion-select-option value="3">3 paikkaa</ion-select-option>
+        <ion-select-option value="4">4 paikkaa</ion-select-option>
+        <ion-select-option value="5">5 paikkaa</ion-select-option>
+        <ion-select-option value="6">6 paikkaa</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Vapaita paikkoja</ion-label>
+      <ion-select placeholder="Valitse yksi">
+        <ion-select-option value="1">1 paikkaa</ion-select-option>
+        <ion-select-option value="2">2 paikkaa</ion-select-option>
+        <ion-select-option value="3">3 paikkaa</ion-select-option>
+        <ion-select-option value="4">4 paikkaa</ion-select-option>
+        <ion-select-option value="5">5 paikkaa</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Lisätietoja</ion-label>
+      <ion-textarea></ion-textarea>
+    </ion-item>
+
+    <div class="buttons">
+      <ion-button type="submit" color="primary">
+        <ion-icon size="medium" color="light" slot="start" name="add-circle-outline"></ion-icon>
+        <p style="color: white;">Luo kyyti</p>
+      </ion-button>
+
+      <ion-button class="chat-btn" fill="outline" color="danger" (click)="dismiss()">
+        <ion-icon size="medium" slot="start" name="alert-circle-outline"></ion-icon>
+        <p>Peruuta</p>
+      </ion-button>
+    </div>
+
+  </form>
+</ion-content>
