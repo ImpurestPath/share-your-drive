@@ -5,7 +5,6 @@ import * as moment from 'moment';
 import { DriveService } from 'src/app/service/drive.service';
 import { Drive } from '../../entity/drive';
 import { UserService } from 'src/app/service/user.service';
-import { User } from '../../entity/user';
 
 @Component({
   selector: 'app-add-drive',
@@ -44,8 +43,9 @@ export class AddDrivePage implements OnInit {
       finishDate: this.formatDate(data.dateDay, data.dateTime, data.duration),
       createdAt: new Date(),
       driverId: this.userService.userData.uid,
-      seatsMax: data.seatsMax,
-      seatsLeft: data.seatsLeft,
+      seatsMax: Number(data.seatsMax),
+      seatsLeft: Number(data.seatsLeft),
+      passengers: [],
       info: data.info
     }
 

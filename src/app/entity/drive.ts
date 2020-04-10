@@ -9,5 +9,6 @@ export class Drive{
     seatsMax: number;
     seatsLeft: number;
     info: string;
+    passengers: Array<string>;
     constructor(){}
 }
