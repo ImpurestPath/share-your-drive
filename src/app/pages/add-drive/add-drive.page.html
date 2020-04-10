@@ -7,38 +7,49 @@
 
 
 <ion-content>
-  <form>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm)">
     <ion-item>
       <ion-label position="stacked">Lähtöpaikka</ion-label>
-      <ion-input></ion-input>
+      <ion-input formControlName="origin"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Määränpää</ion-label>
-      <ion-input></ion-input>
+      <ion-input formControlName="destination"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Lähtöpäivä</ion-label>
-      <ion-datetime
+      <ion-datetime formControlName="dateDay"
         monthNames="Tammikuu, Helmikuu, Maaliskuu, Huhtikuu, Toukokuu, Kesäkuu, Heinäkuu, Elokuu, Syyskuu, Lokakuu, Marraskuu, Joulukuu"
-        displayFormat="DD MMMM YY" placeholder="Valitse päivä">
+        displayFormat="DD MMMM YYYY" placeholder="Valitse päivä">
       </ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Lähtöaika</ion-label>
-      <ion-datetime displayFormat="HH:mm" placeholder="Valitse kellonaika"></ion-datetime>
+      <ion-datetime formControlName="dateTime" displayFormat="HH:mm" placeholder="Valitse kellonaika"></ion-datetime>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Arvioitu saapumisaika</ion-label>
-      <ion-datetime displayFormat="HH:mm" placeholder="Valitse kellonaika"></ion-datetime>
+      <ion-label position="stacked">Kyydin arvioitu kesto</ion-label>
+      <ion-select formControlName="duration" placeholder="Tunteina">
+        <ion-select-option value="1">1 tuntia</ion-select-option>
+        <ion-select-option value="2">2 tuntia</ion-select-option>
+        <ion-select-option value="3">3 tuntia</ion-select-option>
+        <ion-select-option value="4">4 tuntia</ion-select-option>
+        <ion-select-option value="5">5 tuntia</ion-select-option>
+        <ion-select-option value="6">6 tuntia</ion-select-option>
+        <ion-select-option value="7">7 tuntia</ion-select-option>
+        <ion-select-option value="8">8 tuntia</ion-select-option>
+        <ion-select-option value="9">9 tuntia</ion-select-option>
+        <ion-select-option value="10">10 tuntia</ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Maksimitilavuus</ion-label>
-      <ion-select placeholder="Valitse yksi">
+      <ion-select formControlName="seatsMax" placeholder="Valitse yksi">
         <ion-select-option value="2">2 paikkaa</ion-select-option>
         <ion-select-option value="3">3 paikkaa</ion-select-option>
         <ion-select-option value="4">4 paikkaa</ion-select-option>
@@ -49,7 +60,7 @@
 
     <ion-item>
       <ion-label position="stacked">Vapaita paikkoja</ion-label>
-      <ion-select placeholder="Valitse yksi">
+      <ion-select formControlName="seatsLeft" placeholder="Valitse yksi">
         <ion-select-option value="1">1 paikkaa</ion-select-option>
         <ion-select-option value="2">2 paikkaa</ion-select-option>
         <ion-select-option value="3">3 paikkaa</ion-select-option>
@@ -60,11 +71,11 @@
 
     <ion-item>
       <ion-label position="stacked">Lisätietoja</ion-label>
-      <ion-textarea></ion-textarea>
+      <ion-textarea formControlName="info" placeholder="Kirjoita tähän mahdollisia lisätietoja"></ion-textarea>
     </ion-item>
 
     <div class="buttons">
-      <ion-button type="submit" color="primary">
+      <ion-button [disabled]="!addForm.valid" type="submit" color="primary">
         <ion-icon size="medium" color="light" slot="start" name="add-circle-outline"></ion-icon>
         <p style="color: white;">Luo kyyti</p>
       </ion-button>

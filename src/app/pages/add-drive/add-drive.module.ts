@@ -1,19 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular'
 
-import { AddDrivePageRoutingModule } from './add-drive-routing.module';
+import { AddDrivePageRoutingModule } from './add-drive-routing.module'
 
-import { AddDrivePage } from './add-drive.page';
+import { AddDrivePage } from './add-drive.page'
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddDrivePageRoutingModule
+    AddDrivePageRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [AddDrivePage]
 })

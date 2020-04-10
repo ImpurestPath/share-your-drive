@@ -22,7 +22,6 @@ export class DrivesCardComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.drive);
-
   }
 
   async openDetails() {

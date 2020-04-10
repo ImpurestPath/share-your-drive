@@ -1,10 +1,13 @@
 export class Drive{
-    id: string;
-    startPlace: string;
-    finishPlace: string;
+    // id: string;
+    origin: string;
+    destination: string;
     startDate: Date;
     finishDate: Date;
     driverId: string;
     createdAt: Date;
+    seatsMax: number;
+    seatsLeft: number;
+    info: string;
     constructor(){}
 }

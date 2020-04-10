@@ -1,18 +1,18 @@
-import { AddDrivePageModule } from './../add-drive/add-drive.module';
-import { DrivesDetailsPageModule } from './../drives-details/drives-details.module';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { AddDrivePageModule } from './../add-drive/add-drive.module'
+import { DrivesDetailsPageModule } from './../drives-details/drives-details.module'
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular'
 
-import { DrivesPageRoutingModule } from './drives-routing.module';
+import { DrivesPageRoutingModule } from './drives-routing.module'
 
-import { DrivesPage } from './drives.page';
+import { DrivesPage } from './drives.page'
 
-import { DrivesContainerComponent } from '../../components/drives-container/drives-container.component';
-import { DrivesCardComponent } from '../../components/drives-card/drives-card.component';
-import { DrivesActionComponent } from '../../components/drives-action/drives-action.component';
+import { DrivesContainerComponent } from '../../components/drives-container/drives-container.component'
+import { DrivesCardComponent } from '../../components/drives-card/drives-card.component'
+import { DrivesActionComponent } from '../../components/drives-action/drives-action.component'
 
 @NgModule({
   imports: [
@@ -31,4 +31,4 @@ import { DrivesActionComponent } from '../../components/drives-action/drives-act
   ],
   exports: [DrivesCardComponent]
 })
-export class DrivesPageModule { }
+export class DrivesPageModule {}

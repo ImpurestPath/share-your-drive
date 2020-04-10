@@ -40,12 +40,12 @@ export class DriveService {
     this.store.collection(this.collectionName).add(drive);
   }
 
-  update(drive: Drive){
-    this.store.collection(this.collectionName).doc(drive.id).update(drive);
+  update(drive: Drive, driveId){
+    this.store.collection(this.collectionName).doc(driveId).update(drive);
   }
 
-  delete(drive: Drive){
-    this.store.collection(this.collectionName).doc(drive.id).delete();
+  delete(driveId){
+    this.store.collection(this.collectionName).doc(driveId).delete();
   }
   
 }
