@@ -5,6 +5,9 @@ import * as moment from 'moment';
 import { DriveService } from 'src/app/service/drive.service';
 import { Drive } from '../../entity/drive';
 import { UserService } from 'src/app/service/user.service';
+import { MapboxService } from 'src/app/service/mapbox.service';
+import { map } from 'rxjs/operators';
+import { Feature } from '../../service/mapbox.service';
 
 @Component({
   selector: 'app-add-drive',
@@ -13,12 +16,17 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class AddDrivePage implements OnInit {
   addForm: FormGroup;
+  origins: string[] = [];
+  destinations: string[] = [];
+  selectedOrigin = null;
+  selectedDestination = null;
 
   constructor(
     public modalController: ModalController,
     private fb: FormBuilder,
     private driveService: DriveService,
-    private userService: UserService
+    private userService: UserService,
+    private mapboxService: MapboxService
   ) { }
 
   ngOnInit() {
@@ -51,6 +59,34 @@ export class AddDrivePage implements OnInit {
 
     this.driveService.create(drive);
     this.dismiss();
+  }
+
+  search(event: any, type: string) {
+    const searchTerm = event.target.value.toLowerCase();
+    if (searchTerm && searchTerm.length > 0) {
+      this.mapboxService
+        .searchCity(searchTerm)
+        .subscribe((features: Feature[]) => {
+          (type === 'origin') 
+            ? this.origins = features.map(feature => `${feature.place_name.split(',')[0]}, ${feature.place_name.split(',')[1]}`)
+            : this.destinations = features.map(feature => `${feature.place_name.split(',')[0]}, ${feature.place_name.split(',')[1]}`);
+        })
+    } else {
+      (type === 'origin')
+        ? this.origins = []
+        : this.destinations = [];
+    }
+  }
+
+  onSelect(address: string, type: string) {
+    if (type === 'origin') {
+      this.selectedOrigin = address.split(',')[0];
+      this.origins = [];
+    } else {
+      this.selectedDestination = address.split(',')[0];
+      this.destinations = [];
+    }
+
   }
 
   formatDate(day, time, duration?) {

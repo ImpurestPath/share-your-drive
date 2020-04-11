@@ -10,13 +10,33 @@
   <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm)">
     <ion-item>
       <ion-label position="stacked">Lähtöpaikka</ion-label>
-      <ion-input formControlName="origin"></ion-input>
+      <ion-input (ionInput)="search($event, 'origin')" [value]="selectedOrigin" formControlName="origin">
+        <ion-icon name="search" class="search-input-icon" size="large" slot="start"></ion-icon>
+      </ion-input>
     </ion-item>
+    <div class="search-popup" *ngIf="origins.length > 0">
+      <ion-list lines="none">
+        <ion-item (click)="onSelect(address, 'origin')" button *ngFor="let address of origins">
+          <ion-icon name="location" slot="start" size="large" color="primary"></ion-icon>
+          {{ address }}
+        </ion-item>
+      </ion-list>
+    </div>
 
     <ion-item>
       <ion-label position="stacked">Määränpää</ion-label>
-      <ion-input formControlName="destination"></ion-input>
+      <ion-input (ionInput)="search($event, 'desination')" [value]="selectedDestination" formControlName="destination">
+        <ion-icon name="search" class="search-input-icon" size="large" slot="start"></ion-icon>
+      </ion-input>
     </ion-item>
+    <div class="search-popup" *ngIf="destinations.length > 0">
+      <ion-list lines="none">
+        <ion-item (click)="onSelect(address, 'destination')" button *ngFor="let address of destinations">
+          <ion-icon name="location" slot="start" size="large" color="primary"></ion-icon>
+          {{ address }}
+        </ion-item>
+      </ion-list>
+    </div>
 
     <ion-item>
       <ion-label position="stacked">Lähtöpäivä</ion-label>

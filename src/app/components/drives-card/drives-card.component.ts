@@ -21,7 +21,6 @@ export class DrivesCardComponent implements OnInit {
   constructor(public modalController: ModalController) { }
 
   ngOnInit() {
-    console.log(this.drive);
   }
 
   async openDetails() {
