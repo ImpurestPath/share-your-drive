@@ -31,8 +31,8 @@ export class AddDrivePage implements OnInit {
 
   ngOnInit() {
     this.addForm = this.fb.group({
-      origin: ['', Validators.required, Validators.minLength(2)],
-      destination: ['', Validators.required, Validators.minLength(2)],
+      origin: ['', [Validators.required, Validators.minLength(2)]],
+      destination: ['', [Validators.required, Validators.minLength(2)]],
       dateDay: ['', Validators.required],
       dateTime: ['', Validators.required],
       duration: ['', Validators.required],
