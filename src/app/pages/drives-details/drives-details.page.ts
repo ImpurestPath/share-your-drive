@@ -1,3 +1,5 @@
+import { ChatService } from 'src/app/service/chat.service';
+import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import * as moment from 'moment';
@@ -16,7 +18,7 @@ export class DrivesDetailsPage implements OnInit {
     this.formattedTime = moment(this.drive.startDate).format('MMMM Do YYYY, HH:mm');
   }
 
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController, private router: Router, private chatService: ChatService) { }
 
   ngOnInit() {
     console.log(this.drive);
@@ -30,6 +32,9 @@ export class DrivesDetailsPage implements OnInit {
   messageDriver() {
     // SENDING A MESSAGE
     console.log('Send message clicked');
+    this.modalController.dismiss()
+    this.router.navigate(['tabs/tabs/chat', this.chatService.getChatIdWithUser(this.drive.driverId), this.drive.driverId])
+
   }
 
   dismiss() {
