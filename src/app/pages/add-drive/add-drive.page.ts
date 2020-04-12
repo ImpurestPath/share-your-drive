@@ -50,7 +50,7 @@ export class AddDrivePage implements OnInit {
       startDate: this.formatDate(data.dateDay, data.dateTime),
       finishDate: this.formatDate(data.dateDay, data.dateTime, data.duration),
       createdAt: new Date(),
-      driverId: this.userService.userData.uid,
+      driverId: this.userService.userDataSubject.value.uid,
       seatsMax: Number(data.seatsMax),
       seatsLeft: Number(data.seatsLeft),
       passengers: [],
