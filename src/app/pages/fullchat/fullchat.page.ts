@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Message } from 'src/app/entity/message';
 import { ChatService } from 'src/app/service/chat.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-fullchat',
@@ -16,8 +17,8 @@ export class FullchatPage implements OnInit {
   currentMessage: string;
   constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UserService) { }
 
-  ngOnInit() {
-    this.uid = this.userService.userData.uid;
+  async ngOnInit() {
+    this.uid = this.userService.userDataSubject.value.uid;
     this.id = this.route.snapshot.paramMap.get('id')
     this.chatService.getMessagesFromChat(this.id, 50).subscribe(messages => {
       console.log(messages);

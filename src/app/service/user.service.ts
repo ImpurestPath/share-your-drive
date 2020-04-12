@@ -1,5 +1,5 @@
 import { User } from './../entity/user';
-import { Observable } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -13,18 +13,21 @@ import * as firebase from 'firebase';
 })
 export class UserService {
   user: Observable<firebase.User>;
-  userData: any;
+  userDataSubject: BehaviorSubject<any>;
+  userData: Observable<any>;
 
   constructor(
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth
   ) {
     this.user = this.ngFireAuth.user;
-    this.ngFireAuth.authState.subscribe(user => {
+    this.userData = new Observable();
+    this.userDataSubject = new BehaviorSubject(this.userData);
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.getOtherUserData(user.uid).subscribe(ud => {
-          this.userData = ud.data();
-          localStorage.setItem('user', JSON.stringify(this.userData));
+          this.userDataSubject.next(ud.data());
+          localStorage.setItem('user', JSON.stringify(ud.data()));
           JSON.parse(localStorage.getItem('user'));
         })
         } else {
@@ -34,20 +37,20 @@ export class UserService {
     })
   }
 
-  updateUser(){
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.getOtherUserData(user.uid).subscribe(ud => {
-          this.userData = ud.data();
-          localStorage.setItem('user', JSON.stringify(this.userData));
-          JSON.parse(localStorage.getItem('user'));
-        })
-        } else {
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
-      }
-    })
-  }
+  // updateUser(){
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     if (user) {
+  //       this.getOtherUserData(user.uid).subscribe(ud => {
+  //         this.userData = ud.data();
+  //         localStorage.setItem('user', JSON.stringify(this.userData));
+  //         JSON.parse(localStorage.getItem('user'));
+  //       })
+  //       } else {
+  //       localStorage.setItem('user', null);
+  //       JSON.parse(localStorage.getItem('user'));
+  //     }
+  //   })
+  // }
   // Login in with email/password
   signInEmail(email, password) {
     return new Promise<any>((resolve, reject) => {

@@ -4,6 +4,7 @@ import { Message } from '../entity/message';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -40,19 +41,26 @@ export class ChatService {
   }
 
   getUserChats() {
-    const uid = this.userService.userData.uid;
-    return this.store.collection<Chat>(this.collectionName, ref => ref.where('users', 'array-contains', uid)).snapshotChanges().pipe(map(changes => {
-      return changes.map(c => {
-        const data = c.payload.doc.data();
-        const id = c.payload.doc.id;
-
-        const chat: Chat = {
-          id: id,
-          ...data,
+    return new Observable<Chat[]>(observer => {
+      this.userService.user.subscribe(user => {
+        if (user) {
+          const uid = user.uid;
+          this.store.collection<Chat>(this.collectionName, ref => ref.where('users', 'array-contains', uid)).snapshotChanges().pipe(map(changes => {
+            return changes.map(c => {
+              const data = c.payload.doc.data();
+              const id = c.payload.doc.id;
+              const chat: Chat = {
+                id: id,
+                ...data,
+              }
+              return chat;
+            })
+          })).subscribe(chats => observer.next(chats))
         }
-        return chat;
       })
-    }))
+    })
+
+
 
   }
   getChat(id: string) {
