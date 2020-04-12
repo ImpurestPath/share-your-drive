@@ -24,8 +24,8 @@ export class MapboxService {
     const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
     return this.http.get(
       `${url}${query}.json?access_token=${environment.mapbox.apiKey}&cachebuster=1586587728676&autocomplete=true&country=fi&types=place&limit=5&languageMode=strict`
-      ).pipe(map((res: MapboxOutput) => {
-        return res.features;
-      }))
+    ).pipe(map((res: MapboxOutput) => {
+      return res.features;
+    }))
   }
 }

@@ -31,8 +31,8 @@ export class AddDrivePage implements OnInit {
 
   ngOnInit() {
     this.addForm = this.fb.group({
-      origin: ['', Validators.required],
-      destination: ['', Validators.required],
+      origin: ['', Validators.required, Validators.minLength(2)],
+      destination: ['', Validators.required, Validators.minLength(2)],
       dateDay: ['', Validators.required],
       dateTime: ['', Validators.required],
       duration: ['', Validators.required],
@@ -67,7 +67,7 @@ export class AddDrivePage implements OnInit {
       this.mapboxService
         .searchCity(searchTerm)
         .subscribe((features: Feature[]) => {
-          (type === 'origin') 
+          (type === 'origin')
             ? this.origins = features.map(feature => `${feature.place_name.split(',')[0]}, ${feature.place_name.split(',')[1]}`)
             : this.destinations = features.map(feature => `${feature.place_name.split(',')[0]}, ${feature.place_name.split(',')[1]}`);
         })
