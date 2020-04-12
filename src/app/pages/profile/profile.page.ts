@@ -16,6 +16,7 @@ export class ProfilePage implements OnInit {
 
   signOut(){
     this.userService.signOut()
-    this.router.navigateByUrl('/');
+    // this.router.navigateByUrl('login');
+    window.location.reload();
   }
 }

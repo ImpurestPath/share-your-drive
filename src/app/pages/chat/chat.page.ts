@@ -14,13 +14,12 @@ export class ChatPage implements OnInit {
 
   ngOnInit() {
     this.chatService.getUserChats().subscribe(async basicChats => {
+      console.log('Update chats')
       this.chats = [];
-      for (let basicChat of basicChats){
-        const user = basicChat.users[0] == this.userService.userData.uid ? basicChat.users[1] : basicChat.users[0];
-
-        const name = (await this.userService.getOtherUserData(user).toPromise()).data().displayName;
-        const lastMessage = (await this.chatService.getMessagesFromChat(basicChat.id,1).pipe(take(1)).toPromise())[0]
-
+      for (let basicChat of basicChats) {
+        const uid = basicChat.users[0] == this.userService.userDataSubject.value.uid ? basicChat.users[1] : basicChat.users[0];
+        const name = (await this.userService.getOtherUserData(uid).pipe(take(1)).toPromise()).data().displayName;
+        const lastMessage = (await this.chatService.getMessagesFromChat(basicChat.id, 1).pipe(take(1)).toPromise())[0]
         this.chats.push({
           id: basicChat.id,
           name: name,
