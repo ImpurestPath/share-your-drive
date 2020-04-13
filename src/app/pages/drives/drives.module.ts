@@ -27,8 +27,8 @@ import { DrivesActionComponent } from '../../components/drives-action/drives-act
     DrivesPage,
     DrivesContainerComponent,
     DrivesCardComponent,
-    DrivesActionComponent
+    DrivesActionComponent,
   ],
   exports: [DrivesCardComponent]
 })
-export class DrivesPageModule {}
+export class DrivesPageModule { }
