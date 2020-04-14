@@ -17,10 +17,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { DrivesSearchPopupComponent } from './components/drives-search-popup/drives-search-popup.component'
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, DrivesSearchPopupComponent],
+  entryComponents: [DrivesSearchPopupComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -40,4 +41,4 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Drive } from 'src/app/entity/drive';
 
 @Component({
   selector: 'app-drives-container',
@@ -6,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./drives-container.component.scss'],
 })
 export class DrivesContainerComponent implements OnInit {
-  @Input() currentFilter: any;
-  @Input() drives: Array<any>;
+  @Input() currentFilter: string;
+  @Input() drives: Array<Drive>;
 
   constructor() { }
 
