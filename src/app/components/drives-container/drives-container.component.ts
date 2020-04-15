@@ -9,10 +9,12 @@ import { Drive } from 'src/app/entity/drive';
 export class DrivesContainerComponent implements OnInit {
   @Input() currentFilter: string;
   @Input() drives: Array<Drive>;
+  @Input() state: boolean;
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.state);
   }
 
 }

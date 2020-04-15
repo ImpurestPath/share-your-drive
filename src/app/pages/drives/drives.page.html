@@ -33,9 +33,9 @@
       Suosikit
     </ion-button>
   </div>
-  <app-drives-container [currentFilter]="currentFilter" [drives]="drives"></app-drives-container>
+  <app-drives-container [currentFilter]="currentFilter" [state]="state" [drives]="drives"></app-drives-container>
 
 
-  <app-drives-action></app-drives-action>
+  <app-drives-action (createdEvent)="createdEvent($event)"></app-drives-action>
 
 </ion-content>

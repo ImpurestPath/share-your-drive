@@ -14,17 +14,21 @@ export class DrivesPage implements OnInit {
     filterNew: 'Uusimmat kyydit',
     filterFavorites: 'Suosikit'
   }
-  currentFilter: string;
-  drives: Array<any>;
-  search: any;
+  private newest: Array<any>;
+  private favorites: Array<any>;
+  private nearest: Array<any>;
+  private searchResults: Array<any>;
 
-  constructor(private driveService: DriveService, public popoverController: PopoverController) { }
+  public currentFilter: string;
+  public drives: Array<any>;
+  public state: boolean = false;
+
+  constructor(private driveService: DriveService,
+    public popoverController: PopoverController) { }
 
   ngOnInit() {
-    this.currentFilter = this.filters.filterNear;
-    this.driveService.getRecent(10).subscribe(drives => {
-      this.drives = drives;
-    });
+    this.currentFilter = this.filters.filterNew;
+    this.getNewest();
   }
 
   async presentPopover(ev: any) {
@@ -36,44 +40,73 @@ export class DrivesPage implements OnInit {
     await popover.present();
     let dismiss = await popover.onDidDismiss();
     if (dismiss.data) {
-      this.search = dismiss.data;
-      this.searchDrive(this.search);
+      this.searchDrive(dismiss.data);
     }
   }
 
   searchDrive(data) {
-    console.log(data);
     this.currentFilter = `${data.origin} - ${data.destination}`;
+    this.getSearchResults(data.origin, data.destination);
   }
 
   activateFilter(filter: string) {
     switch (filter) {
       case 'near':
+        this.drives = null;
         this.currentFilter = this.filters.filterNear;
-        // TODO this.filterNear()
+        (this.nearest)
+          ? this.drives = this.nearest
+          : this.getNearest();
         break;
       case 'new':
+        this.drives = null;
         this.currentFilter = this.filters.filterNew;
-        // TODO this.filterNew()
+        (this.newest)
+          ? this.drives = this.newest
+          : this.getNewest();
         break;
       case 'favorites':
+        this.drives = null;
         this.currentFilter = this.filters.filterFavorites;
-        // TODO this.filterFavorites()
+        (this.favorites)
+          ? this.drives = this.favorites
+          : this.getFavorites();
         break;
     }
   }
 
+  createdEvent(event: boolean) {
+    if (event) {
+      this.activateFilter('new');
+    }
+  }
+
   // TODO FILTERS
-  filterNear() {
-
+  getNewest() {
+    this.driveService.getRecent(10).subscribe(drives => {
+      this.newest = drives;
+      this.drives = this.newest;
+    });
   }
 
-  filterNew() {
-
+  getFavorites() {
+    // TODO
+    console.log('get favorites');
   }
 
-  filterFavorites() {
-
+  getNearest() {
+    // TODO
+    console.log('get nearest');
   }
 
+  getSearchResults(origin, destination) {
+    this.driveService.getSearchResults(origin, destination).subscribe((drives) => {
+      this.searchResults = drives;
+      this.drives = this.searchResults;
+      console.log(drives);
+      (drives.length < 1)
+        ? this.state = true
+        : this.state = false;
+    });
+  }
 }

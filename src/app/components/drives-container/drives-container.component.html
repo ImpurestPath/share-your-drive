@@ -8,6 +8,11 @@
   <div *ngIf="drives; else loading" class="cards" scrollY="true" no-bounce>
     <app-drives-card *ngFor="let drive of drives" [data]="drive">
     </app-drives-card>
+
+    <div *ngIf="state">
+      Kyytejä ei valitettavasti löytynyt...
+      <ion-icon name="sad-outline" slot="end" size="large"></ion-icon>
+    </div>
   </div>
 
   <ng-template #loading>

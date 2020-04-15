@@ -58,7 +58,7 @@ export class AddDrivePage implements OnInit {
     }
 
     this.driveService.create(drive);
-    this.dismiss();
+    this.dismiss('KYLLÄÄ');
   }
 
   search(event: any, type: string) {
@@ -100,7 +100,9 @@ export class AddDrivePage implements OnInit {
     }
   }
 
-  dismiss() {
-    this.modalController.dismiss();
+  dismiss(boolean?) {
+    (boolean)
+      ? this.modalController.dismiss(boolean)
+      : this.modalController.dismiss();
   }
 }

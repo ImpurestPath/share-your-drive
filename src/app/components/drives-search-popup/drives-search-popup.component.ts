@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms'
-import { PopoverController } from '@ionic/angular';
 
 
 @Component({
