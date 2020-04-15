@@ -15,7 +15,7 @@ export class DriveService {
 
   constructor(private store: AngularFirestore) { }
 
-  private getDataWithMeta(collection: AngularFirestoreCollection){
+  private getDataWithMeta(collection: AngularFirestoreCollection) {
     return collection.snapshotChanges().pipe(map(changes => {
       return changes.map(c => {
         const data = c.payload.doc.data();
@@ -31,22 +31,37 @@ export class DriveService {
   }
 
   getRecent(number: number) {
-    return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref => 
-          ref.orderBy('createdAt', 'desc').limit(number)))
+    return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
+      ref.orderBy('createdAt', 'desc').limit(number)))
   }
 
-  create(drive: Drive){
+  getNearest() {
+
+  }
+
+  getFavorites() {
+
+  }
+
+  getSearchResults(origin: string, destination: string, date?) {
+    return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
+      ref.where('origin', '==', origin)
+        .where('destination', '==', destination)
+    ));
+  }
+
+  create(drive: Drive) {
     //TODO: add fields 
     this.store.collection(this.collectionName).add(drive);
   }
 
-  update(drive: Drive, driveId){
+  update(drive: Drive, driveId) {
     this.store.collection(this.collectionName).doc(driveId).update(drive);
   }
 
-  delete(driveId){
+  delete(driveId) {
     this.store.collection(this.collectionName).doc(driveId).delete();
   }
-  
+
 }
 

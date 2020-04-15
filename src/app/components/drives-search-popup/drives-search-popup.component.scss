@@ -1,0 +1,16 @@
+form {
+  padding: 3px;
+
+  ion-button {
+    --box-shadow: none;
+    --color: white;
+    text-transform: none;
+    margin: 0;
+  }
+
+  ion-item,
+  ion-label,
+  ion-input {
+    font-size: 15px;
+  }
+}

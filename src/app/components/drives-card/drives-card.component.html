@@ -1,5 +1,5 @@
-<ion-card (click)="openDetails()">
-  <div class="left-panel">
+<ion-card (click)="openDetails()" [color]="color">
+  <div class="left-panel" [ngStyle]="{'background': getShade()}">
   </div>
 
   <div class="right-panel">
@@ -10,13 +10,13 @@
     </ion-item-divider>
 
     <ion-card-content mode="md">
-        <ion-item lines="full">
-          <ion-icon name="time" slot="start" size="medium"></ion-icon>
-          <ion-label>{{ formattedTime }}</ion-label>
-        </ion-item>
+      <ion-item lines="full">
+        <ion-icon name="time" slot="start" size="small"></ion-icon>
+        <ion-label>{{ formattedTime }}</ion-label>
+      </ion-item>
 
       <ion-item lines="none">
-        <ion-icon name="people-circle" slot="start" size="medium"></ion-icon>
+        <ion-icon name="people-circle" slot="start" size="small"></ion-icon>
         <ion-label>{{ drive.seatsLeft }} vapaata paikkaa</ion-label>
       </ion-item>
 

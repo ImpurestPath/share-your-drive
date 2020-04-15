@@ -13,6 +13,7 @@ import { DrivesPage } from './drives.page'
 import { DrivesContainerComponent } from '../../components/drives-container/drives-container.component'
 import { DrivesCardComponent } from '../../components/drives-card/drives-card.component'
 import { DrivesActionComponent } from '../../components/drives-action/drives-action.component'
+import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-popup/drives-search-popup.component'
 
 @NgModule({
   imports: [
@@ -31,4 +32,4 @@ import { DrivesActionComponent } from '../../components/drives-action/drives-act
   ],
   exports: [DrivesCardComponent]
 })
-export class DrivesPageModule {}
+export class DrivesPageModule { }
