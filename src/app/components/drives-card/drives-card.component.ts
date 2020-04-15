@@ -18,9 +18,14 @@ export class DrivesCardComponent implements OnInit {
     this.formattedTime = this.drive.startDate.fromNow();
   }
 
+  @Input() color: string;
+
   constructor(public modalController: ModalController) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  getShade() {
+    return `var(--ion-color-${this.color}-shade)`;
   }
 
   async openDetails() {

@@ -21,7 +21,6 @@ export class DrivesPage implements OnInit {
 
   public currentFilter: string;
   public drives: Array<any>;
-  public state: boolean = false;
 
   constructor(private driveService: DriveService,
     public popoverController: PopoverController) { }
@@ -39,14 +38,11 @@ export class DrivesPage implements OnInit {
     });
     await popover.present();
     let dismiss = await popover.onDidDismiss();
-    if (dismiss.data) {
-      this.searchDrive(dismiss.data);
-    }
-  }
 
-  searchDrive(data) {
-    this.currentFilter = `${data.origin} - ${data.destination}`;
-    this.getSearchResults(data.origin, data.destination);
+    // if user submitted form, search for drives
+    if (dismiss.data) {
+      this.getSearchResults(dismiss.data);
+    }
   }
 
   activateFilter(filter: string) {
@@ -81,7 +77,7 @@ export class DrivesPage implements OnInit {
     }
   }
 
-  // TODO FILTERS
+  // FILTERS AND SEARCHING
   getNewest() {
     this.driveService.getRecent(10).subscribe(drives => {
       this.newest = drives;
@@ -99,14 +95,13 @@ export class DrivesPage implements OnInit {
     console.log('get nearest');
   }
 
-  getSearchResults(origin, destination) {
-    this.driveService.getSearchResults(origin, destination).subscribe((drives) => {
+  getSearchResults(form) {
+    const { origin, destination, date } = form;
+    this.drives = null;
+    this.driveService.getSearchResults(origin, destination, date).subscribe((drives) => {
+      this.currentFilter = `${origin} - ${destination}`;
       this.searchResults = drives;
       this.drives = this.searchResults;
-      console.log(drives);
-      (drives.length < 1)
-        ? this.state = true
-        : this.state = false;
     });
   }
 }

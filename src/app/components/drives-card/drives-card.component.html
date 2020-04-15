@@ -1,5 +1,5 @@
-<ion-card (click)="openDetails()">
-  <div class="left-panel">
+<ion-card (click)="openDetails()" [color]="color">
+  <div class="left-panel" [ngStyle]="{'background': getShade()}">
   </div>
 
   <div class="right-panel">

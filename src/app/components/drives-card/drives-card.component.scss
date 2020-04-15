@@ -4,7 +4,6 @@ ion-card {
   border-radius: 10px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.247);
   display: flex;
-  background: var(--ion-color-primary);
   flex-direction: row;
   cursor: pointer;
 
@@ -15,7 +14,6 @@ ion-card {
 
   .left-panel {
     width: 6px;
-    background: var(--ion-color-primary-shade);
   }
 
   .right-panel {
@@ -45,7 +43,7 @@ ion-card {
 
     ion-item {
       font-size: 10px;
-      --background: var(--ion-color-primary);
+      --background: $cardColor;
       --padding-start: 0px;
       --min-height: none;
 

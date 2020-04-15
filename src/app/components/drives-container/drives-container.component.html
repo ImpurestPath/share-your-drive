@@ -6,12 +6,16 @@
   </div>
 
   <div *ngIf="drives; else loading" class="cards" scrollY="true" no-bounce>
-    <app-drives-card *ngFor="let drive of drives" [data]="drive">
+    <app-drives-card *ngFor="let drive of drives; index as i" [color]="getColor(i)" [data]="drive">
     </app-drives-card>
 
-    <div *ngIf="state">
-      Kyytejä ei valitettavasti löytynyt...
-      <ion-icon name="sad-outline" slot="end" size="large"></ion-icon>
+    <div *ngIf="drives.length < 1">
+      <ion-item lines="none">
+        <ion-label color="grey">Kyytejä ei löytynyt...</ion-label>
+        <ion-icon name="sad-outline" size="medium"></ion-icon>
+      </ion-item>
+
+
     </div>
   </div>
 

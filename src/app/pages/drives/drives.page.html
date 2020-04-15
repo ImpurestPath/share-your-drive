@@ -20,20 +20,20 @@
     </ion-button>
 
     <ion-button (click)="activateFilter('new')" fill="outline"
-      [color]="currentFilter === filters.filterNew ? 'primary' : 'light' ">
-      <ion-icon name="refresh-circle-outline" [color]="currentFilter === filters.filterNew ? 'primary' : 'light' ">
+      [color]="currentFilter === filters.filterNew ? 'tertiary' : 'light' ">
+      <ion-icon name="refresh-circle-outline" [color]="currentFilter === filters.filterNew ? 'tertiary' : 'light' ">
       </ion-icon>
       Uusimmat
     </ion-button>
 
     <ion-button (click)="activateFilter('favorites')" fill="outline"
-      [color]="currentFilter === filters.filterFavorites ? 'primary' : 'light' ">
-      <ion-icon name="heart-outline" [color]="currentFilter === filters.filterFavorites ? 'primary' : 'light' ">
+      [color]="currentFilter === filters.filterFavorites ? 'secondary' : 'light' ">
+      <ion-icon name="heart-outline" [color]="currentFilter === filters.filterFavorites ? 'secondary' : 'light' ">
       </ion-icon>
       Suosikit
     </ion-button>
   </div>
-  <app-drives-container [currentFilter]="currentFilter" [state]="state" [drives]="drives"></app-drives-container>
+  <app-drives-container [currentFilter]="currentFilter" [drives]="drives"></app-drives-container>
 
 
   <app-drives-action (createdEvent)="createdEvent($event)"></app-drives-action>
