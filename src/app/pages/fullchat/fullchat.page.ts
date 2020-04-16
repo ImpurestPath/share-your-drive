@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Message } from 'src/app/entity/message';
 import { ChatService } from 'src/app/service/chat.service';
 import { take } from 'rxjs/operators';
+import * as moment from 'moment';
+import { Chat } from 'src/app/entity/chat';
+import { User } from 'src/app/entity/user';
 
 @Component({
   selector: 'app-fullchat',
@@ -15,31 +18,45 @@ export class FullchatPage implements OnInit {
   toId: string;
   uid: string;
   messages: Message[];
+  otherUser: any;
   currentMessage: string;
-  constructor(private route: ActivatedRoute, private chatService: ChatService, private userService: UserService) { }
+  public moment: any = moment;
+  constructor(
+    private route: ActivatedRoute,
+    private chatService: ChatService,
+    private userService: UserService
+  ) {}
 
   async ngOnInit() {
     this.uid = this.userService.userDataSubject.value.uid;
-    this.chatId = this.route.snapshot.paramMap.get('chatId')
-    this.toId = this.route.snapshot.paramMap.get('toId')
-    if (this.toId === 'null'){
-      this.toId = null
-    }
-    this.chatService.getMessagesFromChat(this.chatId, 50).subscribe(messages => {
-      console.log(messages);
-      this.messages = messages.reverse();})
+    this.chatId = this.route.snapshot.paramMap.get('chatId');
+    this.toId = this.route.snapshot.paramMap.get('toId');
+    this.chatService.getChat(this.chatId).subscribe((chat: Chat) => {
+      if (this.toId === 'null') {
+        this.toId = this.uid === chat.users[0] ? chat.users[1] : chat.users[0];
+      }
+      this.userService.getOtherUserData(this.toId).subscribe((user) => {
+        this.otherUser = user.data();
+      });
+    });
+    this.chatService
+      .getMessagesFromChat(this.chatId, 50)
+      .subscribe((messages) => {
+        console.log(messages);
+        this.messages = messages.reverse();
+      });
   }
 
-  sendMessage(){
-    console.log('Sending...')
+  sendMessage() {
+    console.log('Sending...');
     const message: Message = {
       fromId: this.uid,
       messageText: this.currentMessage,
       sentAt: new Date(),
       toId: this.toId,
-      chatId: this.chatId
-    }
-    this.chatService.sendMessage(message)
+      chatId: this.chatId,
+    };
+    this.chatService.sendMessage(message);
     this.currentMessage = '';
   }
 }

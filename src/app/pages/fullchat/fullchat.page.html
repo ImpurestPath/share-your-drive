@@ -1,23 +1,44 @@
 <ion-header>
   <ion-toolbar>
     <ion-back-button slot="start"></ion-back-button>
-    <ion-title>Chat with user</ion-title>
+    <ion-title *ngIf=otherUser>{{otherUser.displayName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <!-- <ion-list>
     <ion-item *ngFor="let message of messages">
       <ion-label>
         <p>{{message.messageText}}</p>
       </ion-label>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
+  <div class="message-wrap">
+
+    <div *ngFor="let message of messages" class="message" [class.left]=" message.fromId != uid "
+      [class.right]=" message.fromId === uid ">
+      <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> -->
+      <!-- <ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner> -->
+      <div class="msg-detail">
+        <div class="msg-info">
+          <p>
+            <!-- {{msg.userName}} -->
+            &nbsp;&nbsp;&nbsp;{{moment(message.sentAt.toDate()).fromNow()}}</p>
+        </div>
+        <div class="msg-content">
+          <span class="triangle"></span>
+          <p class="line-breaker ">{{message.messageText}}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </ion-content>
-<ion-footer >
+<ion-footer>
   <ion-toolbar>
     <ion-input placeholder="Type message" [(ngModel)]="currentMessage"></ion-input>
-    <ion-button slot='end' (click)="sendMessage()">
+    <ion-button slot='end' (click)="sendMessage()" (keyup.enter)="sendMessage()">
       <ion-icon name="send"></ion-icon>
     </ion-button>
   </ion-toolbar>
