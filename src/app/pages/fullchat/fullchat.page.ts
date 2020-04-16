@@ -11,7 +11,8 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./fullchat.page.scss'],
 })
 export class FullchatPage implements OnInit {
-  id: string;
+  chatId: string;
+  toId: string;
   uid: string;
   messages: Message[];
   currentMessage: string;
@@ -19,8 +20,12 @@ export class FullchatPage implements OnInit {
 
   async ngOnInit() {
     this.uid = this.userService.userDataSubject.value.uid;
-    this.id = this.route.snapshot.paramMap.get('id')
-    this.chatService.getMessagesFromChat(this.id, 50).subscribe(messages => {
+    this.chatId = this.route.snapshot.paramMap.get('chatId')
+    this.toId = this.route.snapshot.paramMap.get('toId')
+    if (this.toId === 'null'){
+      this.toId = null
+    }
+    this.chatService.getMessagesFromChat(this.chatId, 50).subscribe(messages => {
       console.log(messages);
       this.messages = messages.reverse();})
   }
@@ -31,8 +36,8 @@ export class FullchatPage implements OnInit {
       fromId: this.uid,
       messageText: this.currentMessage,
       sentAt: new Date(),
-      toId: null,
-      chatId: this.id
+      toId: this.toId,
+      chatId: this.chatId
     }
     this.chatService.sendMessage(message)
     this.currentMessage = '';

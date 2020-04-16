@@ -25,7 +25,7 @@ const routes: Routes = [
         loadChildren: () => import('../chat/chat.module').then(m => m.ChatPageModule)
       },
       {
-        path: 'chat/:id',
+        path: 'chat/:chatId/:toId',
         loadChildren: () => import('../fullchat/fullchat.module').then(m => m.FullchatPageModule)
       }
     ]

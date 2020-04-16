@@ -17,21 +17,15 @@ export class ChatService {
 
   sendMessage(message: Message) {
     if (message.chatId) {
-      this.store.collection(this.collectionName).doc(message.chatId).collection('chat').add(message)
+      const docRef = this.store.collection(this.collectionName).doc(message.chatId)
+      if (message.fromId && message.toId) {
+        docRef.set({ users: [message.fromId, message.toId]})
+      }
+      docRef.collection('chat').add(message);
     }
     else {
-      let from = ''
-      let to = ''
-      if (message.fromId < message.toId) {
-        from = message.fromId;
-        to = message.toId;
-      }
-      else {
-        from = message.toId;
-        to = message.fromId;
-      }
-      const docRef = this.store.collection(this.collectionName).doc(from + '_' + to)
-      docRef.set({ users: [from, to] })
+      const docRef = this.store.collection(this.collectionName).doc(this.getChatId(message.fromId, message.toId))
+      docRef.set({ users: [message.fromId, message.toId] })
       docRef.collection('chat').add(message);
     }
   }
@@ -66,4 +60,23 @@ export class ChatService {
   getChat(id: string) {
     return this.store.collection(this.collectionName).doc(id).valueChanges();
   }
+
+  getChatId(firstUID, secondUID) {
+    let from = ''
+    let to = ''
+    if (firstUID < secondUID) {
+      from = firstUID;
+      to = secondUID;
+    }
+    else {
+      from = secondUID;
+      to = firstUID;
+    }
+    return from + '_' + to
+  }
+
+  getChatIdWithUser(otherUID) {
+    return this.getChatId(this.userService.userDataSubject.value.uid, otherUID)
+  }
+
 }
