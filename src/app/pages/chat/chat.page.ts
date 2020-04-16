@@ -26,7 +26,7 @@ export class ChatPage implements OnInit {
           lastMessage: lastMessage,
         })
       }
-    })
+    }) 
   }
 
 }
