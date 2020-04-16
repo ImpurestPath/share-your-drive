@@ -4,8 +4,6 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
-
 
 @Injectable({
   providedIn: 'root'
@@ -36,34 +34,22 @@ export class DriveService {
       ref.orderBy('createdAt', 'desc').limit(number)))
   }
 
-  getNearest() {
-
-  }
-
-  getFavorites() {
-
-  }
-
   getSearchResults(origin: string, destination: string, date?: string) {
-
     if (date) {
-      console.log(date);
-      let startDate = date.split('T')[0];
-      console.log(startDate);
-      let newDate = new Date(startDate);
-      newDate.setDate(newDate.getDate() + 1);
-      let endDate = moment(newDate).format('YYYY-MM-DD');
+      let start = new Date(`${date.split('T')[0]}T00:00:00`);
+      let end = new Date(start.getTime() + 86400000);
 
       return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
         ref.where('origin', '==', origin)
           .where('destination', '==', destination)
-          .orderBy('startDate').startAt(startDate).endAt(endDate)
+          .orderBy('startDate').startAt(start).endAt(end)
       ))
     }
 
     return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
       ref.where('origin', '==', origin)
         .where('destination', '==', destination)
+        .orderBy('startDate')
     ))
 
   }
