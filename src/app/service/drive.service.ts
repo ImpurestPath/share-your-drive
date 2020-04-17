@@ -34,6 +34,11 @@ export class DriveService {
       ref.orderBy('createdAt', 'desc').limit(number)))
   }
 
+  getNearest(location: string) {
+    return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
+      ref.where('origin', '==', location).orderBy('startDate', 'asc')))
+  }
+
   getSearchResults(origin: string, destination: string, date?: string) {
     if (date) {
       let start = new Date(`${date.split('T')[0]}T00:00:00`);

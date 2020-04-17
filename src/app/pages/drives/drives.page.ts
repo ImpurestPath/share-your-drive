@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DriveService } from 'src/app/service/drive.service';
 import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-popup/drives-search-popup.component';
 import { PopoverController } from '@ionic/angular';
+import { LocationService } from 'src/app/service/location.service';
 
 @Component({
   selector: 'app-drives',
@@ -18,16 +19,22 @@ export class DrivesPage implements OnInit {
   private favorites: Array<any>;
   private nearest: Array<any>;
   private searchResults: Array<any>;
+  public location: any = null;
 
   public currentFilter: string;
   public drives: Array<any>;
 
   constructor(private driveService: DriveService,
-    public popoverController: PopoverController) { }
+    public popoverController: PopoverController,
+    private locationService: LocationService) { }
 
   ngOnInit() {
-    this.currentFilter = this.filters.filterNew;
-    this.getNewest();
+    this.currentFilter = this.filters.filterNear;
+    console.log(this.location);
+    this.locationService.getLocation().then((res) => {
+      this.location = res[0].locality;
+      this.getNearest(this.location);
+    });
   }
 
   async presentPopover(ev: any) {
@@ -41,7 +48,7 @@ export class DrivesPage implements OnInit {
 
     // if user submitted form, search for drives
     if (dismiss.data) {
-      this.getSearchResults(dismiss.data);
+      this.searchDrives(dismiss.data);
     }
   }
 
@@ -52,7 +59,7 @@ export class DrivesPage implements OnInit {
         this.currentFilter = this.filters.filterNear;
         (this.nearest)
           ? this.drives = this.nearest
-          : this.getNearest();
+          : this.getNearest(this.location);
         break;
       case 'new':
         this.drives = null;
@@ -90,12 +97,14 @@ export class DrivesPage implements OnInit {
     console.log('get favorites');
   }
 
-  getNearest() {
-    // TODO
-    console.log('get nearest');
+  getNearest(location: string) {
+    this.driveService.getNearest(location).subscribe(drives => {
+      this.nearest = drives;
+      this.drives = this.nearest;
+    });
   }
 
-  getSearchResults(form) {
+  searchDrives(form) {
     const { origin, destination, date } = form;
     this.drives = null;
     this.driveService.getSearchResults(origin, destination, date).subscribe((drives) => {
