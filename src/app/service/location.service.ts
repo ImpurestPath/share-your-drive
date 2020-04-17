@@ -12,7 +12,7 @@ export class LocationService {
   };
   private lat;
   private long;
-  private locationName;
+  private location;
 
   constructor(private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder) { }
@@ -25,7 +25,8 @@ export class LocationService {
 
         this.nativeGeocoder.reverseGeocode(this.lat, this.long, this.options)
           .then((result: NativeGeocoderResult[]) => {
-            resolve(result);
+            this.location = result;
+            resolve(this.location);
           }).catch((error: any) => reject(error));
       })
     })

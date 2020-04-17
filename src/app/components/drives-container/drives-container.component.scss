@@ -1,63 +1,65 @@
 .container {
   background: #f9f9f9;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.13);
+  box-shadow: 1px 1px 10px #aeaeae;
   text-align: center;
   font-weight: 400;
-  font-size: 11px;
-  padding: 5px 13px;
-  z-index: 5;
-  height: 80%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
 
   .line {
-    width: 100%;
-    text-align: center;
-    position: relative;
-    color: rgba(0, 0, 0, 0.685);
-    margin-bottom: 5px;
-
-    span {
-      background: #f9f9f9;
-      padding: 0 10px;
-    }
-
-    &:before {
-      content: '';
+    margin: 5px 10px 0px 10px;
+    h2 {
       width: 100%;
-      left: 0;
-      top: 50%;
-      position: absolute;
-      z-index: -1;
-      border-top: 2px solid rgba(0, 0, 0, 0.116);
-      border-radius: 100px;
+      text-align: center;
+      border-bottom: 1px solid #909090;
+      line-height: 0em;
+      margin: 0 0 5px;
+
+      span {
+        background: #f9f9f9;
+        padding: 0 5px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.705);
+      }
     }
+
+    // &:before {
+    //   position: relative;
+    //   content: '';
+    //   width: 100%;
+    //   left: 0;
+    //   top: 50%;
+    //   position: absolute;
+    //   z-index: -1;
+    //   border-top: 2px solid rgba(0, 0, 0, 0.116);
+    //   border-radius: 100px;
+    // }
   }
+}
 
-  .else {
-    border-radius: 10px;
-    margin: 15px 0px;
+.else {
+  border-radius: 10px;
+  margin: 15px 0px;
 
-    ion-item {
-      color: rgb(110, 110, 110);
-      font-weight: 500;
-    }
+  ion-item {
+    color: rgb(110, 110, 110);
+    font-weight: 500;
   }
+}
 
-  .cards {
-    height: calc(100% - 70px);
+.cards {
+  height: 100%;
 
-    overflow-x: scroll;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none; // IE 10+
-    scrollbar-width: none; // Firefox
-    scroll-behavior: smooth;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none; // IE 10+
+  scrollbar-width: none; // Firefox
+  scroll-behavior: smooth;
 
-    &::-webkit-scrollbar {
-      display: none; // Safari and Chrome
-    }
+  &::-webkit-scrollbar {
+    display: none; // Safari and Chrome
   }
 }
 
