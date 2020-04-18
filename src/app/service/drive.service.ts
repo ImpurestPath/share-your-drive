@@ -3,7 +3,7 @@ import { Drive } from './../entity/drive';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +56,15 @@ export class DriveService {
         .where('destination', '==', destination)
         .orderBy('startDate')
     ))
+  }
 
+  getFavorites(favorite) {
+    console.log(favorite);
+    return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
+      ref.where('origin', '==', favorite.origin)
+        .where('destination', '==', favorite.destination)
+        .orderBy('startDate')
+    ))
   }
 
   create(drive: Drive) {

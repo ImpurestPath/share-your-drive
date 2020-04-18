@@ -4,6 +4,9 @@ import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-pop
 import { PopoverController } from '@ionic/angular';
 import { LocationService } from 'src/app/service/location.service';
 import { Platform } from '@ionic/angular';
+import { UserService } from 'src/app/service/user.service';
+import { forkJoin, Observable, concat } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-drives',
@@ -21,6 +24,7 @@ export class DrivesPage implements OnInit {
   private nearest: Array<any>;
   private searchResults: Array<any>;
   public location: any = null;
+  private user: any;
 
   public currentFilter: string;
   public drives: Array<any>;
@@ -28,16 +32,22 @@ export class DrivesPage implements OnInit {
   constructor(private driveService: DriveService,
     public popoverController: PopoverController,
     private locationService: LocationService,
-    private platform: Platform) { }
+    private platform: Platform,
+    private userService: UserService) { }
 
   ngOnInit() {
-    if (this.platform.is('android') || this.platform.is('cordova')) {
+
+    // Checks the platform, as nearest
+    // drives filter only works on mobile.
+    if (this.platform.is('mobile') || this.platform.is('android') || this.platform.is('cordova')) {
       console.log('MOBILE');
       this.currentFilter = this.filters.filterNear;
       this.locationService.getLocation().then((res) => {
         this.location = res[0].locality;
         this.getNearest(this.location);
       });
+
+      // Chooses newest as the default filter if on browser
     } else {
       console.log('BROWSER');
       this.currentFilter = this.filters.filterNew;
@@ -101,8 +111,14 @@ export class DrivesPage implements OnInit {
   }
 
   getFavorites() {
-    // TODO
-    console.log('get favorites');
+    let favorites = this.userService.userDataSubject.value.favorites;
+    this.favorites = [];
+    favorites.forEach((favorite) => {
+      this.driveService.getFavorites(favorite).subscribe((drives) => {
+        this.favorites = this.favorites.concat(drives);
+        this.drives = this.favorites;
+      })
+    })
   }
 
   getNearest(location: string) {
