@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Drive } from 'src/app/entity/drive';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-drives-container',
@@ -9,12 +10,14 @@ import { Drive } from 'src/app/entity/drive';
 export class DrivesContainerComponent implements OnInit {
   @Input() currentFilter: string;
   @Input() drives: Array<Drive>;
+  plat: boolean;
 
   color: string;
 
-  constructor() { }
+  constructor(private platform: Platform) { }
 
   ngOnInit() {
+    this.plat = this.platform.is('desktop') ? true : false;
   }
 
   getColor(index: number) {

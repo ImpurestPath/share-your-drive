@@ -10,6 +10,8 @@
 
   .line {
     margin: 5px 10px 0px 10px;
+    padding-bottom: 3px;
+
     h2 {
       width: 100%;
       text-align: center;
@@ -19,23 +21,11 @@
 
       span {
         background: #f9f9f9;
-        padding: 0 5px;
+        padding: 0px 5px;
         font-size: 12px;
         color: rgba(0, 0, 0, 0.705);
       }
     }
-
-    // &:before {
-    //   position: relative;
-    //   content: '';
-    //   width: 100%;
-    //   left: 0;
-    //   top: 50%;
-    //   position: absolute;
-    //   z-index: -1;
-    //   border-top: 2px solid rgba(0, 0, 0, 0.116);
-    //   border-radius: 100px;
-    // }
   }
 }
 
@@ -50,8 +40,7 @@
 }
 
 .cards {
-  height: 100%;
-
+  height: calc(100% - 18px);
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none; // IE 10+

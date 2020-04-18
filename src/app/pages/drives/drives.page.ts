@@ -3,6 +3,7 @@ import { DriveService } from 'src/app/service/drive.service';
 import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-popup/drives-search-popup.component';
 import { PopoverController } from '@ionic/angular';
 import { LocationService } from 'src/app/service/location.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-drives',
@@ -26,15 +27,22 @@ export class DrivesPage implements OnInit {
 
   constructor(private driveService: DriveService,
     public popoverController: PopoverController,
-    private locationService: LocationService) { }
+    private locationService: LocationService,
+    private platform: Platform) { }
 
   ngOnInit() {
-    this.currentFilter = this.filters.filterNear;
-    console.log(this.location);
-    this.locationService.getLocation().then((res) => {
-      this.location = res[0].locality;
-      this.getNearest(this.location);
-    });
+    if (this.platform.is('android') || this.platform.is('cordova')) {
+      console.log('MOBILE');
+      this.currentFilter = this.filters.filterNear;
+      this.locationService.getLocation().then((res) => {
+        this.location = res[0].locality;
+        this.getNearest(this.location);
+      });
+    } else {
+      console.log('BROWSER');
+      this.currentFilter = this.filters.filterNew;
+      this.getNewest();
+    }
   }
 
   async presentPopover(ev: any) {
