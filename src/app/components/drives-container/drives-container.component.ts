@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Drive } from 'src/app/entity/drive';
+import { PopoverController } from '@ionic/angular';
+import { AddFavoritePopupComponent } from '../add-favorite-popup/add-favorite-popup.component';
 
 @Component({
   selector: 'app-drives-container',
@@ -12,7 +14,23 @@ export class DrivesContainerComponent implements OnInit {
 
   color: string;
 
-  constructor() { }
+  constructor(private popoverController: PopoverController) { }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: AddFavoritePopupComponent,
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
+    let dismiss = await popover.onDidDismiss();
+
+    // if user submitted form, search for drives
+    // and store current searchRoute in a variable
+    if (dismiss.data) {
+      console.log(dismiss.data);
+    }
+  }
 
   ngOnInit() {
   }

@@ -7,7 +7,12 @@
     </h2>
   </div>
 
-
+  <div *ngIf="currentFilter == 'Suosikit'">
+    <ion-button (click)="presentPopover($event)" class="add-fav-btn" expand="full">
+      Lisää uusi suosikkireitti
+      <ion-icon name="add-circle-outline" slot="end"></ion-icon>
+    </ion-button>
+  </div>
   <div *ngIf="drives; else loading" class="cards" scrollY="true" no-bounce>
     <app-drives-card *ngFor="let drive of drives; index as i" [color]="getColor(i)" [data]="drive">
     </app-drives-card>
@@ -20,6 +25,7 @@
 
 
     </div>
+
   </div>
 
 

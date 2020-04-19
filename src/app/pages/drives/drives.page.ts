@@ -25,6 +25,7 @@ export class DrivesPage implements OnInit {
   private searchResults: Array<any>;
   public location: any = null;
   private user: any;
+  private searchRoute: null;
 
   public currentFilter: string;
   public drives: Array<any>;
@@ -66,6 +67,7 @@ export class DrivesPage implements OnInit {
 
     // if user submitted form, search for drives
     if (dismiss.data) {
+      console.log(dismiss.data);
       this.searchDrives(dismiss.data);
     }
   }

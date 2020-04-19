@@ -8,6 +8,22 @@
   height: 100%;
   overflow: hidden;
 
+  .add-fav-btn {
+    --box-shadow: none;
+    --background: rgb(233, 233, 233);
+    --color: rgb(128, 128, 128);
+    text-transform: none;
+    margin-bottom: 4px;
+    font-weight: 400;
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    margin-top: 0;
+
+    ion-icon {
+      color: rgb(156, 156, 156);
+    }
+  }
+
   .line {
     margin: 5px 10px 0px 10px;
     padding-bottom: 3px;
