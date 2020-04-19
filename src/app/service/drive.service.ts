@@ -18,20 +18,22 @@ export class DriveService {
   constructor(private store: AngularFirestore) {}
 
   private getDataWithMeta(collection: AngularFirestoreCollection) {
-    return collection.snapshotChanges().pipe(
-      map((changes) => {
-        return changes.map((c) => {
-          const data = c.payload.doc.data();
-          const id = c.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
+    return  collection
+            .snapshotChanges()
+            .pipe(
+              map((changes) => {
+                return changes.map((c) => {
+                  const data = c.payload.doc.data();
+                  const id = c.payload.doc.id;
+                  return { id, ...data };
+                });
+              })
+            );
   }
 
   getAll() {
     this.drives =
-      this.drives == undefined
+      this.drives === undefined
         ? this.store.collection<Drive>(this.collectionName)
         : this.drives;
     return this.getDataWithMeta(this.drives);
@@ -57,6 +59,19 @@ export class DriveService {
           .where('destination', '==', destination)
       )
     );
+  }
+
+  getDrive(driveId: string){
+    return this.store
+    .collection<Drive>(this.collectionName)
+    .doc<Drive>(driveId)
+    .snapshotChanges()
+    .pipe(
+      map((changes) => { 
+        const id = changes.payload.id;
+        const data = changes.payload.data();
+        return { id, ...data };
+    }));
   }
 
   create(drive: Drive) {
@@ -93,4 +108,6 @@ export class DriveService {
       });
     });
   }
+
+  
 }

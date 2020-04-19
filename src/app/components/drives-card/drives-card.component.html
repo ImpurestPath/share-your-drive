@@ -1,4 +1,4 @@
-<ion-card (click)="openDetails()" [color]="color">
+<ion-card [color]="color" [routerLink]="['../../../drives',drive.id]" *ngIf="drive">
   <div class="left-panel" [ngStyle]="{'background': getShade()}">
   </div>
 
