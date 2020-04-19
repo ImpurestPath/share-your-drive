@@ -75,22 +75,51 @@ export class DriveService {
   bookDrive(userId: string, driveId: string) {
     return new Promise((resolve, reject) => {
       const ref = this.store.collection(this.collectionName).doc(driveId);
-      ref.valueChanges().pipe(take(1)).subscribe((data: Drive) => {
-        if (!data.passengers.includes(userId) && data.seatsLeft > 0) {
-          data.passengers.push(userId);
-          data.seatsLeft -= 1;
-          ref
-            .update(data)
-            .then(() => {
-              resolve('Successfully booked');
-            })
-            .catch(() => {
-              reject('Cannot update in firebase');
-            });
-        } else {
-          reject('No place or drive already booked');
-        }
-      });
+      ref
+        .valueChanges()
+        .pipe(take(1))
+        .subscribe((data: Drive) => {
+          if (!data.passengers.includes(userId) && data.seatsLeft > 0) {
+            data.passengers.push(userId);
+            data.seatsLeft -= 1;
+            ref
+              .update(data)
+              .then(() => {
+                resolve('Successfully booked');
+              })
+              .catch(() => {
+                reject('Cannot connect to server');
+              });
+          } else {
+            reject('No place or drive already booked');
+          }
+        });
+    });
+  }
+
+  unbookDrive(userId: string, driveId: string) {
+    return new Promise((resolve, reject) => {
+      const ref = this.store.collection(this.collectionName).doc(driveId);
+      ref
+        .valueChanges()
+        .pipe(take(1))
+        .subscribe((data: Drive) => {
+          if (data.passengers.includes(userId)) {
+            const index = data.passengers.indexOf(userId);
+            data.passengers.splice(index, 1);
+            data.seatsLeft += 1;
+            ref
+              .update(data)
+              .then(() => {
+                resolve('Successfully unbooked');
+              })
+              .catch(() => {
+                reject('Cannot update in firebase');
+              });
+          } else {
+            reject('Drive is not booked');
+          }
+        });
     });
   }
 }
