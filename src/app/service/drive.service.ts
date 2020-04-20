@@ -2,15 +2,11 @@ import { Drive } from './../entity/drive';
 
 import { map, take } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
 import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-=======
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
->>>>>>> feature/drives-filters
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +15,7 @@ export class DriveService {
   private collectionName = 'drive';
   drives: AngularFirestoreCollection;
 
-  constructor(private store: AngularFirestore) {}
+  constructor(private store: AngularFirestore) { }
 
   private getDataWithMeta(collection: AngularFirestoreCollection) {
     return collection.snapshotChanges().pipe(
@@ -50,9 +46,9 @@ export class DriveService {
   }
 
 <<<<<<< HEAD
-  getNearest() {}
+  getNearest() { }
 
-  getFavorites() {}
+  getFavorites() { }
 
   getSearchResults(origin: string, destination: string, date?) {
     return this.getDataWithMeta(
