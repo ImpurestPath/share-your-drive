@@ -45,20 +45,6 @@ export class DriveService {
     );
   }
 
-<<<<<<< HEAD
-  getNearest() { }
-
-  getFavorites() { }
-
-  getSearchResults(origin: string, destination: string, date?) {
-    return this.getDataWithMeta(
-      this.store.collection<Drive>(this.collectionName, (ref) =>
-        ref
-          .where('origin', '==', origin)
-          .where('destination', '==', destination)
-      )
-    );
-=======
   getNearest(location: string) {
     return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
       ref.where('origin', '==', location).orderBy('startDate', 'asc')))
@@ -90,7 +76,6 @@ export class DriveService {
         .where('destination', '==', favorite.destination)
         .orderBy('startDate')
     ))
->>>>>>> feature/drives-filters
   }
 
   create(drive: Drive) {
