@@ -58,7 +58,6 @@ export class AddDrivePage implements OnInit {
     }
 
     this.driveService.create(drive);
-    this.dismiss('KYLLÄÄ');
   }
 
   search(event: any, type: string) {

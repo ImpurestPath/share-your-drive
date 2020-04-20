@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Drive } from 'src/app/entity/drive';
 import { PopoverController } from '@ionic/angular';
 import { AddFavoritePopupComponent } from '../add-favorite-popup/add-favorite-popup.component';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-drives-container',
@@ -12,9 +13,10 @@ export class DrivesContainerComponent implements OnInit {
   @Input() currentFilter: string;
   @Input() drives: Array<Drive>;
 
+  user: any;
   color: string;
 
-  constructor(private popoverController: PopoverController) { }
+  constructor(private popoverController: PopoverController, private userService: UserService) { }
 
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
@@ -25,14 +27,16 @@ export class DrivesContainerComponent implements OnInit {
     await popover.present();
     let dismiss = await popover.onDidDismiss();
 
-    // if user submitted form, search for drives
-    // and store current searchRoute in a variable
+    // if the user adds a new favorite
     if (dismiss.data) {
-      console.log(dismiss.data);
+      this.userService.addFavorite(this.user.uid, dismiss.data.origin, dismiss.data.destination);
     }
   }
 
   ngOnInit() {
+    this.userService.userDataSubject.subscribe((data) => {
+      this.user = data;
+    })
   }
 
   getColor(index: number) {

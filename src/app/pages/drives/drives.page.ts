@@ -5,8 +5,6 @@ import { PopoverController } from '@ionic/angular';
 import { LocationService } from 'src/app/service/location.service';
 import { Platform } from '@ionic/angular';
 import { UserService } from 'src/app/service/user.service';
-import { forkJoin, Observable, concat } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-drives',
@@ -24,8 +22,6 @@ export class DrivesPage implements OnInit {
   private nearest: Array<any>;
   private searchResults: Array<any>;
   public location: any = null;
-  private user: any;
-  private searchRoute: null;
 
   public currentFilter: string;
   public drives: Array<any>;
@@ -66,8 +62,8 @@ export class DrivesPage implements OnInit {
     let dismiss = await popover.onDidDismiss();
 
     // if user submitted form, search for drives
+    // and store current searchRoute in a variable
     if (dismiss.data) {
-      console.log(dismiss.data);
       this.searchDrives(dismiss.data);
     }
   }

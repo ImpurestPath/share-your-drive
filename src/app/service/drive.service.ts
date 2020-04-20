@@ -3,7 +3,6 @@ import { Drive } from './../entity/drive';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable, forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
