@@ -18,10 +18,13 @@ import { AngularFireAuthModule } from '@angular/fire/auth'
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { DrivesSearchPopupComponent } from './components/drives-search-popup/drives-search-popup.component'
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { AddFavoritePopupComponent } from './components/add-favorite-popup/add-favorite-popup.component'
 
 @NgModule({
-  declarations: [AppComponent, DrivesSearchPopupComponent],
-  entryComponents: [DrivesSearchPopupComponent],
+  declarations: [AppComponent, DrivesSearchPopupComponent, AddFavoritePopupComponent],
+  entryComponents: [DrivesSearchPopupComponent, AddFavoritePopupComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -35,6 +38,8 @@ import { DrivesSearchPopupComponent } from './components/drives-search-popup/dri
   ],
 
   providers: [
+    Geolocation,
+    NativeGeocoder,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

@@ -17,4 +17,4 @@ import { CalendarPage } from './calendar.page';
   ],
   declarations: [CalendarPage]
 })
-export class CalendarPageModule {}
+export class CalendarPageModule { }

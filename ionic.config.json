@@ -1,5 +1,7 @@
 {
   "name": "syd",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

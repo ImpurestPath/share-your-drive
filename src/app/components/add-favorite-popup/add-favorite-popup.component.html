@@ -1,0 +1,15 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit(searchForm)">
+
+  <ion-item>
+    <ion-label position="floating">Mistä</ion-label>
+    <ion-input formControlName="origin"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Mihin</ion-label>
+    <ion-input formControlName="destination"></ion-input>
+  </ion-item>
+
+  <ion-button [disabled]="!searchForm.valid" type="submit" expand="full">Lisää suosikkeihin
+  </ion-button>
+</form>

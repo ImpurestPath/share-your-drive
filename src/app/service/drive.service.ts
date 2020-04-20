@@ -2,11 +2,15 @@ import { Drive } from './../entity/drive';
 
 import { map, take } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
 import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+=======
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+>>>>>>> feature/drives-filters
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +49,7 @@ export class DriveService {
     );
   }
 
+<<<<<<< HEAD
   getNearest() {}
 
   getFavorites() {}
@@ -57,6 +62,39 @@ export class DriveService {
           .where('destination', '==', destination)
       )
     );
+=======
+  getNearest(location: string) {
+    return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
+      ref.where('origin', '==', location).orderBy('startDate', 'asc')))
+  }
+
+  getSearchResults(origin: string, destination: string, date?: string) {
+    if (date) {
+      let start = new Date(`${date.split('T')[0]}T00:00:00`);
+      let end = new Date(start.getTime() + 86400000);
+
+      return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
+        ref.where('origin', '==', origin)
+          .where('destination', '==', destination)
+          .orderBy('startDate').startAt(start).endAt(end)
+      ))
+    }
+
+    return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
+      ref.where('origin', '==', origin)
+        .where('destination', '==', destination)
+        .orderBy('startDate')
+    ))
+  }
+
+  getFavorites(favorite) {
+    console.log(favorite);
+    return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
+      ref.where('origin', '==', favorite.origin)
+        .where('destination', '==', favorite.destination)
+        .orderBy('startDate')
+    ))
+>>>>>>> feature/drives-filters
   }
 
   create(drive: Drive) {

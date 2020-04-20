@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DriveService } from 'src/app/service/drive.service';
 import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-popup/drives-search-popup.component';
 import { PopoverController } from '@ionic/angular';
+import { LocationService } from 'src/app/service/location.service';
+import { Platform } from '@ionic/angular';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-drives',
@@ -18,16 +21,32 @@ export class DrivesPage implements OnInit {
   private favorites: Array<any>;
   private nearest: Array<any>;
   private searchResults: Array<any>;
+  public location: any = null;
 
   public currentFilter: string;
   public drives: Array<any>;
 
   constructor(private driveService: DriveService,
-    public popoverController: PopoverController) { }
+    public popoverController: PopoverController,
+    private locationService: LocationService,
+    private platform: Platform,
+    private userService: UserService) { }
 
   ngOnInit() {
-    this.currentFilter = this.filters.filterNew;
-    this.getNewest();
+    // Checks the platform, as nearest
+    // drives filter only works on mobile.
+    if (this.platform.is('mobile') || this.platform.is('android') || this.platform.is('cordova')) {
+      this.currentFilter = this.filters.filterNear;
+      this.locationService.getLocation().then((res) => {
+        this.location = res[0].locality;
+        this.getNearest(this.location);
+      });
+
+      // Chooses newest as the default filter if on browser
+    } else {
+      this.currentFilter = this.filters.filterNew;
+      this.getNewest();
+    }
   }
 
   async presentPopover(ev: any) {
@@ -40,9 +59,8 @@ export class DrivesPage implements OnInit {
     let dismiss = await popover.onDidDismiss();
 
     // if user submitted form, search for drives
-    if (dismiss.data) {
-      this.getSearchResults(dismiss.data);
-    }
+    // and store current searchRoute in a variable
+    if (dismiss.data) this.searchDrives(dismiss.data);
   }
 
   activateFilter(filter: string) {
@@ -52,7 +70,7 @@ export class DrivesPage implements OnInit {
         this.currentFilter = this.filters.filterNear;
         (this.nearest)
           ? this.drives = this.nearest
-          : this.getNearest();
+          : this.getNearest(this.location);
         break;
       case 'new':
         this.drives = null;
@@ -72,9 +90,7 @@ export class DrivesPage implements OnInit {
   }
 
   createdEvent(event: boolean) {
-    if (event) {
-      this.activateFilter('new');
-    }
+    if (event) this.activateFilter('new');
   }
 
   // FILTERS AND SEARCHING
@@ -86,16 +102,24 @@ export class DrivesPage implements OnInit {
   }
 
   getFavorites() {
-    // TODO
-    console.log('get favorites');
+    let favorites = this.userService.userDataSubject.value.favorites;
+    this.favorites = [];
+    favorites.forEach((favorite) => {
+      this.driveService.getFavorites(favorite).subscribe((drives) => {
+        this.favorites = this.favorites.concat(drives);
+        this.drives = this.favorites;
+      })
+    })
   }
 
-  getNearest() {
-    // TODO
-    console.log('get nearest');
+  getNearest(location: string) {
+    this.driveService.getNearest(location).subscribe(drives => {
+      this.nearest = drives;
+      this.drives = this.nearest;
+    });
   }
 
-  getSearchResults(form) {
+  searchDrives(form) {
     const { origin, destination, date } = form;
     this.drives = null;
     this.driveService.getSearchResults(origin, destination, date).subscribe((drives) => {

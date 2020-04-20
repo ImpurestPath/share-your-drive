@@ -8,9 +8,7 @@
       <ion-icon color="light" name="ellipsis-vertical"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
 
-<ion-content fullscreen>
   <div class="top-section">
     <ion-button (click)="activateFilter('near')" fill="outline"
       [color]="currentFilter === filters.filterNear ? 'primary' : 'light' ">
@@ -33,9 +31,10 @@
       Suosikit
     </ion-button>
   </div>
+
+</ion-header>
+
+<ion-content fullscreen no-bounce>
   <app-drives-container [currentFilter]="currentFilter" [drives]="drives"></app-drives-container>
-
-
   <app-drives-action (createdEvent)="createdEvent($event)"></app-drives-action>
-
 </ion-content>
