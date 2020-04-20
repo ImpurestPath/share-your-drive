@@ -33,11 +33,9 @@ export class DrivesPage implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
-
     // Checks the platform, as nearest
     // drives filter only works on mobile.
     if (this.platform.is('mobile') || this.platform.is('android') || this.platform.is('cordova')) {
-      console.log('MOBILE');
       this.currentFilter = this.filters.filterNear;
       this.locationService.getLocation().then((res) => {
         this.location = res[0].locality;
@@ -46,7 +44,6 @@ export class DrivesPage implements OnInit {
 
       // Chooses newest as the default filter if on browser
     } else {
-      console.log('BROWSER');
       this.currentFilter = this.filters.filterNew;
       this.getNewest();
     }
@@ -63,9 +60,7 @@ export class DrivesPage implements OnInit {
 
     // if user submitted form, search for drives
     // and store current searchRoute in a variable
-    if (dismiss.data) {
-      this.searchDrives(dismiss.data);
-    }
+    if (dismiss.data) this.searchDrives(dismiss.data);
   }
 
   activateFilter(filter: string) {
@@ -95,9 +90,7 @@ export class DrivesPage implements OnInit {
   }
 
   createdEvent(event: boolean) {
-    if (event) {
-      this.activateFilter('new');
-    }
+    if (event) this.activateFilter('new');
   }
 
   // FILTERS AND SEARCHING
