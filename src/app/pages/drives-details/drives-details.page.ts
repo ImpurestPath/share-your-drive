@@ -1,7 +1,7 @@
 import { ChatService } from 'src/app/service/chat.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import * as moment from 'moment';
 import { DriveService } from 'src/app/service/drive.service';
 import { UserService } from 'src/app/service/user.service';
@@ -27,7 +27,8 @@ export class DrivesDetailsPage implements OnInit {
     private router: Router,
     private chatService: ChatService,
     private driveService: DriveService,
-    private userService: UserService
+    private userService: UserService,
+    private toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -38,8 +39,20 @@ export class DrivesDetailsPage implements OnInit {
     // BOOK A SEAT
     this.driveService
       .bookDrive(this.userService.userDataSubject.value.uid, this.drive.id)
-      .then((d) => console.log(d))
-      .catch((d) => console.log(d));
+      .then(async (d: string) => {
+        const toast = await this.toastController.create({
+          message: d,
+          duration: 1500
+        });
+        toast.present();
+      })
+      .catch(async (d: string) => {
+        const toast = await this.toastController.create({
+          message: d,
+          duration: 1500
+        });
+        toast.present();
+      });
     console.log('Booking clicked');
   }
 
