@@ -3,10 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Message } from 'src/app/entity/message';
 import { ChatService } from 'src/app/service/chat.service';
-import { take } from 'rxjs/operators';
 import * as moment from 'moment';
 import { Chat } from 'src/app/entity/chat';
-import { User } from 'src/app/entity/user';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-fullchat',
@@ -24,7 +23,8 @@ export class FullchatPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private chatService: ChatService,
-    private userService: UserService
+    private userService: UserService,
+    private location: Location
   ) {}
 
   async ngOnInit() {
@@ -36,7 +36,9 @@ export class FullchatPage implements OnInit {
         this.toId = this.uid === chat.users[0] ? chat.users[1] : chat.users[0];
       }
       this.userService.getOtherUserData(this.toId).subscribe((user) => {
+        console.log(this.toId);
         this.otherUser = user.data();
+        console.log(this.otherUser);
       });
     });
     this.chatService
@@ -58,5 +60,9 @@ export class FullchatPage implements OnInit {
     };
     this.chatService.sendMessage(message);
     this.currentMessage = '';
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
