@@ -70,11 +70,9 @@ export class DriveService {
   }
 
   getFavorites(favorite) {
-    console.log(favorite);
     return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
       ref.where('origin', '==', favorite.origin)
         .where('destination', '==', favorite.destination)
-        .orderBy('startDate')
     ))
   }
 

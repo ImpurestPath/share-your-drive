@@ -18,13 +18,15 @@ export class DrivesPage implements OnInit {
     filterFavorites: 'Suosikit'
   }
   private newest: Array<any>;
-  private favorites: Array<any>;
+  favorites: Array<any>;
   private nearest: Array<any>;
   private searchResults: Array<any>;
   public location: any = null;
 
   public currentFilter: string;
   public drives: Array<any>;
+  uid: any;
+  user: any;
 
   constructor(private driveService: DriveService,
     public popoverController: PopoverController,
@@ -33,6 +35,10 @@ export class DrivesPage implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.userDataSubject.subscribe((user) => {
+      this.uid = user.uid;
+      if (this.uid) this.getUserData();
+    })
     // Checks the platform, as nearest
     // drives filter only works on mobile.
     if (this.platform.is('mobile') || this.platform.is('android') || this.platform.is('cordova')) {
@@ -82,9 +88,7 @@ export class DrivesPage implements OnInit {
       case 'favorites':
         this.drives = null;
         this.currentFilter = this.filters.filterFavorites;
-        (this.favorites)
-          ? this.drives = this.favorites
-          : this.getFavorites();
+        this.getFavorites();
         break;
     }
   }
@@ -101,14 +105,21 @@ export class DrivesPage implements OnInit {
     });
   }
 
+  getUserData() {
+    this.userService.getUserData(this.uid).subscribe((doc) => {
+      console.log(doc);
+      this.user = doc;
+      if (this.currentFilter == 'Suosikit') this.getFavorites();
+    })
+  }
+
   getFavorites() {
-    let favorites = this.userService.userDataSubject.value.favorites;
     this.favorites = [];
-    favorites.forEach((favorite) => {
-      this.driveService.getFavorites(favorite).subscribe((drives) => {
-        this.favorites = this.favorites.concat(drives);
+    this.user.favorites.forEach((favorite) => {
+      this.driveService.getFavorites(favorite).subscribe((drive) => {
+        this.favorites = this.favorites.concat(drive);
         this.drives = this.favorites;
-      })
+      });
     })
   }
 
