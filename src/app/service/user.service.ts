@@ -128,7 +128,8 @@ export class UserService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
+      favorites: user.favorites
     }
     return userRef.set(userData, {
       merge: true
@@ -139,6 +140,10 @@ export class UserService {
     return this.afStore.collection('users').doc(userId).update({
       favorites: firebase.firestore.FieldValue.arrayUnion({ origin, destination })
     })
+  }
+
+  getUserData(userId: string) {
+    return this.afStore.collection('users').doc(userId).valueChanges();
   }
 
 
