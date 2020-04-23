@@ -2,30 +2,65 @@
   cursor: pointer;
 }
 
+ion-content {
+  --background: var(--ion-color-dark-shade);
+}
+
+.details {
+  height: 100%;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none; // IE 10+
+  scrollbar-width: none; // Firefox
+  scroll-behavior: smooth;
+  border-radius: 20px 20px 0px 0px;
+
+  &::-webkit-scrollbar {
+    display: none; // Safari and Chrome
+  }
+}
+
 ion-toolbar {
-  --background: transparent;
-  --ion-color-base: transparent !important;
+  --background: var(--ion-color-dark-shade);
+  --color: #f9f9f9;
+}
+
+ion-card-header {
+  ion-card-title {
+    --color: #3f3f3f;
+    font-size: 20px;
+  }
 }
 
 ion-card {
-  margin: 0px 10px 10px 10px;
-  border-radius: 10px;
+  margin: 0px 0;
+  border-radius: 0px;
+  height: 100%;
   padding: 5px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.103);
-  // border: 2px solid var(--ion-color-primary);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
 
-  .map {
-    border-radius: 10px;
-    height: 30vh;
-    width: 100%;
-    background: url('../../../assets/images/cartodb_placeholder.png');
+  ion-item {
+    // border-bottom: 2px solid rgb(245, 245, 245);
+    --padding-start: 5px;
+    --padding-end: 3px;
+
+    ion-label {
+      border-left: 2px solid var(--ion-color-primary);
+      background: rgb(242, 242, 242);
+      border-radius: 0px 5px 5px 0px;
+      padding: 5px 5px 5px 10px;
+      margin-right: 0;
+    }
+
+    ion-icon {
+      margin-right: 10px;
+    }
   }
 
   ion-card-content {
-    padding-bottom: 0;
+    padding: 0;
+    background: #f8f8f8;
+    border-radius: 10px;
+    height: 50%;
   }
 
   .buttons {
@@ -61,17 +96,11 @@ ion-card {
     margin-bottom: 5px;
   }
 
-  ion-card-title {
-    font-weight: 600;
-    color: #3f3f3f;
-  }
-
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-  }
+  // ion-card-title {
+  //   font-weight: 600;
+  //   color: #3f3f3f;
+  //   font-size: 20px;
+  // }
 }
 
 .list-item {

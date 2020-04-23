@@ -1,7 +1,7 @@
 import { ChatService } from 'src/app/service/chat.service';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import * as moment from 'moment';
 import { DriveService } from 'src/app/service/drive.service';
 import { UserService } from 'src/app/service/user.service';
@@ -16,15 +16,7 @@ export class DrivesDetailsPage implements OnInit {
   public formattedTime: any;
   public drive: any;
 
-  // @Input() set data(value: any) {
-  //   this.drive = value;
-  //   this.formattedTime = moment(this.drive.startDate).format(
-  //     'MMMM Do YYYY, HH:mm'
-  //   );
-  // }
-
   constructor(
-    // public modalController: ModalController,
     private router: Router,
     private chatService: ChatService,
     private driveService: DriveService,
@@ -77,10 +69,6 @@ export class DrivesDetailsPage implements OnInit {
       this.drive.driverId,
     ]);
   }
-
-  // dismiss() {
-  //   // this.modalController.dismiss();
-  // }
 
   goBack() {
     this.location.back();
