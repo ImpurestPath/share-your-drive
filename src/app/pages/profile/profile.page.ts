@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
 import { Component, OnInit } from '@angular/core';
-import { AddItemPage } from 'src\app\pages\profile\additem'
+
 
 @Component({
   selector: 'app-profile',
@@ -9,11 +9,14 @@ import { AddItemPage } from 'src\app\pages\profile\additem'
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
+  
+  user:any;
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.user = this.userService.userDataSubject.value;
   }
+
 
   signOut(){
     this.userService.signOut()
