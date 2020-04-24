@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar color="secondary">
+      <ion-title>
+        Add Item
+      </ion-title>
+        <ion-buttons end>
+          <button ion-button icon-only (click)="close()"><ion-icon name="close"></ion-icon></button>
+        </ion-buttons>
+      </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-list>
+  
+      <ion-item>
+        <ion-label floating>List Name</ion-label>
+        <ion-input type="text" [(ngModel)]="selectedItem.listname"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label floating>Time</ion-label>
+        <ion-input type="text" [(ngModel)]="selectedItem.date"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-input type="text" [(ngModel)]="selectedItem.description"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+       <ion-label>Incomplete</ion-label>
+      <ion-toggle  [(ngModel)]="selectedItem.toogleIncomplete">
+    </ion-toggle>
+  </ion-item>
+  
+   <ion-item>
+       <ion-label>Complete</ion-label>
+      <ion-toggle  [(ngModel)]="selectedItem.toogleComplete">
+    </ion-toggle>
+  </ion-item>
+  
+    </ion-list>
+  
+    <button full ion-button color="secondary" (click)="saveItem()">Save</button>
+  
+  </ion-content>

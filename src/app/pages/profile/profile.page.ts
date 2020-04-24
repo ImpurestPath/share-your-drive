@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/user.service';
 import { Component, OnInit } from '@angular/core';
+import { AddItemPage } from 'src\app\pages\profile\additem'
 
 @Component({
   selector: 'app-profile',

@@ -1,12 +1,44 @@
 <ion-header>
   <ion-toolbar>
+    <ion-button slot="start" (click)="signOut()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
     <ion-title>Profile</ion-title>
-    <ion-button (click)="signOut()">
+    <ion-button slot="end" (click)="signOut()">
       <ion-icon name="exit"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  
+  <div class="card">
+    <div class="header">
+      <div class="avatar">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" alt="">
+      </div>
+      <ion-label>Name</ion-label>
+    </div>
+  </div>
+  
+  <ion-card>
+    <ion-item>
+      <ion-icon name="happy-outline" slot="start"></ion-icon>
+      <ion-label>Personal details</ion-label>
+      <ion-button fill="outline" slot="end" (click)="addItem(item)">Muokkaa</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      tähän tulee tietoja sinusta / here comes info about you.
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-item href="#" class="ion-activated">
+      <ion-icon name="car-outline" slot="start"></ion-icon>
+      <ion-label>Your drives</ion-label>
+    </ion-item>
+  
+  </ion-card>
 
 </ion-content>
