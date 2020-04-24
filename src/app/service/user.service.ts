@@ -112,6 +112,8 @@ export class UserService {
   authLogin(provider) {
     return new Promise((resolve, reject) => this.ngFireAuth.auth.signInWithPopup(provider)
       .then((result) => {
+        console.log(result);
+        console.log(result.user);
 
         this.setUserData(result.user);
         resolve(result);
@@ -129,7 +131,7 @@ export class UserService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
-      favorites: user.favorites
+      favorites: []
     }
     return userRef.set(userData, {
       merge: true
