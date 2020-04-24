@@ -13,8 +13,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./drives-details.page.scss'],
 })
 export class DrivesDetailsPage implements OnInit {
-  public formattedTime: any;
+  public formattedClock: any;
   public drive: any;
+  formattedDate: any;
 
   constructor(
     private router: Router,
@@ -32,9 +33,12 @@ export class DrivesDetailsPage implements OnInit {
     const driveId = this.activatedRouter.snapshot.paramMap.get('driveId');
     this.driveService.getDrive(driveId).subscribe(drive => {
       this.drive = drive;
-      this.formattedTime = moment(this.drive.startDate.toDate()).format(
-        'MMMM Do YYYY, HH:mm'
+      this.formattedClock = moment(this.drive.startDate.toDate()).format(
+        'HH:mm'
       );
+      this.formattedDate = moment(this.drive.startDate.toDate()).format(
+        'DD. MMMM YYYY'
+      )
     });
   }
 

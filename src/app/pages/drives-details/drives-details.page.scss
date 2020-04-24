@@ -8,12 +8,14 @@ ion-content {
 
 .details {
   height: 100%;
+  width: 100%;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none; // IE 10+
   scrollbar-width: none; // Firefox
   scroll-behavior: smooth;
   border-radius: 20px 20px 0px 0px;
+  background: #f9f9f9;
 
   &::-webkit-scrollbar {
     display: none; // Safari and Chrome
@@ -33,10 +35,15 @@ ion-card-header {
 }
 
 ion-card {
-  margin: 0px 0;
-  border-radius: 0px;
-  height: 100%;
-  padding: 5px;
+  // margin: 10px;
+  // border: 1px solid black;
+  // height: 100%;
+  // width: 100%;
+  // padding: 5px;
+  // box-shadow: 1px 1px 10px black;
+  border-radius: 20px;
+  --background: #f9f9f9;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.11);
 
   ion-item {
     // border-bottom: 2px solid rgb(245, 245, 245);
@@ -54,6 +61,10 @@ ion-card {
     ion-icon {
       margin-right: 10px;
     }
+  }
+
+  ion-card-subtitle {
+    margin-top: 0;
   }
 
   ion-card-content {
@@ -103,26 +114,43 @@ ion-card {
   // }
 }
 
-.list-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
+.list {
+  margin: 10px 13px;
 
-  .list-icon {
-    justify-content: center;
-    vertical-align: middle;
-    margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .list-header {
+    p {
+      font-weight: 500;
+      color: #525252;
+    }
   }
 
-  .list-text {
-    background: rgb(243, 243, 243);
-    padding: 5px;
-    min-height: 30px;
-    padding-left: 15px;
-    border-radius: 0px 5px 5px 0px;
-    width: 100%;
+  .list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
     border-left: 2px solid var(--ion-color-primary);
-    color: #3f3f3f;
+    background: rgb(243, 243, 243);
+
+    .list-icon {
+      margin: 5px 10px;
+      ion-icon {
+        vertical-align: middle;
+      }
+    }
+
+    .list-text {
+      background: rgb(243, 243, 243);
+      padding: 5px;
+      min-height: 30px;
+      padding-left: 15px;
+      border-radius: 0px 5px 5px 0px;
+      width: 100%;
+
+      color: #3f3f3f;
+    }
   }
 }
