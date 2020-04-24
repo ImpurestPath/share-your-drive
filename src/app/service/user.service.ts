@@ -15,6 +15,7 @@ export class UserService {
   user: Observable<firebase.User>;
   userDataSubject: BehaviorSubject<any>;
   userData: Observable<any>;
+  isSignedIn: BehaviorSubject<boolean>;
 
   constructor(
     public afStore: AngularFirestore,
@@ -23,14 +24,17 @@ export class UserService {
     this.user = this.ngFireAuth.user;
     this.userData = new Observable();
     this.userDataSubject = new BehaviorSubject(this.userData);
+    this.isSignedIn = new BehaviorSubject(this.user == null)
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        this.isSignedIn.next(true)
         this.getOtherUserData(user.uid).subscribe(ud => {
           this.userDataSubject.next(ud.data());
           localStorage.setItem('user', JSON.stringify(ud.data()));
           JSON.parse(localStorage.getItem('user'));
         })
       } else {
+        this.isSignedIn.next(false)
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'));
       }
@@ -91,10 +95,10 @@ export class UserService {
 
 
   // Returns true when user is looged in
-  get isSignedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null) ? true : false;
-  }
+  // get isSignedIn(): boolean {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   return (user !== null) ? true : false;
+  // }
 
   // Returns true when user's email is verified
   get isEmailVerified(): boolean {
@@ -110,7 +114,8 @@ export class UserService {
   // Auth providers
   // TODO finish
   authLogin(provider) {
-    return new Promise((resolve, reject) => this.ngFireAuth.auth.signInWithPopup(provider)
+    return new Promise((resolve, reject) => this.ngFireAuth.auth.signInWithRedirect(provider)
+    .then(()=> {return firebase.auth().getRedirectResult();})
       .then((result) => {
 
         this.setUserData(result.user);

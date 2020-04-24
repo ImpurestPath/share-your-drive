@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "745110505398",
+    "firebase_url": "https://share-your-drive-8c7b1.firebaseio.com",
+    "project_id": "share-your-drive-8c7b1",
+    "storage_bucket": "share-your-drive-8c7b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745110505398:android:bf8197a65a95b10c57e317",
+        "android_client_info": {
+          "package_name": "io.ionic.starter.shareyourdrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745110505398-3laom16n9e228st5dqhg7l6jj1lq4rr2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.ionic.starter.shareyourdrive",
+            "certificate_hash": "ff9064425ab4853352c7fc62bfeed5d24908da27"
+          }
+        },
+        {
+          "client_id": "745110505398-cnlket186ihnc04d3meu28nn9a94bfqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8qnScNvt_3jV3ksvk94BbsmfIf0ufJP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745110505398-cnlket186ihnc04d3meu28nn9a94bfqp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "745110505398-o1vml3d37407mb7gpggeg50f5jkthokl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.ionic.starter.shareyourdrive"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

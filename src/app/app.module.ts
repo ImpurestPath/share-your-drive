@@ -9,7 +9,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx'
 import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app-routing.module'
 import { HttpClientModule } from '@angular/common/http';
-
+import * as firebase from 'firebase/app';
+import * as firebaseui from 'firebaseui';
+import { FirebaseUIModule } from 'firebaseui-angular';
 import { environment } from '../environments/environment'
 
 import { AngularFireModule } from '@angular/fire'
@@ -22,6 +24,16 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { AddFavoritePopupComponent } from './components/add-favorite-popup/add-favorite-popup.component'
 
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID
+  ],
+  tosUrl: '/terms',
+  privacyPolicyUrl: '/policy',
+  credentialHelper: firebaseui.auth.CredentialHelper.NONE
+};
 @NgModule({
   declarations: [AppComponent, DrivesSearchPopupComponent, AddFavoritePopupComponent],
   entryComponents: [DrivesSearchPopupComponent, AddFavoritePopupComponent],
@@ -30,6 +42,7 @@ import { AddFavoritePopupComponent } from './components/add-favorite-popup/add-f
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
     FormsModule,

@@ -16,9 +16,11 @@ export class LoginPage implements OnInit {
     this.checkSignedIn()
   }
   checkSignedIn(){
-    if (this.userService.isSignedIn) {
-      this.router.navigateByUrl('tabs');
-    }
+    this.userService.isSignedIn.subscribe(isSignedIn =>{
+      if (isSignedIn) {
+        this.router.navigateByUrl('tabs');
+      }
+    })
   }
   
   signIn(email, password){
