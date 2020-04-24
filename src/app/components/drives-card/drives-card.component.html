@@ -1,23 +1,23 @@
-<ion-card (click)="openDetails()">
-  <div class="left-panel">
+<ion-card [color]="color" [routerLink]="['../../../drives',drive.id]" *ngIf="drive">
+  <div class="left-panel" [ngStyle]="{'background': getShade()}">
   </div>
 
   <div class="right-panel">
-    <ion-item-divider>
+    <ion-item-divider mode="md">
       <ion-card-header>
-        <ion-card-title>{{ drive.startPlace }} - {{ drive.finishPlace }}</ion-card-title>
+        <ion-card-title>{{ drive.origin }} - {{ drive.destination }}</ion-card-title>
       </ion-card-header>
     </ion-item-divider>
 
-    <ion-card-content>
+    <ion-card-content mode="md">
       <ion-item lines="full">
-        <ion-icon name="time" slot="start" size="medium"></ion-icon>
+        <ion-icon name="time" slot="start" size="small"></ion-icon>
         <ion-label>{{ formattedTime }}</ion-label>
       </ion-item>
 
       <ion-item lines="none">
-        <ion-icon name="people-circle" slot="start" size="medium"></ion-icon>
-        <ion-label> seats here </ion-label>
+        <ion-icon name="people-circle" slot="start" size="small"></ion-icon>
+        <ion-label>{{ drive.seatsLeft }} vapaata paikkaa</ion-label>
       </ion-item>
 
     </ion-card-content>

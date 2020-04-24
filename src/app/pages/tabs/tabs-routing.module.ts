@@ -13,6 +13,10 @@ const routes: Routes = [
         loadChildren: () => import('../drives/drives.module').then(m => m.DrivesPageModule)
       },
       {
+        path: 'drives/:driveId',
+        loadChildren: () => import('../drives-details/drives-details.module').then(m => m.DrivesDetailsPageModule)
+      },
+      {
         path: 'calendar',
         loadChildren: () => import('../calendar/calendar.module').then(m => m.CalendarPageModule)
       },
@@ -23,6 +27,10 @@ const routes: Routes = [
       {
         path: 'chat',
         loadChildren: () => import('../chat/chat.module').then(m => m.ChatPageModule)
+      },
+      {
+        path: 'chat/:chatId/:toId',
+        loadChildren: () => import('../fullchat/fullchat.module').then(m => m.FullchatPageModule)
       }
     ]
   },

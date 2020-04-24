@@ -1,0 +1,80 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-icon name="chevron-back" size="large" (click)="goBack()" class="back-btn"></ion-icon>
+  </ion-buttons>
+  <ion-title>Tietoja</ion-title>
+</ion-toolbar>
+
+<ion-content fullscreen>
+
+    <ion-card *ngIf="drive">
+      <div class="map">
+      </div>
+      <div class="content-wrapper">
+        <ion-card-header>
+
+          <ion-chip outline color="primary">
+            <ion-avatar>
+              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            </ion-avatar>
+            <ion-label>
+              (Driver profile)
+            </ion-label>
+          </ion-chip>
+
+          <ion-card-title>
+            {{ drive.origin }} - {{ drive.destination }}
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+
+          <div class="list-item">
+            <div class="list-icon">
+              <ion-icon name="time-outline" size="large" color="primary"></ion-icon>
+            </div>
+
+            <div class="list-text">
+              <p>{{ formattedTime }}</p>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="list-icon">
+              <ion-icon size="large" name="people-circle-outline" color="primary"></ion-icon>
+            </div>
+
+            <div class="list-text">
+              <ion-label>{{ drive.seatsLeft }} paikkaa vapaana</ion-label>
+            </div>
+          </div>
+
+          <div class="list-item">
+            <div class="list-icon">
+              <ion-icon size="large" name="information-circle-outline" color="primary"></ion-icon>
+            </div>
+
+            <div class="list-text">
+              <p>{{ drive.info }}</p>
+            </div>
+          </div>
+
+        </ion-card-content>
+
+        <div class="buttons">
+          <ion-button size="small" color="primary" (click)="bookSeat()">
+            <!-- <ion-icon slot="start" color="light" name="checkbox"></ion-icon> -->
+            <p>Varaa paikka</p>
+          </ion-button>
+
+          <ion-button size="small" class="chat-btn" fill="outline" color="primary" (click)="messageDriver()">
+            <!-- <ion-icon slot="start" color="primary" name="paper-plane"></ion-icon> -->
+            <p>Lähetä viesti</p>
+          </ion-button>
+        </div>
+
+      </div>
+
+    </ion-card>
+
+</ion-content>

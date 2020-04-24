@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { DrivesDetailsPage } from './../../pages/drives-details/drives-details.page';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import * as moment from 'moment';
+import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-drives-card',
@@ -16,14 +19,25 @@ export class DrivesCardComponent implements OnInit {
     this.formattedTime = this.drive.startDate.fromNow();
   }
 
-  constructor() { }
+  @Input() color: string;
 
-  ngOnInit() {
+  constructor(
+    // public modalController: ModalController,
+  ) {}
 
+  ngOnInit() {}
+
+  getShade() {
+    return `var(--ion-color-${this.color}-shade)`;
   }
 
-  openDetails() {
-    // CODE TO OPEN DETAIL PAGES
-  }
-
+  // async openDetails() {
+  //   // const modal = await this.modalController.create({
+  //   //   component: DrivesDetailsPage,
+  //   //   componentProps: {
+  //   //     data: this.drive
+  //   //   }
+  //   // });
+  //   // return await modal.present();
+  // }
 }

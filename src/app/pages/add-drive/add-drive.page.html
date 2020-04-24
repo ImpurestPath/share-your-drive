@@ -1,0 +1,110 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-icon name="chevron-back" size="large" (click)="dismiss()" class="back-btn"></ion-icon>
+  </ion-buttons>
+  <ion-title>Luo uusi kyyti</ion-title>
+</ion-toolbar>
+
+
+<ion-content>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm)">
+    <ion-item>
+      <ion-label position="stacked">Lähtöpaikka</ion-label>
+      <ion-input (ionInput)="search($event, 'origin')" [value]="selectedOrigin" formControlName="origin">
+        <ion-icon name="search" class="search-input-icon" size="large" slot="start"></ion-icon>
+      </ion-input>
+    </ion-item>
+    <div class="search-popup" *ngIf="origins.length > 0">
+      <ion-list lines="none">
+        <ion-item (click)="onSelect(address, 'origin')" button *ngFor="let address of origins">
+          <ion-icon name="location" slot="start" size="large" color="primary"></ion-icon>
+          {{ address }}
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">Määränpää</ion-label>
+      <ion-input (ionInput)="search($event, 'destination')" [value]="selectedDestination" formControlName="destination">
+        <ion-icon name="search" class="search-input-icon" size="large" slot="start"></ion-icon>
+      </ion-input>
+    </ion-item>
+    <div class="search-popup" *ngIf="destinations.length > 0">
+      <ion-list lines="none">
+        <ion-item (click)="onSelect(address, 'destination')" button *ngFor="let address of destinations">
+          <ion-icon name="location" slot="start" size="large" color="primary"></ion-icon>
+          {{ address }}
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">Lähtöpäivä</ion-label>
+      <ion-datetime formControlName="dateDay"
+        monthNames="Tammikuu, Helmikuu, Maaliskuu, Huhtikuu, Toukokuu, Kesäkuu, Heinäkuu, Elokuu, Syyskuu, Lokakuu, Marraskuu, Joulukuu"
+        displayFormat="DD MMMM YYYY" placeholder="Valitse päivä">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Lähtöaika</ion-label>
+      <ion-datetime formControlName="dateTime" displayFormat="HH:mm" placeholder="Valitse kellonaika"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Kyydin arvioitu kesto</ion-label>
+      <ion-select formControlName="duration" placeholder="Tunteina">
+        <ion-select-option value="1">1 tuntia</ion-select-option>
+        <ion-select-option value="2">2 tuntia</ion-select-option>
+        <ion-select-option value="3">3 tuntia</ion-select-option>
+        <ion-select-option value="4">4 tuntia</ion-select-option>
+        <ion-select-option value="5">5 tuntia</ion-select-option>
+        <ion-select-option value="6">6 tuntia</ion-select-option>
+        <ion-select-option value="7">7 tuntia</ion-select-option>
+        <ion-select-option value="8">8 tuntia</ion-select-option>
+        <ion-select-option value="9">9 tuntia</ion-select-option>
+        <ion-select-option value="10">10 tuntia</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Maksimitilavuus</ion-label>
+      <ion-select formControlName="seatsMax" placeholder="Valitse yksi">
+        <ion-select-option value="2">2 paikkaa</ion-select-option>
+        <ion-select-option value="3">3 paikkaa</ion-select-option>
+        <ion-select-option value="4">4 paikkaa</ion-select-option>
+        <ion-select-option value="5">5 paikkaa</ion-select-option>
+        <ion-select-option value="6">6 paikkaa</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Vapaita paikkoja</ion-label>
+      <ion-select formControlName="seatsLeft" placeholder="Valitse yksi">
+        <ion-select-option value="1">1 paikkaa</ion-select-option>
+        <ion-select-option value="2">2 paikkaa</ion-select-option>
+        <ion-select-option value="3">3 paikkaa</ion-select-option>
+        <ion-select-option value="4">4 paikkaa</ion-select-option>
+        <ion-select-option value="5">5 paikkaa</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Lisätietoja</ion-label>
+      <ion-textarea formControlName="info" placeholder="Kirjoita tähän mahdollisia lisätietoja"></ion-textarea>
+    </ion-item>
+
+    <div class="buttons">
+      <ion-button [disabled]="!addForm.valid" type="submit" color="primary">
+        <ion-icon size="medium" color="light" slot="start" name="add-circle-outline"></ion-icon>
+        <p style="color: white;">Luo kyyti</p>
+      </ion-button>
+
+      <ion-button class="chat-btn" fill="outline" color="danger" (click)="dismiss()">
+        <ion-icon size="medium" slot="start" name="alert-circle-outline"></ion-icon>
+        <p>Peruuta</p>
+      </ion-button>
+    </div>
+
+  </form>
+</ion-content>
