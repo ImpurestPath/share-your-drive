@@ -36,7 +36,7 @@ export class ChatService {
 
   getUserChats() {
     return new Observable<Chat[]>(observer => {
-      this.userService.user.subscribe(user => {
+      this.userService.userDataSubject.subscribe(user => {
         if (user) {
           const uid = user.uid;
           this.store.collection<Chat>(this.collectionName, ref => ref.where('users', 'array-contains', uid)).snapshotChanges().pipe(map(changes => {
