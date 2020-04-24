@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Profile</ion-title>
+    
+    <ion-title slot="secondary">Profile</ion-title>
     <ion-button (click)="signOut()" slot="end">
       <ion-icon name="exit"></ion-icon>
     </ion-button>
@@ -8,5 +9,33 @@
 </ion-header>
 
 <ion-content>
+  
+  <div class="center">
+        <img class="center2" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" alt="">
+  </div>
+  <div class="center2">
+    <p></p>
+  </div>
+  
+  
+  <ion-card>
+    <ion-item>
+      <ion-icon name="happy-outline" slot="start"></ion-icon>
+      <ion-label>Personal details</ion-label>
+      <ion-button fill="outline" slot="end" (click)="addItem(item)">Muokkaa</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      tähän tulee tietoja sinusta / here comes info about you.
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-item href="#" class="ion-activated">
+      <ion-icon name="car-outline" slot="start"></ion-icon>
+      <ion-label>Your drives</ion-label>
+    </ion-item>
+  
+  </ion-card>
 
 </ion-content>
