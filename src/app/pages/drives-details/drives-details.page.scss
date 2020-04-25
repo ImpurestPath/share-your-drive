@@ -17,6 +17,7 @@ ion-content {
   border-radius: 20px 20px 0px 0px;
   background: #f9f9f9;
   padding: 5px;
+
   .map {
     height: 40%;
     width: 100%;
@@ -152,6 +153,37 @@ ion-card {
       width: 100%;
       margin-right: 5px;
       color: #3f3f3f;
+      display: flex;
+      // justify-content: space-between;
+
+      .seats-left {
+        margin-left: auto;
+        font-weight: 500;
+      }
+
+      ion-label {
+        display: flex;
+
+        :first-child {
+          left: 0;
+        }
+
+        ion-avatar {
+          max-width: 35px;
+          max-height: 35px;
+          cursor: pointer;
+          transition: 0.5s ease;
+          position: relative;
+          left: -10px;
+
+          &:hover,
+          &:active {
+            border: 2px solid var(--ion-color-primary-shade);
+            scale: 1.1;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.24);
+          }
+        }
+      }
     }
   }
 }

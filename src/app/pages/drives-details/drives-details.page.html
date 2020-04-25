@@ -62,7 +62,13 @@
             </div>
 
             <div class="list-text">
-              <ion-label>{{ drive.seatsLeft }}</ion-label>
+              <ion-label>
+                <ion-avatar [ngStyle]="avatarColor" *ngFor="let passenger of passengers">
+                  <img src="{{ passenger.photoURL || defaultPhoto }}">
+                </ion-avatar>
+              </ion-label>
+              <p class="seats-left" style="font-size: 12px;" *ngIf="drive.seatsLeft > 0">{{ drive.seatsLeft }} paikkaa
+                jäljellä</p>
             </div>
           </div>
 
