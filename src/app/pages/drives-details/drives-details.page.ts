@@ -61,72 +61,74 @@ export class DrivesDetailsPage implements OnInit {
       );
       this.isOwned =
         drive.driverId === this.userService.userDataSubject.value.uid;
-      setTimeout(async () => {
-        const originFeatures = await this.mapboxService
-          .searchCity(drive.origin)
-          .toPromise();
-        const destinationFeatures = await this.mapboxService
-          .searchCity(drive.destination)
-          .toPromise();
-        const oLat = originFeatures[0].center[1];
-        const oLng = originFeatures[0].center[0];
-        const dLat = destinationFeatures[0].center[1];
-        const dLng = destinationFeatures[0].center[0];
-        const center = [(oLat + dLat) / 2, (oLng + dLng) / 2];
-        console.log([oLat, oLng]);
-        console.log([dLat, dLng]);
+      if (!this.map) {
+        setTimeout(async () => {
+          const originFeatures = await this.mapboxService
+            .searchCity(drive.origin)
+            .toPromise();
+          const destinationFeatures = await this.mapboxService
+            .searchCity(drive.destination)
+            .toPromise();
+          const oLat = originFeatures[0].center[1];
+          const oLng = originFeatures[0].center[0];
+          const dLat = destinationFeatures[0].center[1];
+          const dLng = destinationFeatures[0].center[0];
+          const center = [(oLat + dLat) / 2, (oLng + dLng) / 2];
+          console.log([oLat, oLng]);
+          console.log([dLat, dLng]);
 
-        console.log(center);
+          console.log(center);
 
-        this.map = new Map('mapId', { attributionControl: false }).setView(
-          center,
-          10
-        );
-        tileLayer(
-          'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}'
-        ).addTo(this.map);
+          this.map = new Map('mapId', { attributionControl: false }).setView(
+            center,
+            10
+          );
+          tileLayer(
+            'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}'
+          ).addTo(this.map);
 
-        const latlng1 = [oLat, oLng];
-        const latlng2 = [dLat, dLng];
-        const offsetX = latlng2[1] - latlng1[1],
-          offsetY = latlng2[0] - latlng1[0];
-        const r = Math.sqrt(Math.pow(offsetX, 2) + Math.pow(offsetY, 2)),
-          theta = Math.atan2(offsetY, offsetX);
-        const thetaOffset = 3.14 / 7;
-        const r2 = r / 2 / Math.cos(thetaOffset),
-          theta2 = theta + thetaOffset;
-        const midpointX = r2 * Math.cos(theta2) + latlng1[1],
-          midpointY = r2 * Math.sin(theta2) + latlng1[0];
-        const midpointLatLng = [midpointY, midpointX];
-        const latlngs = [];
-        latlngs.push(latlng1, midpointLatLng, latlng2);
-        const pathOptions = {
-          color: `var(--ion-color-${this.color})`,
-          weight: 3,
-        };
-        const curvedPath = L.curve(
-          ['M', latlng1, 'Q', midpointLatLng, latlng2],
-          pathOptions
-        ).addTo(this.map);
+          const latlng1 = [oLat, oLng];
+          const latlng2 = [dLat, dLng];
+          const offsetX = latlng2[1] - latlng1[1],
+            offsetY = latlng2[0] - latlng1[0];
+          const r = Math.sqrt(Math.pow(offsetX, 2) + Math.pow(offsetY, 2)),
+            theta = Math.atan2(offsetY, offsetX);
+          const thetaOffset = 3.14 / 7;
+          const r2 = r / 2 / Math.cos(thetaOffset),
+            theta2 = theta + thetaOffset;
+          const midpointX = r2 * Math.cos(theta2) + latlng1[1],
+            midpointY = r2 * Math.sin(theta2) + latlng1[0];
+          const midpointLatLng = [midpointY, midpointX];
+          const latlngs = [];
+          latlngs.push(latlng1, midpointLatLng, latlng2);
+          const pathOptions = {
+            color: `var(--ion-color-${this.color})`,
+            weight: 3,
+          };
+          const curvedPath = L.curve(
+            ['M', latlng1, 'Q', midpointLatLng, latlng2],
+            pathOptions
+          ).addTo(this.map);
 
-        // L.polyline([
-        //   [oLat, oLng],
-        //   [dLat, dLng],
-        // ]).addTo(this.map);
-        this.map.fitBounds([
-          [oLat, oLng],
-          [dLat, dLng],
-        ]);
+          // L.polyline([
+          //   [oLat, oLng],
+          //   [dLat, dLng],
+          // ]).addTo(this.map);
+          this.map.fitBounds([
+            [oLat, oLng],
+            [dLat, dLng],
+          ]);
 
-        // marker([oLat, oLng])
-        //   .addTo(this.map)
-        //   .bindPopup(drive.origin)
-        //   .openPopup();
-        // marker([dLat, dLng])
-        //   .addTo(this.map)
-        //   .bindPopup(drive.destination)
-        //   .openPopup();
-      }, 0);
+          // marker([oLat, oLng])
+          //   .addTo(this.map)
+          //   .bindPopup(drive.origin)
+          //   .openPopup();
+          // marker([dLat, dLng])
+          //   .addTo(this.map)
+          //   .bindPopup(drive.destination)
+          //   .openPopup();
+        }, 0);
+      }
     });
   }
 
