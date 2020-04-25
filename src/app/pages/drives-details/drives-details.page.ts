@@ -76,7 +76,10 @@ export class DrivesDetailsPage implements OnInit {
 
         console.log(center);
 
-        this.map = new Map('mapId').setView(center, 10);
+        this.map = new Map('mapId', { attributionControl: false }).setView(
+          center,
+          10
+        );
         tileLayer(
           'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}'
         ).addTo(this.map);
