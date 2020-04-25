@@ -30,6 +30,14 @@ fdescribe('DriveService', () => {
   fakeAFS
     .collection()
     .doc()
+    .update.and.returnValue(
+      new Promise((resolve, reject) => {
+        resolve(true);
+      })
+    );
+  fakeAFS
+    .collection()
+    .doc()
     .valueChanges.and.returnValue(
       jasmine.createSpyObj('valueChanges', ['pipe'])
     );
@@ -158,6 +166,36 @@ fdescribe('DriveService', () => {
           })
         );
       expectAsync(service.bookDrive('1', '1')).toBeRejected();
+    });
+  });
+  describe('unbook drive', () => {
+    it('should unbook drive when drive is booked', () => {
+      const service: DriveService = TestBed.get(DriveService);
+      const drive = { id: '1', ...driveMock };
+      fakeAFS
+        .collection()
+        .doc()
+        .valueChanges()
+        .pipe.and.returnValue(
+          new Observable((observer) => {
+            observer.next(drive);
+          })
+        );
+      expectAsync(service.unbookDrive('id1', '1')).toBeResolved();
+    });
+    it('should not unbook drive when drive is not booked', () => {
+      const service: DriveService = TestBed.get(DriveService);
+      const drive = { id: '1', ...driveMock };
+      fakeAFS
+        .collection()
+        .doc()
+        .valueChanges()
+        .pipe.and.returnValue(
+          new Observable((observer) => {
+            observer.next(drive);
+          })
+        );
+      expectAsync(service.bookDrive('3', '1')).toBeRejected();
     });
   });
 });
