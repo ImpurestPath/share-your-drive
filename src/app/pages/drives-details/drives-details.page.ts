@@ -15,6 +15,8 @@ import { Location } from '@angular/common';
 export class DrivesDetailsPage implements OnInit {
   public formattedTime: any;
   public drive: any;
+  public isBooked: boolean;
+  public isOwned: boolean;
 
   // @Input() set data(value: any) {
   //   this.drive = value;
@@ -40,6 +42,8 @@ export class DrivesDetailsPage implements OnInit {
     const driveId = this.activatedRouter.snapshot.paramMap.get('driveId');
     this.driveService.getDrive(driveId).subscribe(drive => {
       this.drive = drive;
+      this.isBooked = drive.passengers.includes(this.userService.userDataSubject.value.uid);
+      this.isOwned = drive.driverId === this.userService.userDataSubject.value.uid;
       this.formattedTime = moment(this.drive.startDate.toDate()).format(
         'MMMM Do YYYY, HH:mm'
       );
