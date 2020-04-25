@@ -31,17 +31,17 @@ export class DrivesDetailsPage implements OnInit {
     private toastController: ToastController,
     private activatedRouter: ActivatedRoute,
     private location: Location
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     this.color = this.activatedRouter.snapshot.queryParamMap.get('color');
-    this.borderColor = { 'border-left': `2.5px solid var(--ion-color-${this.color})` };
-    this.avatarColor = { 'border': `2px solid var(--ion-color-${this.color})` };
+    this.borderColor = {
+      'border-left': `2.5px solid var(--ion-color-${this.color})`,
+    };
+    this.avatarColor = { border: `2px solid var(--ion-color-${this.color})` };
 
     const driveId = this.activatedRouter.snapshot.paramMap.get('driveId');
-    this.driveService.getDrive(driveId).subscribe(drive => {
+    this.driveService.getDrive(driveId).subscribe((drive) => {
       this.drive = drive;
       this.formattedClock = moment(this.drive.startDate.toDate()).format(
         'HH:mm'
@@ -49,8 +49,11 @@ export class DrivesDetailsPage implements OnInit {
       this.formattedDate = moment(this.drive.startDate.toDate()).format(
         'DD. MMMM YYYY'
       );
-      this.isBooked = drive.passengers.includes(this.userService.userDataSubject.value.uid);
-      this.isOwned = drive.driverId === this.userService.userDataSubject.value.uid;
+      this.isBooked = drive.passengers.includes(
+        this.userService.userDataSubject.value.uid
+      );
+      this.isOwned =
+        drive.driverId === this.userService.userDataSubject.value.uid;
     });
   }
 
@@ -60,21 +63,36 @@ export class DrivesDetailsPage implements OnInit {
       .then(async (d: string) => {
         const toast = await this.toastController.create({
           message: d,
-          duration: 1500
+          duration: 1500,
         });
         toast.present();
       })
       .catch(async (d: string) => {
         const toast = await this.toastController.create({
           message: d,
-          duration: 1500
+          duration: 1500,
         });
         toast.present();
       });
-    console.log('Booking clicked');
   }
 
   cancelBooking() {
+    this.driveService
+      .unbookDrive(this.userService.userDataSubject.value.uid, this.drive.id)
+      .then(async (d: string) => {
+        const toast = await this.toastController.create({
+          message: d,
+          duration: 1500,
+        });
+        toast.present();
+      })
+      .catch(async (d: string) => {
+        const toast = await this.toastController.create({
+          message: d,
+          duration: 1500,
+        });
+        toast.present();
+      });
     console.log('cancel booking');
   }
 
