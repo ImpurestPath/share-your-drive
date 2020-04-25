@@ -74,6 +74,10 @@ export class DrivesDetailsPage implements OnInit {
     console.log('Booking clicked');
   }
 
+  cancelBooking() {
+    console.log('cancel booking');
+  }
+
   messageDriver() {
     this.router.navigate([
       'tabs/tabs/chat',
