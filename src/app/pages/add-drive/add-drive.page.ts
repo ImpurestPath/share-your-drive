@@ -67,6 +67,7 @@ export class AddDrivePage implements OnInit {
       this.mapboxService
         .searchCity(searchTerm)
         .subscribe((features: Feature[]) => {
+          console.log(features);
           (type === 'origin')
             ? this.origins = features.map(feature => `${feature.place_name.split(',')[0]}, ${feature.place_name.split(',')[1]}`)
             : this.destinations = features.map(feature => `${feature.place_name.split(',')[0]}, ${feature.place_name.split(',')[1]}`);
