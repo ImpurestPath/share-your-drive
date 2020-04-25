@@ -12,21 +12,21 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./drives.page.scss'],
 })
 export class DrivesPage implements OnInit {
-  filters = {
+  public filters = {
     filterNear: 'Kyydit lähellä sinua',
     filterNew: 'Uusimmat kyydit',
     filterFavorites: 'Suosikit'
   }
-  newest: Array<any>;
-  favorites: Array<any>;
-  nearest: Array<any>;
-  searchResults: Array<any>;
-  location: any = null;
+  public newest: Array<any>;
+  public favorites: Array<any>;
+  public nearest: Array<any>;
+  public searchResults: Array<any>;
+  public location: any = null;
 
-  currentFilter: string;
-  drives: Array<any>;
-  uid: any;
-  user: any;
+  public currentFilter: string;
+  public drives: Array<any>;
+  public uid: any;
+  public user: any;
 
   constructor(private driveService: DriveService,
     public popoverController: PopoverController,

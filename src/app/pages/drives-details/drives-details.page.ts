@@ -20,12 +20,13 @@ export class DrivesDetailsPage implements OnInit {
   public drive: any;
   public formattedDate: any;
   public color: string;
-  public test: string = '#3f3f3f';
   public borderColor: any;
   public avatarColor: any;
   public isBooked: boolean;
   public isOwned: boolean;
   public map: Map;
+  public passengers: any;
+  public defaultPhoto: string = 'https://forwardsummit.ca/wp-content/uploads/2019/01/avatar-default.png';
 
   constructor(
     private router: Router,
@@ -36,7 +37,7 @@ export class DrivesDetailsPage implements OnInit {
     private activatedRouter: ActivatedRoute,
     private location: Location,
     private mapboxService: MapboxService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.color = this.activatedRouter.snapshot.queryParamMap.get('color');
@@ -54,11 +55,7 @@ export class DrivesDetailsPage implements OnInit {
       this.formattedDate = moment(this.drive.startDate.toDate()).format(
         'DD. MMMM YYYY'
       );
-      this.isBooked = drive.passengers.includes(
-        this.userService.userDataSubject.value.uid
-      );
-      this.isOwned =
-        drive.driverId === this.userService.userDataSubject.value.uid;
+
       setTimeout(async () => {
         const originFeatures = await this.mapboxService
           .searchCity(drive.origin)
@@ -100,6 +97,21 @@ export class DrivesDetailsPage implements OnInit {
         //   .bindPopup(drive.destination)
         //   .openPopup();
       }, 0);
+
+      this.isBooked = drive.passengers.includes(this.userService.userDataSubject.value.uid);
+      this.isOwned = drive.driverId === this.userService.userDataSubject.value.uid;
+
+      this.passengers = [];
+      this.drive.passengers.forEach((passenger) => {
+        this.userService.getOtherUserData(passenger)
+          .subscribe((user) => {
+            (this.passengers)
+              ? this.passengers.push(user.data())
+              : this.passengers = [user.data()];
+
+            console.log(this.passengers);
+          })
+      })
     });
   }
 
