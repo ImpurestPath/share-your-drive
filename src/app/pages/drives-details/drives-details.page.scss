@@ -16,6 +16,12 @@ ion-content {
   scroll-behavior: smooth;
   border-radius: 20px 20px 0px 0px;
   background: #f9f9f9;
+  padding: 5px;
+  .map {
+    height: 40%;
+    width: 100%;
+    border-radius: 20px 20px 5px 5px;
+  }
 
   &::-webkit-scrollbar {
     display: none; // Safari and Chrome
@@ -149,4 +155,3 @@ ion-card {
     }
   }
 }
-
