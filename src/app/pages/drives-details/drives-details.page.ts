@@ -16,6 +16,10 @@ export class DrivesDetailsPage implements OnInit {
   public formattedClock: any;
   public drive: any;
   formattedDate: any;
+  color: string;
+  test: string = '#3f3f3f';
+  borderColor: any;
+  avatarColor: any;
 
   constructor(
     private router: Router,
@@ -30,6 +34,10 @@ export class DrivesDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.color = this.activatedRouter.snapshot.queryParamMap.get('color');
+    this.borderColor = { 'border-left': `2.5px solid var(--ion-color-${this.color})` };
+    this.avatarColor = { 'border': `2px solid var(--ion-color-${this.color})` };
+
     const driveId = this.activatedRouter.snapshot.paramMap.get('driveId');
     this.driveService.getDrive(driveId).subscribe(drive => {
       this.drive = drive;

@@ -11,13 +11,26 @@
 
   <div class="details" scrollY="true" no-bounce>
     <ion-card *ngIf="drive">
-      <ion-card-header>
-        <ion-card-title>
-          {{ drive.origin }} - {{ drive.destination }}
-        </ion-card-title>
-        <ion-card-subtitle>
-          {{ formattedDate }}
-        </ion-card-subtitle>
+      <ion-card-header class="no-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+              <ion-card-title>
+                {{ drive.origin }} - {{ drive.destination }}
+              </ion-card-title>
+              <ion-card-subtitle>
+                {{ formattedDate }}
+              </ion-card-subtitle>
+            </ion-col>
+            <ion-col size="3">
+              <ion-avatar [ngStyle]="avatarColor">
+                <img src="https://forwardsummit.ca/wp-content/uploads/2019/01/avatar-default.png">
+              </ion-avatar>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+
         <!-- <ion-item>
           <ion-avatar slot="start">
             <img
@@ -62,9 +75,9 @@
           <div class="list-header">
             <p>Lähtöaika</p>
           </div>
-          <div class="list-item">
+          <div class="list-item" [ngStyle]="borderColor">
             <div class="list-icon">
-              <ion-icon name="time-outline" size="large" color="primary"></ion-icon>
+              <ion-icon name="time-outline" size="large" [color]="color"></ion-icon>
             </div>
 
             <div class="list-text">
@@ -75,9 +88,9 @@
           <div class="list-header">
             <p>Matkustajat</p>
           </div>
-          <div class="list-item">
+          <div class="list-item" [ngStyle]="borderColor">
             <div class="list-icon">
-              <ion-icon size="large" name="people-circle-outline" color="primary"></ion-icon>
+              <ion-icon size="large" name="people-circle-outline" [color]="color"></ion-icon>
             </div>
 
             <div class="list-text">
@@ -88,9 +101,9 @@
           <div class="list-header">
             <p>Maksimipaikat</p>
           </div>
-          <div class="list-item">
+          <div class="list-item" [ngStyle]="borderColor">
             <div class="list-icon">
-              <ion-icon size="large" name="car-outline" color="primary"></ion-icon>
+              <ion-icon size="large" name="car-outline" [color]="color"></ion-icon>
             </div>
 
             <div class="list-text">
@@ -101,9 +114,9 @@
           <div class="list-header">
             <p>Lisätietoja</p>
           </div>
-          <div class="list-item">
+          <div class="list-item" [ngStyle]="borderColor">
             <div class="list-icon">
-              <ion-icon size="large" name="information-circle-outline" color="primary"></ion-icon>
+              <ion-icon size="large" name="information-circle-outline" [color]="color"></ion-icon>
             </div>
 
             <div class="list-text">
@@ -115,13 +128,13 @@
       </ion-card-content>
 
       <div class="buttons">
-        <ion-button size="small" color="primary" (click)="bookSeat()">
-          <!-- <ion-icon slot="start" color="light" name="checkbox"></ion-icon> -->
-          <p>Varaa paikka</p>
+        <ion-button expand="block" [color]="color" (click)="bookSeat()">
+          <ion-icon slot="start" color="light" name="checkmark-circle-outline"></ion-icon>
+          <p style="color: white;">Varaa paikka</p>
         </ion-button>
 
-        <ion-button size="small" class="chat-btn" fill="outline" color="primary" (click)="messageDriver()">
-          <!-- <ion-icon slot="start" color="primary" name="paper-plane"></ion-icon> -->
+        <ion-button expand="block" class="chat-btn" fill="outline" [color]="color" (click)="messageDriver()">
+          <ion-icon slot="start" [color]="color" name="paper-plane-outline"></ion-icon>
           <p>Lähetä viesti</p>
         </ion-button>
       </div>

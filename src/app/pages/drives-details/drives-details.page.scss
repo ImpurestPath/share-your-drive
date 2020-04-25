@@ -28,6 +28,24 @@ ion-toolbar {
 }
 
 ion-card-header {
+  padding-bottom: 0;
+  padding-top: 0;
+
+  ion-avatar {
+    padding: 2px;
+    max-width: 50px;
+    max-height: 50px;
+    cursor: pointer;
+    transition: 0.5s ease;
+
+    &:hover,
+    &:active {
+      border: 2px solid var(--ion-color-primary-tint);
+      opacity: 0.7;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.253);
+    }
+  }
+
   ion-card-title {
     --color: #3f3f3f;
     font-size: 20px;
@@ -35,18 +53,13 @@ ion-card-header {
 }
 
 ion-card {
-  // margin: 10px;
-  // border: 1px solid black;
-  // height: 100%;
-  // width: 100%;
-  // padding: 5px;
-  // box-shadow: 1px 1px 10px black;
-  border-radius: 20px;
-  --background: #f9f9f9;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.11);
+  box-shadow: none;
+
+  ion-grid {
+    padding: 0;
+  }
 
   ion-item {
-    // border-bottom: 2px solid rgb(245, 245, 245);
     --padding-start: 5px;
     --padding-end: 3px;
 
@@ -75,29 +88,15 @@ ion-card {
   }
 
   .buttons {
-    display: flex;
-    justify-content: space-evenly;
+    margin: 0 7px 0 7px;
 
     ion-button {
-      align-items: center;
-      text-align: center;
       color: white;
       text-transform: none;
       --box-shadow: none;
 
-      ion-icon {
-        justify-content: center;
-        vertical-align: middle;
-      }
-
       p {
-        color: white;
-      }
-    }
-
-    .chat-btn {
-      p {
-        color: var(--ion-color-primary);
+        font-weight: 600;
       }
     }
   }
@@ -106,16 +105,11 @@ ion-card {
     margin: 0;
     margin-bottom: 5px;
   }
-
-  // ion-card-title {
-  //   font-weight: 600;
-  //   color: #3f3f3f;
-  //   font-size: 20px;
-  // }
 }
 
 .list {
   margin: 10px 13px;
+  margin-bottom: 0px;
 
   display: flex;
   flex-direction: column;
@@ -132,11 +126,12 @@ ion-card {
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
-    border-left: 2px solid var(--ion-color-primary);
     background: rgb(243, 243, 243);
+    border-radius: 0px 5px 5px 0px;
 
     .list-icon {
       margin: 5px 10px;
+
       ion-icon {
         vertical-align: middle;
       }
@@ -149,7 +144,7 @@ ion-card {
       padding-left: 15px;
       border-radius: 0px 5px 5px 0px;
       width: 100%;
-
+      margin-right: 5px;
       color: #3f3f3f;
     }
   }
