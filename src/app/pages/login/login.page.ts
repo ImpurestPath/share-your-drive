@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +10,19 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  constructor(private userService: UserService, private router: Router) {}
+  loginForm: FormGroup;
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.checkSignedIn();
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required]],
+    });
   }
   checkSignedIn() {
     this.userService.userDataSubject.subscribe((user) => {
@@ -20,7 +30,6 @@ export class LoginPage implements OnInit {
         this.router.navigateByUrl('tabs');
       }
     });
-    
   }
 
   signIn(email, password) {
@@ -35,7 +44,8 @@ export class LoginPage implements OnInit {
     );
   }
 
-  signUp(email, password) {
+  signUp() {
+    console.log('signup button clicked')
     this.router.navigateByUrl('signup');
   }
 
@@ -49,5 +59,12 @@ export class LoginPage implements OnInit {
         window.alert(err.message);
       }
     );
+  }
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+  get password() {
+    return this.loginForm.get('password');
   }
 }

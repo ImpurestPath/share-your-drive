@@ -18,7 +18,10 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
     if (this.userService.userDataSubject.value) {
-      this.router.navigateByUrl('tabs');
+      if (this.userService.userDataSubject.value.uid) {
+        this.router.navigateByUrl('tabs');
+        console.log(this.userService.userDataSubject.value.uid);
+      }
     }
 
     this.signupForm = this.formBuilder.group({

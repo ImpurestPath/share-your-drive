@@ -62,12 +62,21 @@
         </ion-card-content>
 
         <div class="buttons">
-          <ion-button size="small" color="primary" (click)="bookSeat()">
+          <ion-button  *ngIf="!isBooked&&!isOwned" size="small" color="primary" (click)="bookSeat()">
             <!-- <ion-icon slot="start" color="light" name="checkbox"></ion-icon> -->
             <p>Varaa paikka</p>
           </ion-button>
+          <ion-button  *ngIf="isBooked" size="small" color="success" [disabled]='true'>
+            <!-- <ion-icon slot="start" color="light" name="checkbox"></ion-icon> -->
+            <p>Booked</p>
+          </ion-button>
+          <ion-button  *ngIf="isOwned" size="small" color="danger" [disabled]='true'>
+            <!-- <ion-icon slot="start" color="light" name="checkbox"></ion-icon> -->
+            <p>Owned</p>
+          </ion-button>
 
-          <ion-button size="small" class="chat-btn" fill="outline" color="primary" (click)="messageDriver()">
+
+          <ion-button [disabled]="isOwned" size="small" class="chat-btn" fill="outline" color="primary" (click)="messageDriver()">
             <!-- <ion-icon slot="start" color="primary" name="paper-plane"></ion-icon> -->
             <p>Lähetä viesti</p>
           </ion-button>
