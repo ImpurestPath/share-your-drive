@@ -56,50 +56,6 @@ export class DrivesDetailsPage implements OnInit {
         'DD. MMMM YYYY'
       );
 
-      setTimeout(async () => {
-        const originFeatures = await this.mapboxService
-          .searchCity(drive.origin)
-          .toPromise();
-        const destinationFeatures = await this.mapboxService
-          .searchCity(drive.destination)
-          .toPromise();
-        const oLat = originFeatures[0].center[1];
-        const oLng = originFeatures[0].center[0];
-        const dLat = destinationFeatures[0].center[1];
-        const dLng = destinationFeatures[0].center[0];
-        const center = [(oLat + dLat) / 2, (oLng + dLng) / 2];
-        console.log([oLat, oLng]);
-        console.log([dLat, dLng]);
-
-        console.log(center);
-
-        this.map = new Map('mapId', { attributionControl: false }).setView(
-          center,
-          10
-        );
-        tileLayer(
-          'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}'
-        ).addTo(this.map);
-        L.polyline([
-          [oLat, oLng],
-          [dLat, dLng],
-        ]).addTo(this.map);
-        this.map.fitBounds([
-          [oLat, oLng],
-          [dLat, dLng],
-        ]);
-        // marker([oLat, oLng])
-        //   .addTo(this.map)
-        //   .bindPopup(drive.origin)
-        //   .openPopup();
-        // marker([dLat, dLng])
-        //   .addTo(this.map)
-        //   .bindPopup(drive.destination)
-        //   .openPopup();
-      }, 0);
-
-      this.isBooked = drive.passengers.includes(this.userService.userDataSubject.value.uid);
-      this.isOwned = drive.driverId === this.userService.userDataSubject.value.uid;
 
       this.passengers = [];
       this.drive.passengers.forEach((passenger) => {
