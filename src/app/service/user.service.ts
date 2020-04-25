@@ -48,6 +48,9 @@ export class UserService {
           localStorage.setItem('user', JSON.stringify(ud.data()));
           JSON.parse(localStorage.getItem('user'));
         });
+    } else {
+      this.user = null;
+      this.userDataSubject.next(null);
     }
   }
 
@@ -193,6 +196,7 @@ export class UserService {
   // Sign-out
   signOut() {
     return this.ngFireAuth.auth.signOut().then(() => {
+      this.updateLocalData();
       localStorage.removeItem('user');
     });
   }
