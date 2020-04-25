@@ -1,6 +1,6 @@
 import { ChatService } from 'src/app/service/chat.service';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import * as moment from 'moment';
 import { DriveService } from 'src/app/service/drive.service';
@@ -15,11 +15,13 @@ import { Location } from '@angular/common';
 export class DrivesDetailsPage implements OnInit {
   public formattedClock: any;
   public drive: any;
-  formattedDate: any;
-  color: string;
-  test: string = '#3f3f3f';
-  borderColor: any;
-  avatarColor: any;
+  public formattedDate: any;
+  public color: string;
+  public test: string = '#3f3f3f';
+  public borderColor: any;
+  public avatarColor: any;
+  public isBooked: boolean;
+  public isOwned: boolean;
 
   constructor(
     private router: Router,
@@ -46,12 +48,13 @@ export class DrivesDetailsPage implements OnInit {
       );
       this.formattedDate = moment(this.drive.startDate.toDate()).format(
         'DD. MMMM YYYY'
-      )
+      );
+      this.isBooked = drive.passengers.includes(this.userService.userDataSubject.value.uid);
+      this.isOwned = drive.driverId === this.userService.userDataSubject.value.uid;
     });
   }
 
   bookSeat() {
-    // BOOK A SEAT
     this.driveService
       .bookDrive(this.userService.userDataSubject.value.uid, this.drive.id)
       .then(async (d: string) => {
@@ -72,9 +75,6 @@ export class DrivesDetailsPage implements OnInit {
   }
 
   messageDriver() {
-    // SENDING A MESSAGE
-    console.log('Send message clicked');
-    // this.modalController.dismiss();
     this.router.navigate([
       'tabs/tabs/chat',
       this.chatService.getChatIdWithUser(this.drive.driverId),

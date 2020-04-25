@@ -12,19 +12,19 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./drives.page.scss'],
 })
 export class DrivesPage implements OnInit {
-  private filters = {
+  filters = {
     filterNear: 'Kyydit lähellä sinua',
     filterNew: 'Uusimmat kyydit',
     filterFavorites: 'Suosikit'
   }
-  private newest: Array<any>;
+  newest: Array<any>;
   favorites: Array<any>;
-  private nearest: Array<any>;
-  private searchResults: Array<any>;
-  public location: any = null;
+  nearest: Array<any>;
+  searchResults: Array<any>;
+  location: any = null;
 
-  public currentFilter: string;
-  public drives: Array<any>;
+  currentFilter: string;
+  drives: Array<any>;
   uid: any;
   user: any;
 
@@ -115,10 +115,13 @@ export class DrivesPage implements OnInit {
 
   getFavorites() {
     this.favorites = [];
+    if (this.user.favorites.length < 1) this.drives = [];
+
     this.user.favorites.forEach((favorite) => {
       this.driveService.getFavorites(favorite).subscribe((drive) => {
         this.favorites = this.favorites.concat(drive);
         this.drives = this.favorites;
+        console.log(this.drives);
       });
     })
   }
