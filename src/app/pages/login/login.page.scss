@@ -2,7 +2,7 @@
     position: relative;
     z-index: 1;
     background: #FFFFFF;
-    padding: 15px;
+    padding: 10px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
@@ -28,3 +28,6 @@ html, body, .container {
     justify-content: center;
 }
 
+.message {
+    font-size: small;
+}
