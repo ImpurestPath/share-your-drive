@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 import { Map, latLng, tileLayer, marker } from 'leaflet';
 import * as L from 'leaflet';
 import { MapboxService } from 'src/app/service/mapbox.service';
+import 'leaflet-curve';
 
 @Component({
   selector: 'app-drives-details',
@@ -40,6 +41,7 @@ export class DrivesDetailsPage implements OnInit {
 
   ngOnInit() {
     this.color = this.activatedRouter.snapshot.queryParamMap.get('color');
+    console.log(this.color);
     this.borderColor = {
       'border-left': `2.5px solid var(--ion-color-${this.color})`,
     };
@@ -83,14 +85,39 @@ export class DrivesDetailsPage implements OnInit {
         tileLayer(
           'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}'
         ).addTo(this.map);
-        L.polyline([
-          [oLat, oLng],
-          [dLat, dLng],
-        ]).addTo(this.map);
+
+        const latlng1 = [oLat, oLng];
+        const latlng2 = [dLat, dLng];
+        const offsetX = latlng2[1] - latlng1[1],
+          offsetY = latlng2[0] - latlng1[0];
+        const r = Math.sqrt(Math.pow(offsetX, 2) + Math.pow(offsetY, 2)),
+          theta = Math.atan2(offsetY, offsetX);
+        const thetaOffset = 3.14 / 7;
+        const r2 = r / 2 / Math.cos(thetaOffset),
+          theta2 = theta + thetaOffset;
+        const midpointX = r2 * Math.cos(theta2) + latlng1[1],
+          midpointY = r2 * Math.sin(theta2) + latlng1[0];
+        const midpointLatLng = [midpointY, midpointX];
+        const latlngs = [];
+        latlngs.push(latlng1, midpointLatLng, latlng2);
+        const pathOptions = {
+          color: `var(--ion-color-${this.color})`,
+          weight: 3,
+        };
+        const curvedPath = L.curve(
+          ['M', latlng1, 'Q', midpointLatLng, latlng2],
+          pathOptions
+        ).addTo(this.map);
+
+        // L.polyline([
+        //   [oLat, oLng],
+        //   [dLat, dLng],
+        // ]).addTo(this.map);
         this.map.fitBounds([
           [oLat, oLng],
           [dLat, dLng],
         ]);
+
         // marker([oLat, oLng])
         //   .addTo(this.map)
         //   .bindPopup(drive.origin)
