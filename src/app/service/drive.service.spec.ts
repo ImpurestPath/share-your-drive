@@ -6,7 +6,7 @@ import { Drive } from '../entity/drive';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-fdescribe('DriveService', () => {
+describe('DriveService', () => {
   const fakeAFS = jasmine.createSpyObj('AngularFirestore', ['collection']);
   fakeAFS.collection.and.returnValue(
     jasmine.createSpyObj('collection', [
