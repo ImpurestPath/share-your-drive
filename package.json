@@ -34,6 +34,7 @@
     "core-js": "^2.5.4",
     "firebase": "^7.14.2",
     "leaflet": "^1.6.0",
+    "leaflet-curve": "^1.0.0",
     "mapbox-gl": "^1.9.1",
     "moment": "^2.24.0",
     "rxjs": "^6.5.5",
