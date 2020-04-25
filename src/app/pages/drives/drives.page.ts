@@ -37,6 +37,7 @@ export class DrivesPage implements OnInit {
   ngOnInit() {
     this.userService.userDataSubject.subscribe((user) => {
       this.uid = user.uid;
+      this.favorites = [];
       if (this.uid) this.getUserData();
     })
     // Checks the platform, as nearest
@@ -107,7 +108,6 @@ export class DrivesPage implements OnInit {
 
   getUserData() {
     this.userService.getUserData(this.uid).subscribe((doc) => {
-      console.log(doc);
       this.user = doc;
       if (this.currentFilter == 'Suosikit') this.getFavorites();
     })
@@ -121,7 +121,6 @@ export class DrivesPage implements OnInit {
       this.driveService.getFavorites(favorite).subscribe((drive) => {
         this.favorites = this.favorites.concat(drive);
         this.drives = this.favorites;
-        console.log(this.drives);
       });
     })
   }
