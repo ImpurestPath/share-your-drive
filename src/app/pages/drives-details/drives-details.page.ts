@@ -27,7 +27,9 @@ export class DrivesDetailsPage implements OnInit {
   public isOwned: boolean;
   public map: Map;
   public passengers: any;
+  public driver: any;
   public defaultPhoto: string = 'https://forwardsummit.ca/wp-content/uploads/2019/01/avatar-default.png';
+
 
   constructor(
     private router: Router,
@@ -42,7 +44,6 @@ export class DrivesDetailsPage implements OnInit {
 
   ngOnInit() {
     this.color = this.activatedRouter.snapshot.queryParamMap.get('color');
-    console.log(this.color);
     this.borderColor = {
       'border-left': `2.5px solid var(--ion-color-${this.color})`,
     };
@@ -51,17 +52,19 @@ export class DrivesDetailsPage implements OnInit {
     const driveId = this.activatedRouter.snapshot.paramMap.get('driveId');
     this.driveService.getDrive(driveId).subscribe((drive) => {
       this.drive = drive;
-      this.formattedClock = moment(this.drive.startDate.toDate()).format(
-        'HH:mm'
-      );
-      this.formattedDate = moment(this.drive.startDate.toDate()).format(
-        'DD. MMMM YYYY'
-      );
+      this.formattedClock = moment(this.drive.startDate.toDate()).format('HH:mm');
+      this.formattedDate = moment(this.drive.startDate.toDate()).format('DD. MMMM YYYY');
+
+      this.userService.getOtherUserData(this.drive.driverId).subscribe((driver) => {
+        this.driver = driver.data();
+      })
+
       this.isBooked = drive.passengers.includes(
         this.userService.userDataSubject.value.uid
       );
-      this.isOwned =
-        drive.driverId === this.userService.userDataSubject.value.uid;
+
+      this.isOwned = drive.driverId === this.userService.userDataSubject.value.uid;
+
       if (!this.map) {
         setTimeout(async () => {
           const originFeatures = await this.mapboxService
@@ -131,7 +134,6 @@ export class DrivesDetailsPage implements OnInit {
         }, 0);
       }
 
-
       this.passengers = [];
       this.drive.passengers.forEach((passenger) => {
         this.userService.getOtherUserData(passenger)
@@ -139,8 +141,6 @@ export class DrivesDetailsPage implements OnInit {
             (this.passengers)
               ? this.passengers.push(user.data())
               : this.passengers = [user.data()];
-
-            console.log(this.passengers);
           })
       })
     });

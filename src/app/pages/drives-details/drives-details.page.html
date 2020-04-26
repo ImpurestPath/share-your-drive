@@ -29,7 +29,8 @@
             </ion-col>
             <ion-col size="3">
               <ion-avatar [ngStyle]="avatarColor">
-                <img src="https://forwardsummit.ca/wp-content/uploads/2019/01/avatar-default.png">
+                <img *ngIf="driver && driver.photoURL" [src]="driver.photoURL">
+                <img *ngIf="!driver || !driver.photoURL" [src]="defaultPhoto">
               </ion-avatar>
             </ion-col>
           </ion-row>
@@ -67,8 +68,11 @@
                   <img src="{{ passenger.photoURL || defaultPhoto }}">
                 </ion-avatar>
               </ion-label>
-              <p class="seats-left" style="font-size: 12px;" *ngIf="drive.seatsLeft > 0">{{ drive.seatsLeft }} paikkaa
+              <p class="seats-left" style="font-size: 12px;" *ngIf="drive.seatsLeft > 1">{{ drive.seatsLeft }} paikkaa
                 jäljellä</p>
+              <p class="seats-left" style="font-size: 12px;" *ngIf="drive.seatsLeft == 1">{{ drive.seatsLeft }} paikka
+                jäljellä</p>
+              <p class="seats-left" style="font-size: 12px;" *ngIf="drive.seatsLeft < 1">Ei vapaita paikkoja</p>
             </div>
           </div>
 
@@ -81,7 +85,7 @@
             </div>
 
             <div class="list-text">
-              <ion-label>4 paikkaa</ion-label>
+              <ion-label>{{ drive.seatsMax }} paikkaa</ion-label>
             </div>
           </div>
 
@@ -94,7 +98,7 @@
             </div>
 
             <div class="list-text">
-              <p>{{ drive.info }}</p>
+              <p>{{ drive.info || 'Ei lisätietoja' }}</p>
             </div>
           </div>
         </div>
@@ -102,8 +106,10 @@
       </ion-card-content>
 
       <div class="buttons">
-        <ion-button *ngIf="!isBooked && !isOwned" expand="block" [color]="color" (click)="bookSeat()">
-          <ion-icon slot="start" color="light" name="checkmark-circle-outline"></ion-icon>
+        <ion-button [disabled]="drive.seatsLeft === 0" *ngIf="!isBooked && !isOwned" expand="block" [color]="color"
+          (click)="bookSeat()">
+          <ion-icon slot="start" color="light" name="checkmark-circle-outline">
+          </ion-icon>
           <p style="color: white;">Varaa paikka</p>
         </ion-button>
         <ion-button expand="block" *ngIf="isBooked" fill="outline" color="danger" (click)="cancelBooking()">

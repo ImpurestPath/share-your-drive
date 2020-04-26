@@ -164,10 +164,6 @@ ion-card {
       ion-label {
         display: flex;
 
-        :first-child {
-          left: 0;
-        }
-
         ion-avatar {
           max-width: 35px;
           max-height: 35px;
@@ -182,6 +178,10 @@ ion-card {
             scale: 1.1;
             box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.24);
           }
+        }
+
+        :first-child {
+          left: 0;
         }
       }
     }
