@@ -9,12 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+<<<<<<< HEAD
   
+  photo:any;
   user:any;
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.user = this.userService.userDataSubject.value;
+    this.photo = this.userService.userDataSubject.value;
   }
 
 
@@ -22,5 +25,17 @@ export class ProfilePage implements OnInit {
     this.userService.signOut()
     // this.router.navigateByUrl('login');
     window.location.reload();
+=======
+  constructor(private userService: UserService, private router: Router) { }
+
+  ngOnInit() { }
+
+  signOut() {
+    this.userService.signOut().then(() => {
+      this.router.navigateByUrl('');
+    });
+
+    // window.location.reload();
+>>>>>>> 78a095653d5d2ef936e8bbddc118ab484af2b153
   }
 }

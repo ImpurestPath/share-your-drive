@@ -12,21 +12,21 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./drives.page.scss'],
 })
 export class DrivesPage implements OnInit {
-  private filters = {
+  public filters = {
     filterNear: 'Kyydit lähellä sinua',
     filterNew: 'Uusimmat kyydit',
     filterFavorites: 'Suosikit'
   }
-  private newest: Array<any>;
-  favorites: Array<any>;
-  private nearest: Array<any>;
-  private searchResults: Array<any>;
+  public newest: Array<any>;
+  public favorites: Array<any>;
+  public nearest: Array<any>;
+  public searchResults: Array<any>;
   public location: any = null;
 
   public currentFilter: string;
   public drives: Array<any>;
-  uid: any;
-  user: any;
+  public uid: any;
+  public user: any;
 
   constructor(private driveService: DriveService,
     public popoverController: PopoverController,
@@ -36,6 +36,7 @@ export class DrivesPage implements OnInit {
 
   ngOnInit() {
     this.userService.userDataSubject.subscribe((user) => {
+      this.favorites = [];
       this.uid = user.uid;
       if (this.uid) this.getUserData();
     })
@@ -107,7 +108,6 @@ export class DrivesPage implements OnInit {
 
   getUserData() {
     this.userService.getUserData(this.uid).subscribe((doc) => {
-      console.log(doc);
       this.user = doc;
       if (this.currentFilter == 'Suosikit') this.getFavorites();
     })
@@ -115,6 +115,8 @@ export class DrivesPage implements OnInit {
 
   getFavorites() {
     this.favorites = [];
+    if (this.user.favorites.length < 1) this.drives = [];
+
     this.user.favorites.forEach((favorite) => {
       this.driveService.getFavorites(favorite).subscribe((drive) => {
         this.favorites = this.favorites.concat(drive);

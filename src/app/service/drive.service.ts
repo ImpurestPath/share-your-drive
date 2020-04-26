@@ -39,10 +39,10 @@ export class DriveService {
     return this.getDataWithMeta(this.drives);
   }
 
-  getRecent(number: number) {
+  getRecent(amount: number) {
     return this.getDataWithMeta(
       this.store.collection<Drive>(this.collectionName, (ref) =>
-        ref.orderBy('createdAt', 'desc').limit(number)
+        ref.orderBy('createdAt', 'desc').limit(amount)
       )
     );
   }
@@ -54,8 +54,8 @@ export class DriveService {
 
   getSearchResults(origin: string, destination: string, date?: string) {
     if (date) {
-      let start = new Date(`${date.split('T')[0]}T00:00:00`);
-      let end = new Date(start.getTime() + 86400000);
+      const start = new Date(`${date.split('T')[0]}T00:00:00`);
+      const end = new Date(start.getTime() + 86400000);
 
       return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
         ref.where('origin', '==', origin)
@@ -92,7 +92,7 @@ export class DriveService {
   }
 
   create(drive: Drive) {
-    //TODO: add fields
+    // TODO: add fields
     this.store.collection(this.collectionName).add(drive);
   }
 
@@ -146,7 +146,7 @@ export class DriveService {
                 resolve('Successfully unbooked');
               })
               .catch(() => {
-                reject('Cannot update in firebase');
+                reject('Cannot connect to server');
               });
           } else {
             reject('Drive is not booked');
@@ -154,6 +154,4 @@ export class DriveService {
         });
     });
   }
-
-  
 }

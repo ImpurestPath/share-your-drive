@@ -1,13 +1,17 @@
 .center {
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    
-    padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 15px;
+  
   }
   .center2 {
-    margin-left: auto;
-    margin-right: auto;
-    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
+  }
+  .size1 {
+    height: 100px;
+    width: 100px;
   }

@@ -1,18 +1,19 @@
 import { UserService } from 'src/app/service/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Message } from 'src/app/entity/message';
 import { ChatService } from 'src/app/service/chat.service';
 import * as moment from 'moment';
 import { Chat } from 'src/app/entity/chat';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-fullchat',
   templateUrl: './fullchat.page.html',
   styleUrls: ['./fullchat.page.scss'],
 })
-export class FullchatPage implements OnInit {
+export class FullchatPage implements OnInit, OnDestroy {
   chatId: string;
   toId: string;
   uid: string;
@@ -20,6 +21,7 @@ export class FullchatPage implements OnInit {
   otherUser: any;
   currentMessage: string;
   public moment: any = moment;
+  subscribtion: Subscription;
   constructor(
     private route: ActivatedRoute,
     private chatService: ChatService,
@@ -31,16 +33,19 @@ export class FullchatPage implements OnInit {
     this.uid = this.userService.userDataSubject.value.uid;
     this.chatId = this.route.snapshot.paramMap.get('chatId');
     this.toId = this.route.snapshot.paramMap.get('toId');
-    this.chatService.getChat(this.chatId).subscribe((chat: Chat) => {
-      if (this.toId === 'null') {
-        this.toId = this.uid === chat.users[0] ? chat.users[1] : chat.users[0];
-      }
-      this.userService.getOtherUserData(this.toId).subscribe((user) => {
-        console.log(this.toId);
-        this.otherUser = user.data();
-        console.log(this.otherUser);
+    this.subscribtion = this.chatService
+      .getChat(this.chatId)
+      .subscribe((chat: Chat) => {
+        if (this.toId === 'null') {
+          this.toId =
+            this.uid === chat.users[0] ? chat.users[1] : chat.users[0];
+        }
+        this.userService.getOtherUserData(this.toId).subscribe((user) => {
+          console.log(this.toId);
+          this.otherUser = user.data();
+          console.log(this.otherUser);
+        });
       });
-    });
     this.chatService
       .getMessagesFromChat(this.chatId, 50)
       .subscribe((messages) => {
@@ -64,5 +69,9 @@ export class FullchatPage implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.subscribtion.unsubscribe();
   }
 }

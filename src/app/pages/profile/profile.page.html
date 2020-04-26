@@ -11,17 +11,19 @@
 <ion-content>
   
   <div class="center">
-        <img class="center2" src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" alt="">
+    <ion-avatar class="size1">
+        <img src="{{user.photoURL}}" alt="">
+      </ion-avatar>
   </div>
   <div class="center2">
-    <p>{{ user.displayName }}</p>
+    <h2>{{user.displayName}}</h2>
   </div>
   
   
   <ion-card>
     <ion-item>
       <ion-icon name="happy-outline" slot="start"></ion-icon>
-      <ion-label>Personal details</ion-label>
+      <ion-label>Tietoja minusta</ion-label>
       <ion-button fill="outline" slot="end" (click)="addItem(item)">Muokkaa</ion-button>
     </ion-item>
   
