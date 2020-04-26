@@ -1,7 +1,6 @@
-
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import * as moment from 'moment';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-drives-card',
@@ -20,12 +19,17 @@ export class DrivesCardComponent implements OnInit {
 
   @Input() color: string;
 
-  constructor(
-  ) { }
+  constructor(private router: Router) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   getShade() {
     return `var(--ion-color-${this.color}-shade)`;
+  }
+
+  clicked() {
+    this.router.navigate(['../../../tabs/tabs/drives', this.drive.id], {
+      queryParams: { color: this.color },
+    });
   }
 }
