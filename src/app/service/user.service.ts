@@ -92,7 +92,9 @@ export class UserService {
             .then(() => {
               firebase
                 .auth()
-                .currentUser.updateProfile({ displayName: name })
+                .currentUser.updateProfile({ 
+                  displayName: name, 
+                  photoURL: 'https://forwardsummit.ca/wp-content/uploads/2019/01/avatar-default.png' })
                 .then(() => {
                   this.setUserData(firebase.auth().currentUser);
                   // this.updateLocalData();
