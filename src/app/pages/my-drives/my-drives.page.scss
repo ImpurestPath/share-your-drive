@@ -3,7 +3,7 @@
 }
 
 ion-content {
-  background: #3f3f3f;
+  --background: #3f3f3f;
 }
 
 .container {
@@ -16,7 +16,8 @@ ion-content {
   scroll-behavior: smooth;
   border-radius: 20px 20px 0px 0px;
   background: #f9f9f9;
-  padding: 5px;
+  padding: 5px 10px;
+  overflow: hidden;
 
   &::-webkit-scrollbar {
     display: none; // Safari and Chrome

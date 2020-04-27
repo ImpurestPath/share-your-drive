@@ -1,18 +1,14 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Calendar</ion-title>
+    <ion-title>Kalenteri</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="wrapper">
 
-    <ion-calendar *ngIf="_daysConfig.length > 0" [(ngModel)]="date"
-      (change)="onChange($event)"
-      (select)="onSelect($event)"
-      [options]="options"
-      [type]="type"
-      [format]="'YYYY-MM-DD'">
+    <ion-calendar *ngIf="_daysConfig.length > 0" [(ngModel)]="date" (change)="onChange($event)"
+      (select)="onSelect($event)" [options]="options" [type]="type" [format]="'YYYY-MM-DD'">
     </ion-calendar>
 
     <!--<ion-list *ngFor ="let drive of drives; index as i" (click)="openDetails()">
@@ -25,18 +21,20 @@
       </ion-list>
     </div>-->
 
-    <div *ngFor ="let drive of drives; index as i" [routerLink]="['../../../drives', drive.id]">
-      <ion-list *ngIf = "drive.startDate.seconds >= this.ykkonen && drive.startDate.seconds < this.kakkonen">
+    <div *ngFor="let drive of drives; index as i" [routerLink]="['../../../drives', drive.id]">
+      <ion-list *ngIf="drive.startDate.seconds >= this.ykkonen && drive.startDate.seconds < this.kakkonen">
         <ion-grid class="calendarInfo">
           <ion-row>
-            <ion-col size="12" class="ion-text-center"><h5>{{ drive.origin }} - {{ drive.destination}} </h5></ion-col>
-            <ion-col >Lähtö: {{ drive.startDate.toDate() | date: "H:mm"}}</ion-col>
-            <ion-col  class="ion-text-end">{{ this.seatsTaken }} / {{ drive.seatsMax }} </ion-col>
+            <ion-col size="12" class="ion-text-center">
+              <h5>{{ drive.origin }} - {{ drive.destination}} </h5>
+            </ion-col>
+            <ion-col>Lähtö: {{ drive.startDate.toDate() | date: "H:mm"}}</ion-col>
+            <ion-col class="ion-text-end">{{ this.seatsTaken }} / {{ drive.seatsMax }} </ion-col>
           </ion-row>
         </ion-grid>
       </ion-list>
     </div>
-    
+
     <!--<ion-item>{{ drive.startDate.toDate() | date: "dd/MM/yyyy H:mm" }}</ion-item>-->
   </div>
 </ion-content>
