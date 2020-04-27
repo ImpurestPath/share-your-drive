@@ -22,8 +22,9 @@ export class MyDrivesPage implements OnInit {
 
   ngOnInit() {
     this.userService.userDataSubject.subscribe((user) => {
-      this.uid = user.uid;
-      if (this.uid) {
+      if (user) {
+        this.uid = user.uid;
+
         this.getUserData();
 
         this.driveService.getUserDrives(this.uid)
