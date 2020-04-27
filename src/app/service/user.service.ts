@@ -1,6 +1,7 @@
 import { User } from './../entity/user';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
@@ -9,6 +10,7 @@ import {
 import { auth } from 'firebase';
 import * as firebase from 'firebase';
 import { take } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,7 +19,10 @@ export class UserService {
   userDataSubject: BehaviorSubject<any>;
   userData: Observable<any>;
 
-  constructor(public afStore: AngularFirestore) {
+  constructor(
+    public afStore: AngularFirestore,
+    public ngFireAuth: AngularFireAuth
+  ) {
     this.userData = new Observable();
     this.userDataSubject = new BehaviorSubject(this.userData);
     firebase.auth().onAuthStateChanged((user) => {
@@ -66,68 +71,58 @@ export class UserService {
   // Login in with email/password
   signInEmail(email, password) {
     return new Promise<any>((resolve, reject) => {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(
-          (res) => {
-            firebase
-              .auth()
-              .setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-            resolve(res);
-          },
-          (err) => reject(err)
-        );
+      this.ngFireAuth.auth.signInWithEmailAndPassword(email, password).then(
+        (res) => {
+          this.ngFireAuth.auth.setPersistence(
+            firebase.auth.Auth.Persistence.LOCAL
+          );
+          resolve(res);
+        },
+        (err) => reject(err)
+      );
     });
   }
 
   // Register user with email/password
   signUpEmail(name, email, password) {
     return new Promise<any>((resolve, reject) => {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(
-          (res) => {
-            this.signInEmail(email, password)
-              .then(() => {
-                firebase
-                  .auth()
-                  .currentUser.updateProfile({
-                    displayName: name,
-                    photoURL:
-                      'https://forwardsummit.ca/wp-content/uploads/2019/01/avatar-default.png',
-                  })
-                  .then(() => {
-                    this.setUserData(firebase.auth().currentUser);
-                    // this.updateLocalData();
-                    this.signOut();
-                    this.signInEmail(email, password);
-                    resolve(res);
-                  })
-                  .catch((err) => {
-                    console.error(err);
-                    reject(err);
-                  });
-              })
-              .catch((err) => {
-                console.error(err);
-                reject(err);
-              });
-          },
-          (err) => reject(err)
-        );
+      this.ngFireAuth.auth.createUserWithEmailAndPassword(email, password).then(
+        (res) => {
+          this.signInEmail(email, password)
+            .then(() => {
+              firebase
+                .auth()
+                .currentUser.updateProfile({ displayName: name })
+                .then(() => {
+                  this.setUserData(firebase.auth().currentUser);
+                  // this.updateLocalData();
+                  this.signOut();
+                  this.signInEmail(email, password);
+                  resolve(res);
+                })
+                .catch((err) => {
+                  console.error(err);
+                  reject(err);
+                });
+            })
+            .catch((err) => {
+              console.error(err);
+              reject(err);
+            });
+        },
+        (err) => reject(err)
+      );
     });
   }
 
   // Email verification when new user register
   sendVerificationEmail() {
-    return firebase.auth().currentUser.sendEmailVerification();
+    return this.ngFireAuth.auth.currentUser.sendEmailVerification();
   }
 
   // Recover password
   passwordRecover(passwordResetEmail) {
-    return firebase.auth().sendPasswordResetEmail(passwordResetEmail);
+    return this.ngFireAuth.auth.sendPasswordResetEmail(passwordResetEmail);
   }
 
   // Returns true when user is looged in
@@ -151,8 +146,7 @@ export class UserService {
   // TODO finish
   authLogin(provider) {
     return new Promise((resolve, reject) =>
-      firebase
-        .auth()
+      this.ngFireAuth.auth
         .signInWithPopup(provider)
         .then((result) => {
           console.log(result);
@@ -213,13 +207,10 @@ export class UserService {
 
   // Sign-out
   signOut() {
-    return firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        this.updateLocalData();
-        localStorage.removeItem('user');
-      });
+    return this.ngFireAuth.auth.signOut().then(() => {
+      this.updateLocalData();
+      localStorage.removeItem('user');
+    });
   }
 
   getOtherUserData(userId: string) {
