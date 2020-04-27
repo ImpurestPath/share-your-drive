@@ -37,8 +37,8 @@ export class MyDrivesPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  formatTime(date) {
-    return moment(date).format('DD. MM. YYYY HH:mm');
+  formatTime(date: Date): string {
+    return moment(date).format('DD.MM.YYYY HH:mm');
   }
 
 }
