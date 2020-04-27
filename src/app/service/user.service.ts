@@ -1,7 +1,6 @@
 import { User } from './../entity/user';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
@@ -20,8 +19,7 @@ export class UserService {
   userData: Observable<any>;
 
   constructor(
-    public afStore: AngularFirestore,
-    public ngFireAuth: AngularFireAuth
+    public afStore: AngularFirestore
   ) {
     this.userData = new Observable();
     this.userDataSubject = new BehaviorSubject(this.userData);
@@ -71,9 +69,9 @@ export class UserService {
   // Login in with email/password
   signInEmail(email, password) {
     return new Promise<any>((resolve, reject) => {
-      this.ngFireAuth.auth.signInWithEmailAndPassword(email, password).then(
+      firebase.auth().signInWithEmailAndPassword(email, password).then(
         (res) => {
-          this.ngFireAuth.auth.setPersistence(
+          firebase.auth().setPersistence(
             firebase.auth.Auth.Persistence.LOCAL
           );
           resolve(res);
@@ -86,7 +84,7 @@ export class UserService {
   // Register user with email/password
   signUpEmail(name, email, password) {
     return new Promise<any>((resolve, reject) => {
-      this.ngFireAuth.auth.createUserWithEmailAndPassword(email, password).then(
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(
         (res) => {
           this.signInEmail(email, password)
             .then(() => {
@@ -119,12 +117,12 @@ export class UserService {
 
   // Email verification when new user register
   sendVerificationEmail() {
-    return this.ngFireAuth.auth.currentUser.sendEmailVerification();
+    return firebase.auth().currentUser.sendEmailVerification();
   }
 
   // Recover password
   passwordRecover(passwordResetEmail) {
-    return this.ngFireAuth.auth.sendPasswordResetEmail(passwordResetEmail);
+    return firebase.auth().sendPasswordResetEmail(passwordResetEmail);
   }
 
   // Returns true when user is looged in
@@ -148,7 +146,7 @@ export class UserService {
   // TODO finish
   authLogin(provider) {
     return new Promise((resolve, reject) =>
-      this.ngFireAuth.auth
+    firebase.auth()
         .signInWithPopup(provider)
         .then((result) => {
           console.log(result);
@@ -209,7 +207,7 @@ export class UserService {
 
   // Sign-out
   signOut() {
-    return this.ngFireAuth.auth.signOut().then(() => {
+    return firebase.auth().signOut().then(() => {
       this.updateLocalData();
       localStorage.removeItem('user');
     });
