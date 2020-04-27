@@ -6,6 +6,7 @@
 An app where you can find someone's drive or share your own drive.​
 
 
+
 ## Installation
 
 Links:
@@ -26,6 +27,16 @@ npm install
 ```
 
 ## Release History
+
+* 0.1.0
+    * The app supports auth with using email and password.
+    * The app supports creating your drive and sharing it with other users
+    * The app supports searching other's people drives by start and finish place.
+    * The app supports searching other's people drives near you by your geolocation.
+    * The app supports searching by favorite drives.
+    * The app supports chating with other users, you can text your driver.
+    * The app supports showing drives in calendar view.
+    * The app supports profile pictures.
 
 
 * 0.0.1

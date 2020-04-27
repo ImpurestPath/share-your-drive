@@ -1,7 +1,7 @@
 {
   "name": "syd",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "version": "0.1.0",
+  "author": "Group something",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
