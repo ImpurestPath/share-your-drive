@@ -42,7 +42,7 @@ export class DriveService {
   getRecent(amount: number) {
     return this.getDataWithMeta(
       this.store.collection<Drive>(this.collectionName, (ref) =>
-        ref.orderBy('createdAt', 'desc').limit(amount)
+        ref.orderBy('startDate', 'asc').where('startDate', '>=', new Date()).orderBy('createdAt', 'desc').limit(amount)
       )
     );
   }
