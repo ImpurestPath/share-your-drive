@@ -57,7 +57,7 @@ export class DrivesDetailsPage implements OnInit {
 
       this.userService.getOtherUserData(this.drive.driverId).subscribe((driver) => {
         this.driver = driver.data();
-      })
+      });
 
       this.isBooked = drive.passengers.includes(
         this.userService.userDataSubject.value.uid
@@ -78,11 +78,6 @@ export class DrivesDetailsPage implements OnInit {
           const dLat = destinationFeatures[0].center[1];
           const dLng = destinationFeatures[0].center[0];
           const center = [(oLat + dLat) / 2, (oLng + dLng) / 2];
-          console.log([oLat, oLng]);
-          console.log([dLat, dLng]);
-
-          console.log(center);
-
           this.map = new Map('mapId', { attributionControl: false }).setView(
             center,
             10
@@ -113,24 +108,10 @@ export class DrivesDetailsPage implements OnInit {
             ['M', latlng1, 'Q', midpointLatLng, latlng2],
             pathOptions
           ).addTo(this.map);
-
-          // L.polyline([
-          //   [oLat, oLng],
-          //   [dLat, dLng],
-          // ]).addTo(this.map);
           this.map.fitBounds([
             [oLat, oLng],
             [dLat, dLng],
           ]);
-
-          // marker([oLat, oLng])
-          //   .addTo(this.map)
-          //   .bindPopup(drive.origin)
-          //   .openPopup();
-          // marker([dLat, dLng])
-          //   .addTo(this.map)
-          //   .bindPopup(drive.destination)
-          //   .openPopup();
         }, 0);
       }
 
