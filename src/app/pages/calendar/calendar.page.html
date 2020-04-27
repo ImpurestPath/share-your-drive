@@ -1,18 +1,14 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Calendar</ion-title>
+    <ion-title>Kalenteri</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="wrapper">
 
-    <ion-calendar *ngIf="_daysConfig.length > 0" [(ngModel)]="date"
-      (change)="onChange($event)"
-      (select)="onSelect($event)"
-      [options]="options"
-      [type]="type"
-      [format]="'YYYY-MM-DD'">
+    <ion-calendar *ngIf="_daysConfig.length > 0" [(ngModel)]="date" (change)="onChange($event)"
+      (select)="onSelect($event)" [options]="options" [type]="type" [format]="'YYYY-MM-DD'">
     </ion-calendar>
 
     <!--<ion-list *ngFor ="let drive of drives; index as i" (click)="openDetails()">
@@ -36,7 +32,7 @@
         </ion-grid>
       </ion-list>
     </div>
-    
+
     <!--<ion-item>{{ drive.startDate.toDate() | date: "dd/MM/yyyy H:mm" }}</ion-item>-->
   </div>
   <app-drives-action ></app-drives-action>

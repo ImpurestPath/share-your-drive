@@ -33,3 +33,20 @@ ion-list {
     font-size: 30px;
   }
 }
+ ion-content {
+     --background: #3f3f3f;
+
+
+     .wrapper {
+         background: #f9f9f9;
+         border-radius: 20px 20px 0px 0px;
+         width: 100%;
+         height: 100%;
+         overflow: hidden;
+     }
+ }
+
+ ion-toolbar {
+     --background: #3f3f3f;
+          --color: white;
+ }

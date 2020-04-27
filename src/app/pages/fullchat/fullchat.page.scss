@@ -11,6 +11,34 @@ ion-content .scroll-content {
 //     height: 255px;
 // }
 
+
+ion-footer {
+    ion-button {
+        --border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        --padding-top: 0;
+        --padding-bottom: 0;
+        --padding-start: 0;
+        --padding-end: 0;
+        margin: 3px;
+        margin-right: 5px;
+        --box-shadow: none;
+        --border-width: 2.5px;
+
+
+        &:hover, &:active {
+            --box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.178);
+        }
+    }
+}
+
+ion-header {
+    ion-buttons {
+        cursor: pointer;
+    }
+}
+
 .line-breaker {
     white-space: pre-line;
 }

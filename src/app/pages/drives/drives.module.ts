@@ -12,7 +12,7 @@ import { DrivesPage } from './drives.page'
 import { DrivesContainerComponent } from '../../components/drives-container/drives-container.component'
 import { DrivesCardComponent } from '../../components/drives-card/drives-card.component'
 import { SharedModule } from 'src/app/shared.module'
-import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-popup/drives-search-popup.component'
+
 
 @NgModule({
   imports: [
@@ -27,7 +27,7 @@ import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-pop
     DrivesPage,
     DrivesContainerComponent,
     DrivesCardComponent,
-    
+
   ],
   exports: [DrivesCardComponent]
 })

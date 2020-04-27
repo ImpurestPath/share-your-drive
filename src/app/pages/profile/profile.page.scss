@@ -1,0 +1,36 @@
+ ion-content {
+     --background: #3f3f3f;
+
+
+     .container {
+         background: #f9f9f9;
+         border-radius: 20px 20px 0px 0px;
+         width: 100%;
+         height: 100%;
+         overflow: hidden;
+     }
+ }
+
+ ion-toolbar {
+     --background: #3f3f3f;
+          --color: white;
+
+        ion-button {
+            --border-radius: 50%;
+            height: 35px;
+            width: 35px;
+            --padding-left: 0;
+            --padding-right: 0;
+            --padding-start: 0;
+            --padding-end: 0;
+            margin-right: 15px;
+
+            ion-icon {
+                color: white;
+            }
+
+            &:hover, &:active {
+                --box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.466);
+            }
+        }
+ }
