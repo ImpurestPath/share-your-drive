@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPage } from './login.page';
+import { ResetPasswordPage } from './reset-password.page';
 
-describe('LoginPage', () => {
-  // let component: LoginPage;
-  // let fixture: ComponentFixture<LoginPage>;
+describe('ResetPasswordPage', () => {
+  // let component: ResetPasswordPage;
+  // let fixture: ComponentFixture<ResetPasswordPage>;
 
   // beforeEach(async(() => {
   //   TestBed.configureTestingModule({
-  //     declarations: [ LoginPage ],
+  //     declarations: [ ResetPasswordPage ],
   //     imports: [IonicModule.forRoot()]
   //   }).compileComponents();
 
-  //   fixture = TestBed.createComponent(LoginPage);
+  //   fixture = TestBed.createComponent(ResetPasswordPage);
   //   component = fixture.componentInstance;
   //   fixture.detectChanges();
   // }));

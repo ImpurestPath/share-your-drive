@@ -1,80 +1,133 @@
-<ion-toolbar>
-  <ion-buttons slot="start">
-    <ion-icon name="chevron-back" size="large" (click)="goBack()" class="back-btn"></ion-icon>
-  </ion-buttons>
-  <ion-title>Tietoja</ion-title>
-</ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="chevron-back" size="large" (click)="goBack()" class="back-btn"></ion-icon>
+    </ion-buttons>
+    <ion-title>Tietoja</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content fullscreen>
 
+  <div class="details" scrollY="true" no-bounce>
+
+    <div class="map" id="mapId">
+
+    </div>
+
     <ion-card *ngIf="drive">
-      <div class="map">
-      </div>
-      <div class="content-wrapper">
-        <ion-card-header>
+      <ion-card-header class="no-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+              <ion-card-title>
+                {{ drive.origin }} - {{ drive.destination }}
+              </ion-card-title>
+              <ion-card-subtitle>
+                {{ formattedDate }}
+              </ion-card-subtitle>
+            </ion-col>
+            <ion-col size="3">
+              <ion-avatar [ngStyle]="avatarColor">
+                <img *ngIf="driver && driver.photoURL" [src]="driver.photoURL">
+                <img *ngIf="!driver || !driver.photoURL" [src]="defaultPhoto">
+              </ion-avatar>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-          <ion-chip outline color="primary">
-            <ion-avatar>
-              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-            </ion-avatar>
-            <ion-label>
-              (Driver profile)
-            </ion-label>
-          </ion-chip>
+      </ion-card-header>
 
-          <ion-card-title>
-            {{ drive.origin }} - {{ drive.destination }}
-          </ion-card-title>
-        </ion-card-header>
+      <ion-card-content>
 
-        <ion-card-content>
-
-          <div class="list-item">
+        <div class="list">
+          <div class="list-header">
+            <p>Lähtöaika</p>
+          </div>
+          <div class="list-item" [ngStyle]="borderColor">
             <div class="list-icon">
-              <ion-icon name="time-outline" size="large" color="primary"></ion-icon>
+              <ion-icon name="time-outline" size="large" [color]="color"></ion-icon>
             </div>
 
             <div class="list-text">
-              <p>{{ formattedTime }}</p>
+              <p>Kello {{ formattedClock }}</p>
             </div>
           </div>
 
-          <div class="list-item">
+          <div class="list-header">
+            <p>Matkustajat</p>
+          </div>
+          <div class="list-item" [ngStyle]="borderColor">
             <div class="list-icon">
-              <ion-icon size="large" name="people-circle-outline" color="primary"></ion-icon>
+              <ion-icon size="large" name="people-circle-outline" [color]="color"></ion-icon>
             </div>
 
             <div class="list-text">
-              <ion-label>{{ drive.seatsLeft }} paikkaa vapaana</ion-label>
+              <ion-label>
+                <ion-avatar [ngStyle]="avatarColor" *ngFor="let passenger of passengers">
+                  <img src="{{ passenger.photoURL || defaultPhoto }}">
+                </ion-avatar>
+              </ion-label>
+              <p class="seats-left" style="font-size: 12px;" *ngIf="drive.seatsLeft > 1">{{ drive.seatsLeft }} paikkaa
+                jäljellä</p>
+              <p class="seats-left" style="font-size: 12px;" *ngIf="drive.seatsLeft == 1">{{ drive.seatsLeft }} paikka
+                jäljellä</p>
+              <p class="seats-left" style="font-size: 12px;" *ngIf="drive.seatsLeft < 1">Ei vapaita paikkoja</p>
             </div>
           </div>
 
-          <div class="list-item">
+          <div class="list-header">
+            <p>Maksimipaikat</p>
+          </div>
+          <div class="list-item" [ngStyle]="borderColor">
             <div class="list-icon">
-              <ion-icon size="large" name="information-circle-outline" color="primary"></ion-icon>
+              <ion-icon size="large" name="car-outline" [color]="color"></ion-icon>
             </div>
 
             <div class="list-text">
-              <p>{{ drive.info }}</p>
+              <ion-label>{{ drive.seatsMax }} paikkaa</ion-label>
             </div>
           </div>
 
-        </ion-card-content>
+          <div class="list-header">
+            <p>Lisätietoja</p>
+          </div>
+          <div class="list-item" [ngStyle]="borderColor">
+            <div class="list-icon">
+              <ion-icon size="large" name="information-circle-outline" [color]="color"></ion-icon>
+            </div>
 
-        <div class="buttons">
-          <ion-button size="small" color="primary" (click)="bookSeat()">
-            <!-- <ion-icon slot="start" color="light" name="checkbox"></ion-icon> -->
-            <p>Varaa paikka</p>
-          </ion-button>
-
-          <ion-button size="small" class="chat-btn" fill="outline" color="primary" (click)="messageDriver()">
-            <!-- <ion-icon slot="start" color="primary" name="paper-plane"></ion-icon> -->
-            <p>Lähetä viesti</p>
-          </ion-button>
+            <div class="list-text">
+              <p>{{ drive.info || 'Ei lisätietoja' }}</p>
+            </div>
+          </div>
         </div>
 
-      </div>
+      </ion-card-content>
 
+      <div class="buttons">
+        <ion-button [disabled]="drive.seatsLeft === 0" *ngIf="!isBooked && !isOwned" expand="block" [color]="color"
+          (click)="bookSeat()">
+          <ion-icon slot="start" color="light" name="checkmark-circle-outline">
+          </ion-icon>
+          <p style="color: white;">Varaa paikka</p>
+        </ion-button>
+        <ion-button expand="block" *ngIf="isBooked" fill="outline" color="danger" (click)="cancelBooking()">
+          <ion-icon slot="start" color="danger" name="alert-circle-outline"></ion-icon>
+          <p>Peruuta varaus</p>
+        </ion-button>
+        <ion-button expand="block" *ngIf="isOwned" fill="outline" color="success" [disabled]='true'>
+          <ion-icon slot="start" color="success" name="trail-sign-outline"></ion-icon>
+          <p>Oma kyyti</p>
+        </ion-button>
+
+
+        <ion-button expand="block" [disabled]="isOwned" fill="outline" [color]="color" (click)="messageDriver()">
+          <ion-icon slot="start" [color]="color" name="paper-plane-outline"></ion-icon>
+          <p>Lähetä viesti</p>
+        </ion-button>
+      </div>
     </ion-card>
+  </div>
 
 </ion-content>

@@ -8,15 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
   constructor(private userService: UserService, private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
-  signOut(){
-    this.userService.signOut()
-    // this.router.navigateByUrl('login');
-    window.location.reload();
+  signOut() {
+    this.userService.signOut().then(() => {
+      this.router.navigateByUrl('');
+    });
+
+    // window.location.reload();
   }
 }

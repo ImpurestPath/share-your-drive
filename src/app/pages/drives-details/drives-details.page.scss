@@ -2,56 +2,108 @@
   cursor: pointer;
 }
 
+ion-content {
+  --background: var(--ion-color-dark-shade);
+}
+
+.details {
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none; // IE 10+
+  scrollbar-width: none; // Firefox
+  scroll-behavior: smooth;
+  border-radius: 20px 20px 0px 0px;
+  background: #f9f9f9;
+  padding: 5px;
+
+  .map {
+    height: 40%;
+    width: 100%;
+    border-radius: 20px 20px 5px 5px;
+  }
+
+  &::-webkit-scrollbar {
+    display: none; // Safari and Chrome
+  }
+}
+
 ion-toolbar {
-  --background: transparent;
-  --ion-color-base: transparent !important;
+  --background: var(--ion-color-dark-shade);
+  --color: #f9f9f9;
+}
+
+ion-card-header {
+  padding-bottom: 0;
+  padding-top: 0;
+
+  ion-avatar {
+    padding: 2px;
+    max-width: 50px;
+    max-height: 50px;
+    cursor: pointer;
+    transition: 0.5s ease;
+
+    &:hover,
+    &:active {
+      border: 2px solid var(--ion-color-primary-tint);
+      opacity: 0.7;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.253);
+    }
+  }
+
+  ion-card-title {
+    --color: #3f3f3f;
+    font-size: 20px;
+  }
 }
 
 ion-card {
-  margin: 0px 10px 10px 10px;
-  border-radius: 10px;
-  padding: 5px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.103);
-  // border: 2px solid var(--ion-color-primary);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  box-shadow: none;
 
-  .map {
-    border-radius: 10px;
-    height: 30vh;
-    width: 100%;
-    background: url('../../../assets/images/cartodb_placeholder.png');
+  ion-grid {
+    padding: 0;
+  }
+
+  ion-item {
+    --padding-start: 5px;
+    --padding-end: 3px;
+
+    ion-label {
+      border-left: 2px solid var(--ion-color-primary);
+      background: rgb(242, 242, 242);
+      border-radius: 0px 5px 5px 0px;
+      padding: 5px 5px 5px 10px;
+      margin-right: 0;
+    }
+
+    ion-icon {
+      margin-right: 10px;
+    }
+  }
+
+  ion-card-subtitle {
+    margin-top: 0;
   }
 
   ion-card-content {
-    padding-bottom: 0;
+    padding: 0;
+    background: #f8f8f8;
+    border-radius: 10px;
+    height: 50%;
   }
 
   .buttons {
-    display: flex;
-    justify-content: space-evenly;
+    margin: 0 7px 0 7px;
 
     ion-button {
-      align-items: center;
-      text-align: center;
       color: white;
       text-transform: none;
       --box-shadow: none;
 
-      ion-icon {
-        justify-content: center;
-        vertical-align: middle;
-      }
-
       p {
-        color: white;
-      }
-    }
-
-    .chat-btn {
-      p {
-        color: var(--ion-color-primary);
+        font-weight: 600;
       }
     }
   }
@@ -60,40 +112,78 @@ ion-card {
     margin: 0;
     margin-bottom: 5px;
   }
-
-  ion-card-title {
-    font-weight: 600;
-    color: #3f3f3f;
-  }
-
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-  }
 }
 
-.list-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
+.list {
+  margin: 10px 13px;
+  margin-bottom: 0px;
 
-  .list-icon {
-    justify-content: center;
-    vertical-align: middle;
-    margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .list-header {
+    p {
+      font-weight: 500;
+      color: #525252;
+    }
   }
 
-  .list-text {
+  .list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
     background: rgb(243, 243, 243);
-    padding: 5px;
-    min-height: 30px;
-    padding-left: 15px;
     border-radius: 0px 5px 5px 0px;
-    width: 100%;
-    border-left: 2px solid var(--ion-color-primary);
-    color: #3f3f3f;
+
+    .list-icon {
+      margin: 5px 10px;
+
+      ion-icon {
+        vertical-align: middle;
+      }
+    }
+
+    .list-text {
+      background: rgb(243, 243, 243);
+      padding: 5px;
+      min-height: 30px;
+      padding-left: 15px;
+      border-radius: 0px 5px 5px 0px;
+      width: 100%;
+      margin-right: 5px;
+      color: #3f3f3f;
+      display: flex;
+      // justify-content: space-between;
+
+      .seats-left {
+        margin-left: auto;
+        font-weight: 500;
+      }
+
+      ion-label {
+        display: flex;
+
+        ion-avatar {
+          max-width: 35px;
+          max-height: 35px;
+          cursor: pointer;
+          transition: 0.5s ease;
+          position: relative;
+          left: -10px;
+
+          &:hover,
+          &:active {
+            border: 2px solid var(--ion-color-primary-shade);
+            scale: 1.1;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.24);
+          }
+        }
+
+        :first-child {
+          left: 0;
+        }
+      }
+    }
   }
 }
