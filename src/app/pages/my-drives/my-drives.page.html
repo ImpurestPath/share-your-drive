@@ -1,0 +1,57 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="chevron-back" size="large" (click)="dismiss()" class="back-btn"></ion-icon>
+    </ion-buttons>
+    <ion-title>Omat kyydit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+
+    <ion-list class="drives-list" *ngIf="drives">
+      <div class="line">
+        <h2>
+          <span>
+            Luomasi kyydit
+          </span>
+        </h2>
+      </div>
+      <ion-item *ngFor="let drive of drives" lines="none">
+        <ion-label>
+          <h2>{{ drive.origin }} - {{ drive.destination }}</h2>
+          <p>{{ formatTime(drive.startDate.toDate()) }}</p>
+        </ion-label>
+        <ion-icon (click)="deleteDrive(drive.id);" name="trash" color="danger" slot="end"></ion-icon>
+      </ion-item>
+
+
+    </ion-list>
+    <div class="no-drives" *ngIf="!drives || drives.length < 1">
+      Et ole luonut kyytejä
+    </div>
+
+    <div *ngIf="user && user.favorites.length > 0">
+      <div class="line">
+        <h2>
+          <span>
+            Suosikkireittisi
+          </span>
+        </h2>
+      </div>
+
+      <ion-list class="favorites-list">
+        <ion-item *ngFor="let favorite of user.favorites; index as i" lines="none">
+          <ion-label>
+            <h2>{{ favorite.origin }} - {{ favorite.destination }}</h2>
+          </ion-label>
+          <ion-icon (click)="deleteFavorite(i)" name="trash" color="danger" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+
+    </div>
+
+
+  </div>
+</ion-content>

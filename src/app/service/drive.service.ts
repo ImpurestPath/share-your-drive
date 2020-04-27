@@ -18,17 +18,17 @@ export class DriveService {
   constructor(private store: AngularFirestore) { }
 
   private getDataWithMeta(collection: AngularFirestoreCollection) {
-    return  collection
-            .snapshotChanges()
-            .pipe(
-              map((changes) => {
-                return changes.map((c) => {
-                  const data = c.payload.doc.data();
-                  const id = c.payload.doc.id;
-                  return { id, ...data };
-                });
-              })
-            );
+    return collection
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          return changes.map((c) => {
+            const data = c.payload.doc.data();
+            const id = c.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
   }
 
   getAll() {
@@ -42,7 +42,7 @@ export class DriveService {
   getRecent(amount: number) {
     return this.getDataWithMeta(
       this.store.collection<Drive>(this.collectionName, (ref) =>
-        ref.orderBy('createdAt', 'desc').limit(amount)
+        ref.orderBy('startDate', 'asc').where('startDate', '>=', new Date()).orderBy('createdAt', 'desc').limit(amount)
       )
     );
   }
@@ -78,17 +78,22 @@ export class DriveService {
     ))
   }
 
-  getDrive(driveId: string){
+  getDrive(driveId: string) {
     return this.store
-    .collection<Drive>(this.collectionName)
-    .doc<Drive>(driveId)
-    .snapshotChanges()
-    .pipe(
-      map((changes) => { 
-        const id = changes.payload.id;
-        const data = changes.payload.data();
-        return { id, ...data };
-    }));
+      .collection<Drive>(this.collectionName)
+      .doc<Drive>(driveId)
+      .snapshotChanges()
+      .pipe(
+        map((changes) => {
+          const id = changes.payload.id;
+          const data = changes.payload.data();
+          return { id, ...data };
+        }));
+  }
+
+  getUserDrives(userId: string) {
+    return this.getDataWithMeta(this.store.collection<Drive>(this.collectionName, ref =>
+      ref.where('driverId', '==', userId)))
   }
 
   create(drive: Drive) {

@@ -1,0 +1,89 @@
+.back-btn {
+  cursor: pointer;
+}
+
+ion-content {
+  --background: #3f3f3f;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none; // IE 10+
+  scrollbar-width: none; // Firefox
+  scroll-behavior: smooth;
+  border-radius: 20px 20px 0px 0px;
+  background: #f9f9f9;
+  padding: 5px 10px;
+  overflow: hidden;
+
+  &::-webkit-scrollbar {
+    display: none; // Safari and Chrome
+  }
+
+    .line {
+    margin: 5px 10px 0px 10px;
+    padding-bottom: 3px;
+
+    h2 {
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid #909090;
+      line-height: 0em;
+      margin: 0 0 5px;
+
+      span {
+        background: #f9f9f9;
+        padding: 0px 5px;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.705);
+      }
+    }
+  }
+
+  .no-drives {
+    text-align: center;
+  }
+
+  ion-list  {
+    ion-item {
+      background: #f9f9f9;
+      margin: 5px;
+      margin-bottom: 8px;
+      border-radius: 3px 5px 5px 3px;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.13);
+
+      h2 {
+        font-weight: 500;
+      }
+    }
+
+    ion-icon {
+      cursor: pointer;
+      font-size: 30px;
+    }
+  }
+
+  .drives-list {
+
+    ion-item {
+    border-left: 4px solid var(--ion-color-primary);
+    }
+
+  }
+
+  .favorites-list {
+
+    ion-item {
+    border-left: 4px solid var(--ion-color-secondary);
+    }
+
+  }
+}
+
+ion-toolbar {
+  --background: var(--ion-color-dark-shade);
+  --color: #f9f9f9;
+}

@@ -21,6 +21,7 @@ import { AddFavoritePopupComponent } from './components/add-favorite-popup/add-f
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { DrivesActionComponent } from './components/drives-action/drives-action.component';
 
 @NgModule({
   declarations: [AppComponent, DrivesSearchPopupComponent, AddFavoritePopupComponent],
@@ -42,7 +43,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     NativeGeocoder,
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })
