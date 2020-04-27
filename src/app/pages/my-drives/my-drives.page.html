@@ -10,7 +10,14 @@
 <ion-content>
   <div class="container">
 
-    <ion-list *ngIf="drives">
+    <ion-list class="drives-list" *ngIf="drives">
+      <div class="line">
+        <h2>
+          <span>
+            Luomasi kyydit
+          </span>
+        </h2>
+      </div>
       <ion-item *ngFor="let drive of drives" lines="none">
         <ion-label>
           <h2>{{ drive.origin }} - {{ drive.destination }}</h2>
@@ -24,6 +31,27 @@
     <div class="no-drives" *ngIf="!drives || drives.length < 1">
       Et ole luonut kyytejä
     </div>
+
+    <div *ngIf="user && user.favorites.length > 0">
+      <div class="line">
+        <h2>
+          <span>
+            Suosikkireittisi
+          </span>
+        </h2>
+      </div>
+
+      <ion-list class="favorites-list">
+        <ion-item *ngFor="let favorite of user.favorites; index as i" lines="none">
+          <ion-label>
+            <h2>{{ favorite.origin }} - {{ favorite.destination }}</h2>
+          </ion-label>
+          <ion-icon (click)="deleteFavorite(i)" name="trash" color="danger" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+
+    </div>
+
 
   </div>
 </ion-content>
