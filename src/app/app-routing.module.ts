@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'reset-password',
     loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
+  {
+    path: 'my-drives',
+    loadChildren: () => import('./pages/my-drives/my-drives.module').then( m => m.MyDrivesPageModule)
+  },
 
 ];
 

@@ -14,6 +14,8 @@ import { DrivesContainerComponent } from '../../components/drives-container/driv
 import { DrivesCardComponent } from '../../components/drives-card/drives-card.component'
 import { DrivesActionComponent } from '../../components/drives-action/drives-action.component'
 import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-popup/drives-search-popup.component'
+import { MyDrivesPage } from '../my-drives/my-drives.page'
+import { MyDrivesPageModule } from '../my-drives/my-drives.module'
 
 @NgModule({
   imports: [
@@ -22,7 +24,8 @@ import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-pop
     IonicModule,
     DrivesPageRoutingModule,
     DrivesDetailsPageModule,
-    AddDrivePageModule
+    AddDrivePageModule,
+    MyDrivesPageModule
   ],
   declarations: [
     DrivesPage,

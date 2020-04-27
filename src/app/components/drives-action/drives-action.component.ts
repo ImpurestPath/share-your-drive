@@ -1,6 +1,7 @@
 import { AddDrivePage } from './../../pages/add-drive/add-drive.page';
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
+import { MyDrivesPage } from './../../pages/my-drives/my-drives.page';
 
 @Component({
   selector: 'app-drives-action',
@@ -25,10 +26,10 @@ export class DrivesActionComponent {
           }
         },
         {
-          text: 'Poista kyyti',
-          icon: 'trash',
+          text: 'Omat kyydit',
+          icon: 'list-circle-outline',
           handler: () => {
-            console.log('Share clicked');
+            this.openDrivesList();
           }
         },
         {
@@ -42,6 +43,14 @@ export class DrivesActionComponent {
       ]
     });
     await actionSheet.present()
+
+  }
+
+  async openDrivesList() {
+    const modal = await this.modalController.create({
+      component: MyDrivesPage
+    })
+    await modal.present();
 
   }
 
