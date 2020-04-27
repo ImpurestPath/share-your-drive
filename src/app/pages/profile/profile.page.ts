@@ -27,6 +27,6 @@ export class ProfilePage implements OnInit {
     });
 
     // window.location.reload();
->>>>>>> 78a095653d5d2ef936e8bbddc118ab484af2b153
+
   }
 }
