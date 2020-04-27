@@ -21,7 +21,7 @@
 
 
     </ion-list>
-    <div class="no-drives" *ngIf="drives.length < 1">
+    <div class="no-drives" *ngIf="!drives || drives.length < 1">
       Et ole luonut kyytejä
     </div>
 
