@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-<<<<<<< HEAD
   
   photo:any;
   user:any;
@@ -18,17 +17,9 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.user = this.userService.userDataSubject.value;
     this.photo = this.userService.userDataSubject.value;
+
   }
 
-
-  signOut(){
-    this.userService.signOut()
-    // this.router.navigateByUrl('login');
-    window.location.reload();
-=======
-  constructor(private userService: UserService, private router: Router) { }
-
-  ngOnInit() { }
 
   signOut() {
     this.userService.signOut().then(() => {
