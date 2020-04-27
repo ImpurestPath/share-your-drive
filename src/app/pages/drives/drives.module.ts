@@ -1,4 +1,3 @@
-import { AddDrivePageModule } from './../add-drive/add-drive.module'
 import { DrivesDetailsPageModule } from './../drives-details/drives-details.module'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
@@ -12,7 +11,7 @@ import { DrivesPage } from './drives.page'
 
 import { DrivesContainerComponent } from '../../components/drives-container/drives-container.component'
 import { DrivesCardComponent } from '../../components/drives-card/drives-card.component'
-import { DrivesActionComponent } from '../../components/drives-action/drives-action.component'
+import { SharedModule } from 'src/app/shared.module'
 import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-popup/drives-search-popup.component'
 
 @NgModule({
@@ -22,13 +21,13 @@ import { DrivesSearchPopupComponent } from 'src/app/components/drives-search-pop
     IonicModule,
     DrivesPageRoutingModule,
     DrivesDetailsPageModule,
-    AddDrivePageModule
+    SharedModule
   ],
   declarations: [
     DrivesPage,
     DrivesContainerComponent,
     DrivesCardComponent,
-    DrivesActionComponent
+    
   ],
   exports: [DrivesCardComponent]
 })

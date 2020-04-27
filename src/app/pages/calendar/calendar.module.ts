@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 
 import { CalendarPage } from './calendar.page';
 
+import { SharedModule } from 'src/app/shared.module';
+
 // Calendar UI Module
 import { CalendarModule } from 'ion2-calendar';
 
@@ -22,6 +24,7 @@ import { DrivesDetailsPageModule } from './../drives-details/drives-details.modu
     IonicModule,
     CalendarPageRoutingModule,
     DrivesDetailsPageModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',

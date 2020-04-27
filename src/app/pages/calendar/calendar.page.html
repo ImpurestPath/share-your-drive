@@ -25,13 +25,13 @@
       </ion-list>
     </div>-->
 
-    <div *ngFor ="let drive of drives; index as i" [routerLink]="['../../../drives', drive.id]">
+    <div *ngFor ="let drive of drives; index as i" (click)="clicked(drive.id)">
       <ion-list *ngIf = "drive.startDate.seconds >= this.ykkonen && drive.startDate.seconds < this.kakkonen">
         <ion-grid class="calendarInfo">
           <ion-row>
-            <ion-col size="12" class="ion-text-center"><h5>{{ drive.origin }} - {{ drive.destination}} </h5></ion-col>
+            <ion-col size="12" class="ion-text-center names"><h6>{{ drive.origin }} - {{ drive.destination}} </h6></ion-col>
             <ion-col >Lähtö: {{ drive.startDate.toDate() | date: "H:mm"}}</ion-col>
-            <ion-col  class="ion-text-end">{{ this.seatsTaken }} / {{ drive.seatsMax }} </ion-col>
+            <ion-col  class="ion-text-end seats">{{ this.seatsTaken }} / {{ drive.seatsMax }} </ion-col>
           </ion-row>
         </ion-grid>
       </ion-list>
@@ -39,4 +39,5 @@
     
     <!--<ion-item>{{ drive.startDate.toDate() | date: "dd/MM/yyyy H:mm" }}</ion-item>-->
   </div>
+  <app-drives-action ></app-drives-action>
 </ion-content>

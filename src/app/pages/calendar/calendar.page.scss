@@ -1,0 +1,35 @@
+app-drives-action {
+    margin-bottom: 50px;
+  }
+  
+ion-list {
+  
+  padding: 0px;
+  
+  ion-grid {
+    background: #f9f9f9;
+    margin: 5px;
+    margin-bottom: 8px;
+    border-radius: 3px 5px 5px 3px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.13);
+    border-left: 4px solid var(--ion-color-primary);
+
+    h6 {
+      font-weight: 500;
+    }
+    .seats{
+      margin-right: 57px;
+    }
+    ion-col {
+      padding:0;
+    }
+    .names {
+      padding-top: -5px;
+    }
+  }
+
+  ion-icon {
+    cursor: pointer;
+    font-size: 30px;
+  }
+}

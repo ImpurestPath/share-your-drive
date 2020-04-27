@@ -4,6 +4,7 @@ import { CalendarComponentOptions, DayConfig } from 'ion2-calendar';
 import * as moment from 'moment';
 import { ModalController } from '@ionic/angular';
 import { DrivesDetailsPage } from './../../pages/drives-details/drives-details.page';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class CalendarPage implements OnInit {
   date: string;
   type: 'string'; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
   drives: Array<any>;
+  //drive: Array<any>;
   options:CalendarComponentOptions = {
     monthFormat: 'MMMM',
     monthPickerFormat: ['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'],
@@ -30,11 +32,12 @@ export class CalendarPage implements OnInit {
     weekStart: 0,
     daysConfig: this._daysConfig
   };
-  constructor(private driveService: DriveService, public modalController: ModalController) { }
+  constructor(private driveService: DriveService, public modalController: ModalController,private router: Router) { }
 
   ngOnInit() {
     this.driveService.getAll().subscribe((drives) => {
     this.drives = drives;
+    //this.drive = drives;
     this.initCalendarData();
     console.log(drives);
   })
@@ -85,5 +88,9 @@ export class CalendarPage implements OnInit {
     return await modal.present();
   }
   */
-  
+ clicked(driveId) {
+     this.router.navigate(['../../../tabs/tabs/drives', driveId], {
+       queryParams: { color:'primary'},
+     });
+   }
 }
