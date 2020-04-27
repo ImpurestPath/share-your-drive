@@ -1,7 +1,8 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Profiili</ion-title>
-    <ion-button fill="outline" color="light" (click)="signOut()" slot="end">
+    
+    <ion-title slot="secondary">Profile</ion-title>
+    <ion-button (click)="signOut()" slot="end">
       <ion-icon name="exit"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -9,7 +10,36 @@
 
 
 <ion-content>
-  <div class="container">
+  
+  <div class="center">
+    <ion-avatar class="size1">
+        <img src="{{user.photoURL}}" alt="">
+      </ion-avatar>
+  </div>
+  <div class="center2">
+    <h2>{{user.displayName}}</h2>
+  </div>
+  
+  
+  <ion-card>
+    <ion-item>
+      <ion-icon name="happy-outline" slot="start"></ion-icon>
+      <ion-label>Tietoja minusta</ion-label>
+      <ion-button fill="outline" slot="end" (click)="addItem(item)">Muokkaa</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      tähän tulee tietoja sinusta / here comes info about you.
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-item href="#" class="ion-activated">
+      <ion-icon name="car-outline" slot="start"></ion-icon>
+      <ion-label>Your drives</ion-label>
+    </ion-item>
+  
+  </ion-card>
 
   </div>
 </ion-content>
