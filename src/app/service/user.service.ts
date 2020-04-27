@@ -195,6 +195,18 @@ export class UserService {
       });
   }
 
+  deleteFavorite(userId: string, origin: string, destination: string) {
+    return this.afStore
+      .collection('users')
+      .doc(userId)
+      .update({
+        favorites: firebase.firestore.FieldValue.arrayRemove({
+          origin,
+          destination
+        })
+      });
+  }
+
   getUserData(userId: string) {
     return this.afStore.collection('users').doc(userId).valueChanges();
   }

@@ -12,6 +12,7 @@ import * as moment from 'moment';
 export class MyDrivesPage implements OnInit {
   user: any;
   drives: Array<any>;
+  uid: any;
 
   constructor(
     private userService: UserService,
@@ -20,17 +21,37 @@ export class MyDrivesPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.userService.userDataSubject.value;
+    this.userService.userDataSubject.subscribe((user) => {
+      this.uid = user.uid;
+      if (this.uid) {
+        this.getUserData();
 
-    this.driveService.getUserDrives(this.user.uid)
-      .subscribe((drives) => {
-        this.drives = drives;
-        console.log(this.drives);
-      })
+        this.driveService.getUserDrives(this.uid)
+          .subscribe((drives) => {
+            this.drives = drives;
+            console.log(this.drives);
+          });
+      }
+    })
   }
 
   deleteDrive(driveId: string) {
     return this.driveService.delete(driveId);
+  }
+
+  getUserData() {
+    this.userService.getUserData(this.uid).subscribe((doc) => {
+      this.user = doc;
+    })
+  }
+
+  deleteFavorite(index: number) {
+    const fav = this.user.favorites[index];
+    console.log(fav);
+    this.userService.deleteFavorite(this.user.uid, fav.origin, fav.destination)
+      .then(() => {
+        console.log('deleted');
+      })
   }
 
   dismiss() {
