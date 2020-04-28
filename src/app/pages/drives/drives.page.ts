@@ -35,9 +35,9 @@ export class DrivesPage implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
+    this.favorites = [];
     this.userService.userDataSubject.subscribe((user) => {
-      this.favorites = [];
-      this.uid = user.uid;
+      if (user) this.uid = user.uid;
       if (this.uid) this.getUserData();
     })
     // Checks the platform, as nearest
