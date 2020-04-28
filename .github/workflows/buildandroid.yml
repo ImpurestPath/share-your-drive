@@ -1,6 +1,24 @@
-- name: Setup Ionic
-  uses: coturiv/setup-ionic@v1.0.0
+name: BuildAndroid
+on:
+  push:
+    branches:
+      - master
+        - develop
+          
 
-- name: Build
-  run: |
-    ionic cordova build android
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup Ionic
+        uses: coturiv/setup-ionic@v1.0.0
+
+      - name: Build
+        run: |
+            ionic cordova build android
