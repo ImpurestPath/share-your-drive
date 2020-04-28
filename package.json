@@ -74,7 +74,7 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
-  "description": "An Ionic project",
+  "description": "App for traveling",
   "cordova": {
     "plugins": {
       "cordova-plugin-geolocation": {},
