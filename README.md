@@ -11,7 +11,7 @@ An app where you can find someone's drive or share your own drive.​
 
 Links:
 No app store release yet
-
+Android: Apk can be found in artifacts in this repo.
 Demo: [Web app](https://share-your-drive-8c7b1.web.app/)
 
 ## Usage example
